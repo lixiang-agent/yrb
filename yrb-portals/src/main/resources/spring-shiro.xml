@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 读取属性文件 -->
+	<context:property-placeholder location="classpath:redis.properties"/>
+
+	<!-- Shiro 核心组件 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 缓存管理 -->
+		<property name="cacheManager" ref="cacheManager" />
+		<!-- 配置 realm，定义访问安全数据 -->
+		<property name="realm" ref="jdbcRealm" />
+		<property name="rememberMeManager.cookie.maxAge" value="#{10*24*60*60}">
+		</property>
+		<property name="sessionManager" ref="sessionManager">
+		</property>
+	</bean>
+
+	<!-- 配饰session管理 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 设置sessionDAO -->
+		<property name="sessionDAO" ref="sessionDao"></property>
+		<!-- 设置超时时间  单位：毫秒-->
+		<property name="globalSessionTimeout" value="#{30*60*1000}" />
+		<!-- 删除失效session -->
+		<property name="sessionValidationSchedulerEnabled" value="true" />
+		<!-- session 监听器 -->
+		<property name="sessionListeners" ref="myShiroSessionListener"></property>
+	</bean>
+	<!-- 配置sessionDAO -->
+	<bean id="sessionDao" class="com.lixiang.ssm.shiro.SessionDAO">
+		<property name="redisUtil" ref="redisUtil"></property>
+	</bean>
+	<!-- 配置redis -->
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="100" />
+		<property name="maxWaitMillis" value="10000" />
+		<property name="testOnBorrow" value="true" />
+	</bean>
+	<!-- redis服务器中心 -->
+	<bean id="connectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="poolConfig" ref="poolConfig" />
+		<property name="port" value="7001" />
+		<property name="hostName" value="192.168.0.91" />
+		<property name="password" value="123456" /> 
+		<property name="timeout" value="3000"></property>
+	</bean>
+	<!-- reids templete -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+	</bean>
+
+
+	<!-- 配置缓存管理 ，使用 Ehcache -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache.xml" />
+	</bean>
+
+	<!-- 配置realm 写一个类实现realm接口 -->
+	<bean id="jdbcRealm" class="com.lixiang.ssm.realms.ShiroRealm">
+		<!-- 指定密码匹配器 -->
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<!-- 算法 MD5: SHA1 -->
+				<property name="hashAlgorithmName" value="MD5"></property>
+				<!-- 迭代次数 -->
+				<property name="hashIterations" value="101"></property>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Shiro跟spring的集成配置 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<!-- 配置好后，才可以使用shiro的注解 depends-on：依赖lifecycleBeanPostProcessor bean对象 -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<!-- cgLib -->
+		<property name="proxyTargetClass" value="true"></property>
+	</bean>
+
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+	<bean id="filterChainDefinitionMapFactory" class="com.lixiang.ssm.utils.FilterChainDefinitionMapFactory"></bean>
+
+	<bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionMapFactory"
+		factory-method="getFilterChainDefinitionMap"></bean>
+
+	<!--配置过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!-- 配置登录地址 -->
+		<property name="loginUrl" value="/login.jsp" />
+		<!-- 配置登录成功地址 -->
+		<property name="successUrl" value="/user.jsp" />
+		<!-- 配置未授权的路径 -->
+		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+		<!-- 配置哪些资源需要受保护 配置哪些资源需要怎样的权限才能访问 /favicon.ico【资源】 = anon【过滤器】 anon：匿名访问，不需要登陆就可以访问的资源 
+			authc：需要认证后才可以访问 匹配优先： user:delete:zhangsan -->
+		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap">
+
+		</property>
+
+	</bean>
+
+
+</beans>
