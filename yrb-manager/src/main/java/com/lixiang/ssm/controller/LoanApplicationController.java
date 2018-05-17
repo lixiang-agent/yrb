@@ -34,9 +34,7 @@ public class LoanApplicationController
 	//申请的业务处理
 	@Autowired
 	private LoanApplicationService service;
-	//获取当前用户
-	Subject currentUser = SecurityUtils.getSubject();
-	User user = (User)currentUser.getPrincipal();
+	
 	
 	/**
 	 * 查询申请列表
@@ -47,6 +45,9 @@ public class LoanApplicationController
 	@RequestMapping("list")
 	public String listLoanApplication(Model model)
 	{
+		//获取当前用户
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = (User)currentUser.getPrincipal();
 		log.debug("查询申请列表");
 		//封装了查询出来的数据
 		PageInfo<LoanApplication> page = service.listLoanApplication();
@@ -67,6 +68,9 @@ public class LoanApplicationController
 	{
 		log.debug("查询真实姓名的申请");
 		log.debug("查询联系电话的申请");
+		//获取当前用户
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = (User)currentUser.getPrincipal();
 		//封装了查询出来的数据
 		PageInfo<LoanApplication> page = service.listLoanApplication(realName, contactNumber);
 		model.addAttribute("page", page);
