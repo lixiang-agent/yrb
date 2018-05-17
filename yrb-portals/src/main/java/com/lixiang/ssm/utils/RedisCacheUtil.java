@@ -84,13 +84,10 @@ public class RedisCacheUtil<T> {
 	public <T> List<T> getCacheList(String key) {
 		List<T> dataList = new ArrayList<T>();
 		ListOperations<String, T> listOperation = redisTemplate.opsForList();
-		Long size = listOperation.size(key);
-
-		for (int i = 0; i < size; i++) {
-			dataList.add((T) listOperation.leftPop(key));
-		}
-
-		return dataList;
+		
+		 List<T> list= listOperation.range(key, 0, -1);
+		
+		return list;
 	}
 
 	/**

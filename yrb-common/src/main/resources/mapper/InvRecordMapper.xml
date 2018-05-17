@@ -37,7 +37,7 @@
     from t_inv_record
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAllInvRecord" resultMap="java.lang.double">
+  <select id="selectAllInvRecord" resultType="java.lang.Double">
     select sum(invrec_money) from t_inv_record
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

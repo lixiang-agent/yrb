@@ -1,6 +1,9 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.News;
 
 public interface InvProjectMapper {
     /**
@@ -50,4 +53,9 @@ public interface InvProjectMapper {
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
     int updateByPrimaryKey(InvProject record);
+
+	List<InvProject> listIndexCommendProjects();
+	List<InvProject> listIndexCarProjects();
+	List<InvProject> listIndexHouseProjects();
+	List<InvProject> listIndexObligationProjects();
 }

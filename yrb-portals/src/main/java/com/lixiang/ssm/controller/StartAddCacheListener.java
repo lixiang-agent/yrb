@@ -10,8 +10,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
+import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.News;
 import com.lixiang.ssm.service.NewsService;
+import com.lixiang.ssm.service.ProjectService;
 import com.lixiang.ssm.utils.RedisCacheUtil;
 
  //* 监听器，用于项目启动的时候初始化信息
@@ -25,6 +27,8 @@ public class StartAddCacheListener implements ApplicationListener<ContextRefresh
     
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private ProjectService projectService;
     
     @Override
     public void onApplicationEvent(ContextRefreshedEvent  event) {
@@ -37,11 +41,13 @@ public class StartAddCacheListener implements ApplicationListener<ContextRefresh
             for(int i = 0 ; i < newsListSize ; i ++ ){
                 newsMap.put(newsList.get(i).getId(), newsList.get(i));
             }
-            redisCache.setCacheIntegerMap("newsMap:new", newsMap);
-            
+            redisCache.setCacheIntegerMap("newsMap:index", newsMap);
             //缓存累计投资，本息等信息
             
             
+            //缓存推荐项目，车易贷等项目
+            List<InvProject> invProjectList = projectService.listIndexProjects();
+            redisCache.setCacheList("projectsList:index", invProjectList);
         }
     }
 }
