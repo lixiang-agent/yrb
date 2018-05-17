@@ -152,6 +152,26 @@ public class InvestManageController {
 		return "redirect:/investManage/listOperProject";
 	}
 	
+	@RequestMapping("/toFail")
+	public String toFailOperProject(Integer id,Model model){
+		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		model.addAttribute("invProject", invProject);
+		return "oper-record-fail";
+	}
+	
+	@RequestMapping("/failOper")
+	public String failOperProject(OperateRecord operateRecord,Integer id,Model model,HttpSession session) throws ParseException{
+		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
+		String time1 = time.format(new Date());
+		boolean oper_result = invManageService.updateProjectStatus(11,id);
+		InvProject inv = invManageService.selectByPrimaryKey(id);
+		OperateRecord operRecord = new OperateRecord(null,3,time.parse(time1),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),operateRecord.getRemark());
+		invManageService.insertSelective(operRecord);
+		
+		session.setAttribute("oper_result", oper_result);
+		return "redirect:/investManage/listOperProject";
+	}
+	
 	@RequestMapping("/toRelease")
 	public String toReleaseProject(Integer id,Model model){
 		InvProject invProject = invManageService.selectByPrimaryKey(id);

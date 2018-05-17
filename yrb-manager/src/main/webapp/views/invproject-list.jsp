@@ -115,7 +115,7 @@
 													待提交
 												</c:if>
 												<c:if test="${invpro.projectStatus==11}">
-													退回
+													<p style="color:red;">退回</p>
 												</c:if>
 												<c:if test="${invpro.projectStatus==20}">
 													待审批
@@ -147,7 +147,7 @@
 														</a>
 													</c:if>
 													
-													<c:if test="${invpro.projectStatus==10 || inpro.projectStatus==11}">
+													<c:if test="${invpro.projectStatus==10 || invpro.projectStatus==11}">
 														<a class="green" href="${ctx }/investManage/toUpdate?id=${invpro.id}" data-toggle="modal"
 															data-target="#myModal" title="修改项目"> <i
 															class="icon-edit bigger-130"></i>

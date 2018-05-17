@@ -6,12 +6,13 @@
 <meta charset="utf-8" />
 </head>
 <script type="text/javascript">
+	
 </script>
 <body>
 	<%@ include file="/top.jsp"%>
 	<div class="main-container" id="main-container">
-		<jsp:include page="/menu.jsp" >
-			<jsp:param value="inv-oper" name="menu"/>
+		<jsp:include page="/menu.jsp">
+			<jsp:param value="inv-oper" name="menu" />
 		</jsp:include>
 
 
@@ -49,16 +50,18 @@
 							style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
 								<div class="col-lg-6">
-									<form class="form-search" action="${ctx }/investManage/listOperProject"
-										method="post">
+									<form class="form-search"
+										action="${ctx }/investManage/listOperProject" method="post">
 										<div class="input-group">
 											<input type="text" name="projectName" class="form-control"
 												placeholder="请输入您项目名" value="${operRecord.projectName }"
 												aria-describedby="basic-addon2" maxlength="12"> <span
 												class="input-group-btn">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
+												<a style="margin-left: 50px" class="btn btn-primary btn-sm" href="${ctx }/investManage/toInsert" data-toggle="modal" 
+													data-target="#myOperRecordModal" role="button" title="新增项目">查看审核记录</a>
 											</span>
-											
+
 										</div>
 									</form>
 								</div>
@@ -91,75 +94,67 @@
 													class="lbl"></span>
 											</label></td>
 											<td>${operRecord.projectName }</td>
-											<td>
-												<c:if test="${operRecord.projectType==1}">
+											<td><c:if test="${operRecord.projectType==1}">
 													车易贷
-												</c:if>
-												<c:if test="${operRecord.projectType==2}">
+												</c:if> <c:if test="${operRecord.projectType==2}">
 													房易贷
-												</c:if>
-												<c:if test="${operRecord.projectType==3}">
+												</c:if> <c:if test="${operRecord.projectType==3}">
 													售楼贷
-												</c:if>
-												<c:if test="${operRecord.projectType==4}">
+												</c:if> <c:if test="${operRecord.projectType==4}">
 													债券贷
-												</c:if>
-											</td>
+												</c:if></td>
 											<td>${operRecord.invTotbalance }</td>
 											<td>${operRecord.rate }</td>
 											<td>${operRecord.loanReason }</td>
-											<td>
-												<c:if test="${operRecord.projectStatus==10}">
+											<td><c:if test="${operRecord.projectStatus==10}">
 													待提交
-												</c:if>
-												<c:if test="${operRecord.projectStatus==11}">
+												</c:if> <c:if test="${operRecord.projectStatus==11}">
 													退回
-												</c:if>
-												<c:if test="${operRecord.projectStatus==20}">
+												</c:if> <c:if test="${operRecord.projectStatus==20}">
 													待审批
-												</c:if>
-												<c:if test="${operRecord.projectStatus==30}">
+												</c:if> <c:if test="${operRecord.projectStatus==30}">
 													待发布
-												</c:if>
-												<c:if test="${operRecord.projectStatus==40}">
+												</c:if> <c:if test="${operRecord.projectStatus==40}">
 													筹款中
-												</c:if>
-												<c:if test="${operRecord.projectStatus==50}">
+												</c:if> <c:if test="${operRecord.projectStatus==50}">
 													筹资成功
-												</c:if>
-												<c:if test="${operRecord.projectStatus==60}">
+												</c:if> <c:if test="${operRecord.projectStatus==60}">
 													还款中
-												</c:if>
-												<c:if test="${operRecord.projectStatus==70}">
+												</c:if> <c:if test="${operRecord.projectStatus==70}">
 													结束
-												</c:if>
-												<c:if test="${operRecord.projectStatus==100}">
+												</c:if> <c:if test="${operRecord.projectStatus==100}">
 													流标
-												</c:if>
-											</td>
+												</c:if></td>
 											<td>
-												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<div
+													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 													<c:if test="${operRecord.projectStatus==20}">
-													<a class="green" href="${ctx }/investManage/toPass?id=${operRecord.id}"  data-toggle="modal"
-															data-target="#passModal" title="通过审核"> <i
-														class="icon-check bigger-130"></i>
-													</a>
+														<a class="green"
+															href="${ctx }/investManage/toPass?id=${operRecord.id}"
+															data-toggle="modal" data-target="#passModal" title="通过审核">
+															<i class="icon-check bigger-130"></i>
+														</a>
 													</c:if>
 													<c:if test="${operRecord.projectStatus==30}">
-														<a class="green" href="${ctx }/investManage/toRelease?id=${operRecord.id}" data-toggle="modal"
-															data-target="#releaseModal" title="发布项目"> <i
-															class="icon-upload bigger-130"></i>
+														<a class="green"
+															href="${ctx }/investManage/toRelease?id=${operRecord.id}"
+															data-toggle="modal" data-target="#releaseModal"
+															title="发布项目"> <i class="icon-upload bigger-130"></i>
 														</a>
 													</c:if>
-													
-													<a class="red" data-toggle="modal" data-target="#myDelModal"
-														href="${ctx }/investManage/toDel?id=${operRecord.id}"
-														id="del" title="审核不通过"> <i class="icon-times-circle bigger-130"></i>
-													</a>
-														<a class="green"  data-toggle="modal" data-target="#detailsModal" 
-															href="${ctx }/investManage/detailsList?id=${operRecord.id}" id="details" title="项目详情"> <i
-															class="icon-search bigger-130"></i>
+													<c:if test="${operRecord.projectStatus==20}">
+														<a class="red"
+															href="${ctx }/investManage/toFail?id=${operRecord.id}"
+															data-toggle="modal" data-target="#failModal"
+															title="审核不通过"> <i class="icon-trash bigger-130"></i>
 														</a>
+													</c:if>
+													<a class="green" data-toggle="modal"
+														data-target="#detailsModal"
+														href="${ctx }/investManage/detailsList?id=${operRecord.id}"
+														id="details" title="项目详情"> <i
+														class="icon-search bigger-130"></i>
+													</a>
 												</div>
 
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -171,17 +166,22 @@
 
 														<ul
 															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li><a href="${ctx }/investManage/detailsList?id=${operRecord.id}" data-toggle="modal"
-																data-target="#detailsModal" class="tooltip-success"
-																data-rel="tooltip" title="Edit"> <span class="green">
-																		<i class="icon-edit bigger-120"></i>
+															<li><a
+																href="${ctx }/investManage/detailsList?id=${operRecord.id}"
+																data-toggle="modal" data-target="#detailsModal"
+																class="tooltip-success" data-rel="tooltip" title="Edit">
+																	<span class="green"> <i
+																		class="icon-edit bigger-120"></i>
 																</span>
 
 															</a></li>
 
-															<li><a href="${ctx }/investManage/toDel?id=${operRecord.id }" class="tooltip-error"
-																data-rel="tooltip" data-toggle="modal" data-target="#myDelModal" title="Delete"> <span class="red">
-																		<i class="icon-inbox bigger-120"></i>
+															<li><a
+																href="${ctx }/investManage/toDel?id=${operRecord.id }"
+																class="tooltip-error" data-rel="tooltip"
+																data-toggle="modal" data-target="#failModal"
+																title="Delete"> <span class="red"> <i
+																		class="icon-inbox bigger-120"></i>
 																</span>
 															</a></li>
 														</ul>
@@ -197,8 +197,9 @@
 						</div>
 
 						<div class="modal-footer no-margin-top">
-							<w:pager pageSize="${inv.pageSize }" url="${ctx }/investManage/pageList"
-								recordCount="${inv.total }" pageNum="${inv.pageNum }" />
+							<w:pager pageSize="${inv.pageSize }"
+								url="${ctx }/investManage/pageList" recordCount="${inv.total }"
+								pageNum="${inv.pageNum }" />
 						</div>
 
 					</div>
@@ -217,7 +218,7 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
-	
+
 	<!-- 发布项目的模态框 -->
 	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -225,9 +226,9 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
-	
+
 	<!-- 删除项目的模态框 -->
-	<div class="modal fade" id="myDelModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="failModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
@@ -319,10 +320,10 @@
 
 	<script type="text/javascript">
 		/* 模态框隐藏的时候把原来模态框里面的内容去掉 */
-		 $("#myModal").on("hidden.bs.modal", function() {
-			 $(this).removeData("bs.modal");
-			});
+		$("#myModal").on("hidden.bs.modal", function() {
+			$(this).removeData("bs.modal");
+		});
 	</script>
-	<%@ include file="/tip.jsp" %>
+	<%@ include file="/tip.jsp"%>
 </body>
 </html>
