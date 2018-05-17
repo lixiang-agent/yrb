@@ -146,7 +146,7 @@
 													</a>
 													</c:if>
 													<c:if test="${operRecord.projectStatus==30}">
-														<a class="green" href="${ctx }/investManage/toUpdate?id=${operRecord.id}" data-toggle="modal"
+														<a class="green" href="${ctx }/investManage/toRelease?id=${operRecord.id}" data-toggle="modal"
 															data-target="#releaseModal" title="发布项目"> <i
 															class="icon-upload bigger-130"></i>
 														</a>
@@ -154,7 +154,7 @@
 													
 													<a class="red" data-toggle="modal" data-target="#myDelModal"
 														href="${ctx }/investManage/toDel?id=${operRecord.id}"
-														id="del" title="删除项目"> <i class="icon-times-circle bigger-130"></i>
+														id="del" title="审核不通过"> <i class="icon-times-circle bigger-130"></i>
 													</a>
 														<a class="green"  data-toggle="modal" data-target="#detailsModal" 
 															href="${ctx }/investManage/detailsList?id=${operRecord.id}" id="details" title="项目详情"> <i
@@ -171,8 +171,8 @@
 
 														<ul
 															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li><a href="${ctx }/investManage/toUpdate?id=${operRecord.id}" data-toggle="modal"
-																data-target="#passModal" class="tooltip-success"
+															<li><a href="${ctx }/investManage/detailsList?id=${operRecord.id}" data-toggle="modal"
+																data-target="#detailsModal" class="tooltip-success"
 																data-rel="tooltip" title="Edit"> <span class="green">
 																		<i class="icon-edit bigger-120"></i>
 																</span>
@@ -218,8 +218,8 @@
 		</div>
 	</div>
 	
-	<!-- 新增项目的模态框 -->
-	<div class="modal fade" id="myAddModal" tabindex="-1" role="dialog"
+	<!-- 发布项目的模态框 -->
+	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
