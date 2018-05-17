@@ -29,7 +29,7 @@
 					<li class="c_1"><a class="ico_head_weixin" id="wx"></a>
 						<div class="ceng" id="weixin_xlgz" style="display: none;">
 							<div class="cnr">
-								<img src="images/code.png">
+								<img src="${ctx}/images/code.png">
 							</div>
 							<b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b>
 						</div></li>
@@ -65,7 +65,7 @@
 		<div class="header min-width">
 			<div class="container">
 				<div class="fn-left logo">
-					<a class="" href="${ctx}/index.jsp"> <img src="images/logo.png"
+					<a class="" href="${ctx}/index.jsp"> <img src="${ctx}/images/logo.png"
 						title="">
 					</a>
 				</div>

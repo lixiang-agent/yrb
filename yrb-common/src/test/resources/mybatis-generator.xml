@@ -20,7 +20,7 @@
 
 		<!-- 指定实体类的路径 -->
 		<javaModelGenerator targetPackage="com.lixiang.ssm.entity" 
-			targetProject="D:\software\eclipse\workspace5\yrb\src\main\java">
+			targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\java">
 			<property name="constructorBased" value="true"/>
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -28,12 +28,12 @@
 
 		<!-- 指定映射文件的路径 -->
 		<sqlMapGenerator targetPackage="mapper"
-			targetProject="D:\software\eclipse\workspace5\yrb\yrb-common\src\main\resources">
+			targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 指定生成接口路径 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.lixiang.ssm.dao" targetProject="D:\software\eclipse\workspace5\yrb\src\main\java">
+			targetPackage="com.lixiang.ssm.dao" targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -41,7 +41,25 @@
 			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
 			selectByExampleQueryId="false"></table> -->
 
-		<table tableName="product" domainObjectName="Product"
+	<!-- 	<table tableName="product" domainObjectName="Product"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+		
+		<table tableName="t_system_message" domainObjectName="SystemMessage"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table tableName="t_tra_record" domainObjectName="TraRecord"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table tableName="t_user_bank" domainObjectName="UserBank"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
