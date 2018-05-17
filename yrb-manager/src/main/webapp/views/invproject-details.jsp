@@ -69,9 +69,23 @@
 						</tr>
 						<tr>
 							<td>回款方式:</td>
-							<td><input type="text" name="paybackWay"
-								class="form-control" value="${invProject.paybackWay }"
-								disabled="disabled" maxlength="12"></td>
+							<td>
+							<c:if test="${invProject.paybackWay==0 }">
+							<input type="text" name="paybackWay"
+								class="form-control" value="到期还本"
+								disabled="disabled" maxlength="12">
+							</c:if>
+							<c:if test="${invProject.paybackWay==1 }">
+							<input type="text" name="paybackWay"
+								class="form-control" value="按月付息"
+								disabled="disabled" maxlength="12">
+							</c:if>
+							<c:if test="${invProject.paybackWay==2 }">
+							<input type="text" name="paybackWay"
+								class="form-control" value="等额本息"
+								disabled="disabled" maxlength="12">
+							</c:if>
+							</td>
 						</tr>
 						<tr>
 							<td>已投资金额:</td>
