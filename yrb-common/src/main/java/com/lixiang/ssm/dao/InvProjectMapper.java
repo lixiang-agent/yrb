@@ -1,5 +1,12 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
+
+import org.apache.ibatis.annotations.Param;
+
+
+
 import com.lixiang.ssm.entity.InvProject;
 
 public interface InvProjectMapper {
@@ -50,4 +57,21 @@ public interface InvProjectMapper {
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
     int updateByPrimaryKey(InvProject record);
+    
+
+    /**
+     * 按照条件来查询投资项目
+     */
+    List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject);
+
+    boolean updateProjectStatus(@Param("status") Integer status,@Param("id") Integer id);
+    /**
+     * 查询全部
+     * @param record
+     * @return
+     */
+    List<InvProject> queryAllInvProject(InvProject record);
+    
+    List<InvProject> queryAllInvProjectByProStatus(InvProject record);
+
 }

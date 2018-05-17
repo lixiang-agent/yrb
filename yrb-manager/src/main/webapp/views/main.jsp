@@ -37,11 +37,60 @@
 				<!-- #nav-search -->
 			</div>
 			<div class="page-content">
-				  欢迎登录.. 
+
+				<div class="row">
+					<div class="col-sm-7 infobox-container">
+						<div class="infobox infobox-green  ">
+							<div class="infobox-icon">
+								<i class="icon-comments"></i>
+							</div>
+
+							<div class="infobox-data">
+								<span class="infobox-data-number">${platFormAccount}</span>
+								<div class="infobox-content">平台成交总额</div>
+							</div>
+							<div class="stat stat-success">8%</div>
+						</div>
+
+						<div class="infobox infobox-blue  ">
+							<div class="infobox-icon">
+								<i class="icon-twitter"></i>
+							</div>
+
+							<div class="infobox-data">
+								<span class="infobox-data-number">${platFormAccount1 }</span>
+								<div class="infobox-content">今日投资数据</div>
+							</div>
+
+							<div class="badge badge-success">
+								+32% <i class="icon-arrow-up"></i>
+							</div>
+						</div>
+
+						<div class="infobox infobox-pink  ">
+							<div class="infobox-icon">
+								<i class="icon-shopping-cart"></i>
+							</div>
+
+							<div class="infobox-data">
+								<span class="infobox-data-number">${user }</span>
+								<div class="infobox-content">注册人数</div>
+							</div>
+							<div class="stat stat-important">4%</div>
+						</div>
+					</div>
+	
+				</div>
+
+				
 			</div>
-			<!-- PAGE CONTENT ENDS -->
+
 		</div>
-		<!-- /.col -->
+
+	</div>
+	<!-- PAGE CONTENT ENDS -->
+	</div>
+	<!-- /.col -->
 	</div>
 	<!-- /.row -->
 	<!-- /.page-content -->

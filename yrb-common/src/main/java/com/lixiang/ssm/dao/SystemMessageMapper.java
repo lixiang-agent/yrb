@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.SystemMessage;
 
 public interface SystemMessageMapper {
@@ -50,4 +52,11 @@ public interface SystemMessageMapper {
      * @mbg.generated Wed May 16 11:21:21 CST 2018
      */
     int updateByPrimaryKey(SystemMessage record);
+    
+    /**
+     * 查询全部SystemMessage
+     * @param systemMessage
+     * @return
+     */
+    List<SystemMessage> queryAllSystemMessagee(SystemMessage systemMessage);
 }

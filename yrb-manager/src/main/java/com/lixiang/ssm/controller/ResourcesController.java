@@ -57,6 +57,7 @@ public class ResourcesController {
 	@RequestMapping("/delResources")
 	public String delectResources(@RequestParam Integer id,Model model,HttpSession session){
 		int result = resourcesService.deleteByPrimaryKey(id);
+		System.out.println(result);
 		model.addAttribute("result", result);
 		session.setAttribute("oper_result", result>0);
 		return "redirect:/resources/pageList";
