@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="utf-8" />
-<title>OA系统</title>
+<title>网贷管理平台</title>
 <%
 	String ctx = request.getServletContext().getContextPath();
 	application.setAttribute("ctx", ctx);
@@ -55,7 +55,7 @@
 		<div class="navbar-container" id="navbar-container">
 			<div class="navbar-header pull-left">
 				<a href="#" class="navbar-brand"> <small> <i
-						class="icon-leaf"></i> 管理平台
+						class="icon-leaf"></i> 网贷管理平台
 				</small>
 				</a>  
 				<!-- /.brand -->
