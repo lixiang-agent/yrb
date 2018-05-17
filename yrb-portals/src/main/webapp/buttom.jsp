@@ -63,7 +63,7 @@
 				<dl>
 					<dt>官方二维码</dt>
 					<dd>
-						<span class="icon-ft-erweima"><img src="images/code.png"
+						<span class="icon-ft-erweima"><img src="${ctx}/images/code.png"
 							style="display: inline;"></span>
 					</dd>
 				</dl>

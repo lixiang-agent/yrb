@@ -8,14 +8,14 @@
 		<constructor>
 			<idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="project_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-			<arg column="project_type" javaType="java.lang.Boolean" jdbcType="BIT" />
+			<arg column="project_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="inv_no" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="inv_totbalance" javaType="java.math.BigDecimal"
 				jdbcType="DECIMAL" />
 			<arg column="rate" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
 			<arg column="payback_time" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="Safe_way" javaType="java.lang.String" jdbcType="VARCHAR" />
-			<arg column="payback_way" javaType="java.lang.String" jdbcType="VARCHAR" />
+			<arg column="payback_way" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="inv_balance" javaType="java.math.BigDecimal"
 				jdbcType="DECIMAL" />
 			<arg column="min_inv_balance" javaType="java.lang.Integer"
@@ -31,14 +31,14 @@
 				jdbcType="INTEGER" />
 			<arg column="Financing_end_time" javaType="java.util.Date"
 				jdbcType="TIMESTAMP" />
-			<arg column="delay_flag" javaType="java.lang.Boolean" jdbcType="BIT" />
+			<arg column="delay_flag" javaType="java.lang.Integer" jdbcType="BIT" />
 			<arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
 			<arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="creator_name" javaType="java.lang.String" jdbcType="VARCHAR" />
 			<arg column="modifior_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="modifior_name" javaType="java.lang.String" jdbcType="VARCHAR" />
 			<arg column="modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-			<arg column="resource" javaType="java.lang.Boolean" jdbcType="BIT" />
+			<arg column="resource" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="loan_project_id" javaType="java.lang.Integer"
 				jdbcType="INTEGER" />
 			<arg column="commend_flag" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -95,23 +95,23 @@
 		modifior_name, modify_date, resource,
 		loan_project_id, commend_flag)
 		values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR},
-		#{projectType,jdbcType=BIT},
+		#{projectType,jdbcType=INTEGER},
 		#{invNo,jdbcType=INTEGER},
 		#{invTotbalance,jdbcType=DECIMAL}, #{rate,jdbcType=DECIMAL},
 		#{paybackTime,jdbcType=INTEGER}, #{safeWay,jdbcType=VARCHAR},
-		#{paybackWay,jdbcType=VARCHAR},
+		#{paybackWay,jdbcType=INTEGER},
 		#{invBalance,jdbcType=DECIMAL},
 		#{minInvBalance,jdbcType=INTEGER}, #{maxInvBalance,jdbcType=INTEGER},
 		#{interest,jdbcType=DECIMAL}, #{loanReason,jdbcType=VARCHAR},
 		#{biddingDate,jdbcType=TIMESTAMP},
 		#{borrowerInfo,jdbcType=VARCHAR},
 		#{riskControl,jdbcType=VARCHAR}, #{projectStatus,jdbcType=INTEGER},
-		#{financingEndTime,jdbcType=TIMESTAMP}, #{delayFlag,jdbcType=BIT},
+		#{financingEndTime,jdbcType=TIMESTAMP}, #{delayFlag,jdbcType=INTEGER},
 		#{endTime,jdbcType=TIMESTAMP},
 		#{creatorId,jdbcType=INTEGER},
 		#{creatorName,jdbcType=VARCHAR}, #{modifiorId,jdbcType=INTEGER},
 		#{modifiorName,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP},
-		#{resource,jdbcType=BIT},
+		#{resource,jdbcType=INTEGER},
 		#{loanProjectId,jdbcType=INTEGER},
 		#{commendFlag,jdbcType=INTEGER})
 	</insert>
@@ -217,7 +217,7 @@
 				#{projectName,jdbcType=VARCHAR},
 			</if>
 			<if test="projectType != null">
-				#{projectType,jdbcType=BIT},
+				#{projectType,jdbcType=INTEGER},
 			</if>
 			<if test="invNo != null">
 				#{invNo,jdbcType=INTEGER},
@@ -235,7 +235,7 @@
 				#{safeWay,jdbcType=VARCHAR},
 			</if>
 			<if test="paybackWay != null">
-				#{paybackWay,jdbcType=VARCHAR},
+				#{paybackWay,jdbcType=INTEGER},
 			</if>
 			<if test="invBalance != null">
 				#{invBalance,jdbcType=DECIMAL},
@@ -268,7 +268,7 @@
 				#{financingEndTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="delayFlag != null">
-				#{delayFlag,jdbcType=BIT},
+				#{delayFlag,jdbcType=INTEGER},
 			</if>
 			<if test="endTime != null">
 				#{endTime,jdbcType=TIMESTAMP},
@@ -289,7 +289,7 @@
 				#{modifyDate,jdbcType=TIMESTAMP},
 			</if>
 			<if test="resource != null">
-				#{resource,jdbcType=BIT},
+				#{resource,jdbcType=INTEGER},
 			</if>
 			<if test="loanProjectId != null">
 				#{loanProjectId,jdbcType=INTEGER},
@@ -309,7 +309,7 @@
 				project_name = #{projectName,jdbcType=VARCHAR},
 			</if>
 			<if test="projectType != null">
-				project_type = #{projectType,jdbcType=BIT},
+				project_type = #{projectType,jdbcType=INTEGER},
 			</if>
 			<if test="invNo != null">
 				inv_no = #{invNo,jdbcType=INTEGER},
@@ -327,7 +327,7 @@
 				Safe_way = #{safeWay,jdbcType=VARCHAR},
 			</if>
 			<if test="paybackWay != null">
-				payback_way = #{paybackWay,jdbcType=VARCHAR},
+				payback_way = #{paybackWay,jdbcType=INTEGER},
 			</if>
 			<if test="invBalance != null">
 				inv_balance = #{invBalance,jdbcType=DECIMAL},
@@ -361,7 +361,7 @@
 				#{financingEndTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="delayFlag != null">
-				delay_flag = #{delayFlag,jdbcType=BIT},
+				delay_flag = #{delayFlag,jdbcType=INTEGER},
 			</if>
 			<if test="endTime != null">
 				end_time = #{endTime,jdbcType=TIMESTAMP},
@@ -382,7 +382,7 @@
 				modify_date = #{modifyDate,jdbcType=TIMESTAMP},
 			</if>
 			<if test="resource != null">
-				resource = #{resource,jdbcType=BIT},
+				resource = #{resource,jdbcType=INTEGER},
 			</if>
 			<if test="loanProjectId != null">
 				loan_project_id = #{loanProjectId,jdbcType=INTEGER},
@@ -401,7 +401,7 @@
 		set project_name =
 		#{projectName,jdbcType=VARCHAR},
 		project_type =
-		#{projectType,jdbcType=BIT},
+		#{projectType,jdbcType=INTEGER},
 		inv_no = #{invNo,jdbcType=INTEGER},
 		inv_totbalance = #{invTotbalance,jdbcType=DECIMAL},
 		rate =
@@ -411,7 +411,7 @@
 		Safe_way =
 		#{safeWay,jdbcType=VARCHAR},
 		payback_way =
-		#{paybackWay,jdbcType=VARCHAR},
+		#{paybackWay,jdbcType=INTEGER},
 		inv_balance =
 		#{invBalance,jdbcType=DECIMAL},
 		min_inv_balance =
@@ -433,7 +433,7 @@
 		Financing_end_time =
 		#{financingEndTime,jdbcType=TIMESTAMP},
 		delay_flag =
-		#{delayFlag,jdbcType=BIT},
+		#{delayFlag,jdbcType=INTEGER},
 		end_time = #{endTime,jdbcType=TIMESTAMP},
 		creator_id = #{creatorId,jdbcType=INTEGER},
 		creator_name =
@@ -444,7 +444,7 @@
 		#{modifiorName,jdbcType=VARCHAR},
 		modify_date =
 		#{modifyDate,jdbcType=TIMESTAMP},
-		resource = #{resource,jdbcType=BIT},
+		resource = #{resource,jdbcType=INTEGER},
 		loan_project_id = #{loanProjectId,jdbcType=INTEGER},
 		commend_flag =
 		#{commendFlag,jdbcType=INTEGER}
@@ -475,9 +475,25 @@
 				#{invProject.maxMonth}
 			</if>
 			<if test="invProject.paybackWay!=null">
-				payback_way=#{invProject.paybackWay}
+				and payback_way=#{invProject.paybackWay}
 			</if>
 			and project_status=40
+		</where>
+	</select>
+	
+	<update id="updateProjectStatus" parameterType="com.lixiang.ssm.entity.InvProject">
+		update t_inv_project set project_status = 20 where id =
+		#{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="queryAllInvProject" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project
+		<where>
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
 		</where>
 	</select>
 </mapper>

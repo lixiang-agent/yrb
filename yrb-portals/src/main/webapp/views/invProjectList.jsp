@@ -36,23 +36,35 @@ $().ready(function() {
 		$("#rate li a").removeClass("active");
 		$(this).addClass("active");
 		var rate=new Array(2);
-		rate=$(this).attr("name").split(",");
-		invCondition["minRate"]=rate[0];
-		invCondition["maxRate"]=rate[1];
+		if($(this).attr("name")!=undefined){
+			rate=$(this).attr("name").split(",");
+			invCondition["minRate"]=rate[0];
+			invCondition["maxRate"]=rate[1];
+		}else{
+			invCondition["minRate"]=undefined;
+			invCondition["maxRate"]=undefined;
+		}
 		queryList();
 	});
 	$("#term li a").click(function() {
 		$("#term li a").removeClass("active");
 		$(this).addClass("active");
 		var term=new Array(2);
+		if($(this).attr("name")!=undefined){
 		rate=$(this).attr("name").split(",");
 		invCondition["minMonth"]=rate[0];
 		invCondition["maxMonth"]=rate[1];
+		}else{
+			invCondition["minMonth"]=undefined;
+			invCondition["maxMonth"]=undefined;
+		}
 		queryList();
 	});
 	$("#paybackWay li a").click(function() {
 		$("#paybackWay li a").removeClass("active");
 		$(this).addClass("active");
+		invCondition["paybackWay"]=$(this).attr("name");
+		queryList();
 	});
 
 	function queryList(){
@@ -74,7 +86,9 @@ $().ready(function() {
 		if(invCondition["maxRate"]!=null){
 			url=url+"&maxRate="+invCondition["maxRate"];
 		}
-	
+		if(invCondition["paybackWay"]!=null){
+			url=url+"&paybackWay="+invCondition["paybackWay"];
+		}
 		$.ajax({
 			url:url,
 			dataType:"json",
@@ -85,7 +99,21 @@ $().ready(function() {
 		 		
 		 		var item='<ul>'
 				+'<li class="col-330 col-t"><a href="infor.html"'
-				+'	target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a'
+				+'	target="_blank"><i class="icon ';
+					if(data[i].paybackWay==1){
+						item+="icon-che";
+					}
+					if(data[i].paybackWay==2){
+						item+="icon-fang";
+					}
+					if(data[i].paybackWay==3){
+						item+="icon-shu";
+					}
+					if(data[i].paybackWay==4){
+						item+="icon-zhai";
+					}
+				
+				item+='title="车易贷"></i></a><a'
 				+'	class="f18" href="infor.html"'
 				+'	title="'+data[i].projectName+'" target="_blank">'
 				+'		'+data[i].projectName+'</a></li>'
@@ -94,7 +122,17 @@ $().ready(function() {
 				+'	</span>%</li>'
 				+'	<li class="col-150"><span class="f20 c-333">'+data[i].paybackTime +'</span>个月'
 				+'	</li>'
-				+'	<li class="col-150">'+data[i].paybackWay+'</li>'
+				+'	<li class="col-150">';
+				if(data[i].paybackWay==0){
+					item+="到期还本还息";
+				}
+				if(data[i].paybackWay==1){
+					item+="按月付息，到期还本";
+				}
+				if(data[i].paybackWay==2){
+					item+="等额本息";
+				}
+				item+='</li>'
 				+'	<li class="col-120">'
 				+'		<div class="circle">'
 				+'				<div class="progress-bgPic progress-bfb10">'
@@ -158,9 +196,8 @@ $().ready(function() {
 							<dt>年利率</dt>
 							<dd>
 								<ul id="rate">
-									<li class="n1"><a
-										href="javascript:url('borrow_interestrate','');"
-										id="borrow_interestrate_" class="active">不限</a></li>
+									<li class="n1"><a href="javascript:void(0);"
+										id="post_type_" class="active">不限</a></li>
 									<li class="n2"><a id="borrow_interestrate_1"
 										href="javascript:url('borrow_interestrate','1');" name="0,12">12%以下</a>
 									</li>
@@ -208,12 +245,12 @@ $().ready(function() {
 									<li class="n1"><a href="javascript:url('repay_style','');"
 										id="repay_style_" class="active">不限</a></li>
 									<li class="n2"><a id="repay_style_end"
-										href="javascript:url('repay_style','end');">到期还本付息</a></li>
+										href="javascript:url('repay_style','end');" name="0">到期还本付息</a></li>
 									<li class="n2"><a id="repay_style_endmonth"
-										href="javascript:url('repay_style','endmonth');">按月付息,到期还本</a>
+										href="javascript:url('repay_style','endmonth');" name="1">按月付息,到期还本</a>
 									</li>
 									<li class="n2"><a id="repay_style_month"
-										href="javascript:url('repay_style','month');">等额本息</a></li>
+										href="javascript:url('repay_style','month');" name="2">等额本息</a></li>
 								</ul>
 							</dd>
 						</dl>
@@ -246,7 +283,8 @@ $().ready(function() {
 						<ul>
 							<li class="col-330">借款标题</li>
 							<li class="col-180"><a
-								href="javascript:url('order','account_up');" class="">借款金额</a></li>
+								href="javascript:void(0);" name="0">借款金额</a>
+								</li>
 							<li class="col-110"><a
 								href="javascript:url('order','apr_up');" class="">年利率</a></li>
 							<li class="col-150"><a
@@ -263,7 +301,14 @@ $().ready(function() {
 							<c:forEach items="${listInvProject }" var="invProject">
 								<ul>
 									<li class="col-330 col-t"><a href="infor.html"
-										target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a
+										target="_blank"><i class="icon
+										<c:choose>
+											<c:when test="${invProject.projectType ==1 }">icon-che</c:when>
+											<c:when test="${invProject.projectType ==2 }">icon-fang</c:when>
+											<c:when test="${invProject.projectType ==3 }">icon-shu</c:when>
+											<c:when test="${invProject.projectType ==4 }">icon-zhai</c:when>
+										</c:choose></li>
+										  " title="车易贷"></i></a><a
 										class="f18" href="infor.html"
 										title="${invProject.projectName }" target="_blank">
 											${invProject.projectName }</a></li>
@@ -272,7 +317,12 @@ $().ready(function() {
 									</span>%</li>
 									<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
 									</li>
-									<li class="col-150">${invProject.paybackWay }</li>
+									<li class="col-150">
+									<c:choose>
+											<c:when test="${invProject.paybackWay ==0 }">到期还本还息</c:when>
+											<c:when test="${invProject.paybackWay ==1 }">按月付息，到期还本</c:when>
+											<c:when test="${invProject.paybackWay ==2 }">等额本息</c:when>
+										</c:choose></li>
 									<li class="col-120">
 										<div class="circle">
 											<div class="left progress-bar">
