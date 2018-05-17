@@ -38,6 +38,8 @@ public class OperateRecord {
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     private Integer projectType;
+    
+    private String projectName;
 
     /**
      *
@@ -293,4 +295,13 @@ public class OperateRecord {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+    
 }

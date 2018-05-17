@@ -41,7 +41,13 @@ public class InvManageService {
 		System.out.println(page);
 		return page;
 	}
-
+	
+	public List<OperateRecord> queryOperRecord(OperateRecord record){
+		
+		List<OperateRecord> list = operateRecordMapper.queryOperRecord(record);
+		
+		return list;
+	}
 	public int insertSelective(InvProject record) {
 		return invProjectMapper.insertSelective(record);
 	}

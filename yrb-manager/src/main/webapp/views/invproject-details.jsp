@@ -10,7 +10,7 @@
 					<span aria-hidden="true">×</span>
 				</button>
 				<h4 class="modal-title">
-					<strong>修改项目</strong>
+					<strong>项目详情</strong>
 				</h4>
 			</div>
 			<div class="modal-body">

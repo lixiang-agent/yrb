@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lixiang.ssm.entity.InvProject;
-import com.lixiang.ssm.entity.News;
+import com.lixiang.ssm.entity.OperateRecord;
 
 public interface InvProjectMapper {
     /**
@@ -72,10 +72,12 @@ public interface InvProjectMapper {
     List<InvProject> queryAllInvProject(InvProject record);
     
     List<InvProject> queryAllInvProjectByProStatus(InvProject record);
-
+    
+   
+    
 	List<InvProject> listIndexCommendProjects();
 	List<InvProject> listIndexCarProjects();
 	List<InvProject> listIndexHouseProjects();
 	List<InvProject> listIndexObligationProjects();
-
+	
 }

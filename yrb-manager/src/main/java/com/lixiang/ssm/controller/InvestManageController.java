@@ -3,6 +3,7 @@ package com.lixiang.ssm.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -32,10 +33,11 @@ public class InvestManageController {
 
 	@RequestMapping("/subProject")
 	public String submitProject(Integer id, Model model, HttpSession session) {
-
+		Subject currentUser = SecurityUtils.getSubject();
+		User result = (User) currentUser.getPrincipal();
 		boolean oper_result = invManageService.updateProjectStatus(20,id);
 		InvProject inv = invManageService.selectByPrimaryKey(id);
-		OperateRecord operRecord = new OperateRecord(null,1,new Date(),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),"提交");
+		OperateRecord operRecord = new OperateRecord(null,1,new Date(),inv.getProjectType(),id,result.getId(),result.getUsername(),"提交");
 		invManageService.insertSelective(operRecord);
 		session.setAttribute("oper_result", oper_result);
 		return "redirect:/investManage/pageList";
@@ -123,7 +125,7 @@ public class InvestManageController {
 		return "redirect:/investManage/pageList";
 	}
 	
-	@RequestMapping("listOperProject")
+	@RequestMapping("/listOperProject")
 	public String listOperProject(InvProject invProject, Model model){
 		// 封装了总数，封装了分页信息，封装了查询出来的数据
 		PageInfo<InvProject> inv = invManageService.listOperProject(invProject);
@@ -132,10 +134,12 @@ public class InvestManageController {
 		return "oper-record-list";
 	}
 	
-	
-	public String showOperRecord(InvProject invProject,Model model){
+	@RequestMapping("/showOperRecord")
+	public String showOperRecord(OperateRecord operateRecord,Model model){
 		
+		List<OperateRecord> showList = invManageService.queryOperRecord(operateRecord);
 		
+		model.addAttribute("showList", showList);
 		return "oper-record-show";
 	}
 	
