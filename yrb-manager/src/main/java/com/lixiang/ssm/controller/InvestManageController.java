@@ -46,6 +46,13 @@ public class InvestManageController {
 		return "invproject-list";
 	}
 	
+	@RequestMapping("/detailsList")
+	public String detailsList(Integer id, Model model) {
+		// 封装了总数，封装了分页信息，封装了查询出来的数据
+		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		model.addAttribute("invProject", invProject);
+		return "invproject-details";
+	}
 	
 	@RequestMapping("/toDel")
 	public String toDelInvProject(Integer id,Model model){

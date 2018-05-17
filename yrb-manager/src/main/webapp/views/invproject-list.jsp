@@ -161,7 +161,10 @@
 															id="del" title="删除项目"> <i class="icon-trash bigger-130"></i>
 														</a>
 													</c:if>
-											
+														<a class="green"  data-toggle="modal" data-target="#detailsModal" 
+															href="${ctx }/investManage/detailsList?id=${invpro.id}" id="details" title="项目详情"> <i
+															class="icon-search bigger-130"></i>
+														</a>
 												</div>
 
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -236,7 +239,13 @@
 		</div>
 	</div>
 
-
+	<!-- 项目详情的模态框 -->
+	<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"

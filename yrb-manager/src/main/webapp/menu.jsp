@@ -124,7 +124,7 @@
 			   </li>
 				<li class="" id="inv">
 					<a href="#" class="dropdown-toggle">
-						<i class="icon-list"></i> <span class="menu-text">投资管理 </span> <b
+						<i class="icon-briefcase"></i> <span class="menu-text">投资管理 </span> <b
 						class="arrow icon-angle-down"></b>
 					</a>
 					<ul class="submenu">
