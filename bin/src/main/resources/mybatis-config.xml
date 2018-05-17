@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 开启数据库的下划线变驼峰命名 -->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<!-- 开启懒加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 开启、关闭 二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 指定日志 -->
+		<setting name="logImpl" value="LOG4J" />
+	</settings>
+</configuration>

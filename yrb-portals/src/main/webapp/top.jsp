@@ -71,7 +71,7 @@
 				</div>
 				<ul class="top-nav fn-clear">
 					<li id="index"><a href="${ctx}/index.jsp">首页</a></li>
-					<li id="inv"><a href="list.html" class="">我要投资</a></li>
+					<li id="inv"><a href="${ctx}/invProject/list" class="">我要投资</a></li>
 					<li id="apply"><a href="apply.html" class="">我要借款</a></li>
 					<li id="security"><a href="帮助中心.html">安全保障</a></li>
 					<li class="top-nav-safe" id="usercenter"><a href="个人中心首页.html">我的账户</a></li>
