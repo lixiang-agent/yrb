@@ -82,47 +82,7 @@
 	
 				</div>
 
-				<div class="space-6"></div>
-
-				<div class="infobox infobox-green infobox-small infobox-dark">
-					<div class="infobox-progress">
-						<div class="easy-pie-chart percentage easyPieChart"
-							data-percent="61" data-size="39"
-							style="width: 39px; height: 39px; line-height: 39px;">
-							<span class="percent">61</span>%
-							<canvas width="39" height="39"></canvas>
-						</div>
-					</div>
-
-					<div class="infobox-data">
-						<div class="infobox-content">任务</div>
-						<div class="infobox-content">完成</div>
-					</div>
-				</div>
-
-				<div class="infobox infobox-blue infobox-small infobox-dark">
-					<div class="infobox-chart">
-						<span class="sparkline" data-values="3,4,2,3,4,4,2,2"><canvas
-								width="39" height="19"
-								style="display: inline-block; width: 39px; height: 19px; vertical-align: top;"></canvas></span>
-					</div>
-		
-					<div class="infobox-data">
-						<div class="infobox-content">获得</div>
-						<div class="infobox-content">$32,000</div>
-					</div>
-				</div>
 				
-				<div class="infobox infobox-grey infobox-small infobox-dark">
-					<div class="infobox-icon">
-						<i class="icon-download-alt"></i>
-					</div>
-
-					<div class="infobox-data">
-						<div class="infobox-content">下载次数</div>
-						<div class="infobox-content">1,205</div>
-					</div>
-				</div>
 			</div>
 
 		</div>
