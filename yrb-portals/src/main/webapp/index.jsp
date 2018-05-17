@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,8 +144,9 @@ $(function(){
   <div class="new-announcement-content">
     <div id="scrollDiv">
       <ul style="margin-top: 0px;">
-        <li><a class="black-link" href="公司公告详细.html" target="_blank"> 2015年9月8日还款公告</a></li>
-        <li><a class="black-link" href="公司公告详细.html" target="_blank"> 2015年纪念抗日战争胜利放假公告</a></li>
+      <c:forEach items="${newsMap}" var="news">
+      	<li><a class="black-link" href="公司公告详细.html" target="_blank"> ${news.value.title}</a></li>
+      </c:forEach>
       </ul>
     </div>
   </div>
@@ -374,11 +377,9 @@ $(function(){
         <div class="bd">
           <div class="article-list clearfix">
             <ul>
-              <li><a href="#" title="关于“金融产品”产品的说明">关于“金融产品”产品的说明</a><span class="date">06-19</span></li>
-              <li><a href="#" title="2015年9月10日发标预告">2015年9月10日发标预告</a><span class="date">09-10</span></li>
-              <li><a href="#" title="关于平台“纪念抗战胜利70周年”9月3日***">关于平台“纪念抗战胜利70周年***</a><span class="date">09-02</span></li>
-              <li><a href="#" title="关于P2P理财平台新系统升级的公告">关于P2P理财平台新系统***</a><span class="date">09-02</span></li>
-              <li><a href="#" title="关于债权贷新规调整实施的公告">关于债权贷新规调整实施的公告</a><span class="date">08-25</span></li>
+            <c:forEach items="${newsMap}" var="news">
+      			<li><a href="#" title="${news.value.title}">${news.value.title}</a><span class="date"><fmt:formatDate value="${news.value.publishDate}" pattern="MM-dd"/></span></li>
+      		</c:forEach>
             </ul>
           </div>
         </div>
@@ -428,25 +429,19 @@ $(function(){
         <div class="bd">
           <div class="ui-tab-cont">
             <div class="ui-tab-item active">
-              <div class="headlines"> <img src="images/news.jpg"> <a title="平台遭遇P2P滑稽抄袭" target="_blank" href="#">平台遭遇P2P滑稽抄袭</a><br>
-                <span class="des">抄袭者居然把被抄袭者的名字一起抄下来，这样的乌龙抄袭你见过没...</span> </div>
-              <div class="article-list">
                 <ul>
-                  <li>[凤凰网]<a href="#" title="平台携手哈工大关爱毕节留守儿童" target="_blank">平台携手哈工大关爱毕节留守儿童</a></li>
-                  <li>[21CN财经]<a href="#" title="接受网贷之家专访" target="_blank">接受网贷之家专访</a></li>
-                  <li>[和讯网]<a href="#" title="受邀参加中国财经峰会 斩获行业最具品牌影响力等两项大奖" target="_blank">受邀参加中国财经峰会 斩获行业最具品牌影响力等两项大奖</a></li>
+                  <c:forEach items="${newsMap}" var="news">
+      				 <li><a href="#" title="${news.value.title}" target="_blank">${news.value.title}</a></li>
+      			</c:forEach>
                 </ul>
               </div>
             </div>
             <div class="ui-tab-item">
               <div class="article-list">
                 <ul>
-                  <li>[<a href="#">P2P网贷</a>]<a href="#" title="随着互联网金融的快速发展，越来越多的人开始加入到p2p网贷投资行列，作为一种相对来说还比较新兴的理财产品" target="_blank"> 合肥p2p网贷哪家好，投资新人该如何选择p2p网贷平台</a></li>
-                  <li>[<a href="#">外汇</a>]<a href="#" title="投资者应知道，外汇交易市场是一个保证金交易市场，投资者可以利用外汇保证金交易进行更有收益空间的交易" target="_blank"> 什么是外汇保证金交易有哪些方式</a></li>
-                  <li>[<a href="#">外汇</a>]<a href="#" title="很多的投资者都听说过外汇保证金交易，他们都知道该交易方式可以让投资者有机会进行更有收益空间的交易" target="_blank"> 外汇保证金交易开户有什么样的具体优势呢？</a></li>
-                  <li>[<a href="#">保险理财</a>]<a href="#" title="保险理财因为其特殊性而对人员专业知识、道德标准以及人生阅历提出了较高要求。但是我国的保险业人才还存在很多问题" target="_blank"> 保险公司存在的人才需求问题</a></li>
-                  <li>[<a href="#">保险理财</a>]<a href="#" title="保险理财的专业人士缺乏已经成为我国保险公司个人理财业务发展的一大瓶颈，保险公司的员工要能够成为一个好的客户经理" target="_blank"> 保险理财产品销售人员需要具备的基本素质</a></li>
-                  <li>[<a href="#">外汇</a>]<a href="#" title="外货期货也叫货币期货，所谓期货自然与现货有着明显的区别，外汇期货除了价格表现形式上与现货有所差异之外，外汇期货交易是用一种货币按照汇率兑换成另一种货币的期货合约" target="_blank"> 什么是外汇期货及其套利形式介绍</a></li>
+                <c:forEach items="${newsMap}" var="news">
+      				 <li><a href="#" title="${news.value.title}" target="_blank">${news.value.title}</a></li>
+      			</c:forEach>
                 </ul>
               </div>
             </div>
