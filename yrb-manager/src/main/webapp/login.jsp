@@ -4,7 +4,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>管理系统</title>
+		<title>网贷平台</title>
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -27,7 +27,7 @@
 								<h1>
 									<i class="icon-leaf green"></i>
 									<span class="red"></span>
-									<span class="white">管理平台+</span>
+									<span class="white">网贷管理平台+</span>
 								</h1>
 								<h4 class="blue"></h4>
 							</div>
@@ -77,24 +77,6 @@
 													<div style="color:red; text-align: center">${msg }</div>
 												</fieldset>
 											</form>
-
-											<div class="social-or-login center">
-												<span class="bigger-110">使用第三方登录</span>
-											</div>
-
-											<div class="social-login center">
-												<a class="btn btn-primary">
-													<i class="icon-facebook"></i>
-												</a>
-
-												<a class="btn btn-info">
-													<i class="icon-twitter"></i>
-												</a>
-
-												<a class="btn btn-danger">
-													<i class="icon-google-plus"></i>
-												</a>
-											</div>
 										</div><!-- /widget-main -->
 
 										<div class="toolbar clearfix">
@@ -102,13 +84,6 @@
 												<a href="#" onclick="show_box('forgot-box'); return false;" class="forgot-password-link">
 													<i class="icon-arrow-left"></i>
 													忘记密码
-												</a>
-											</div>
-
-											<div>
-												<a href="#" onclick="show_box('signup-box'); return false;" class="user-signup-link">
-													注册
-													<i class="icon-arrow-right"></i>
 												</a>
 											</div>
 										</div>
@@ -155,92 +130,12 @@
 										</div>
 									</div><!-- /widget-body -->
 								</div><!-- /forgot-box -->
-
-								<div id="signup-box" class="signup-box widget-box no-border">
-									<div class="widget-body">
-										<div class="widget-main">
-											<h4 class="header green lighter bigger">
-												<i class="icon-group blue"></i>
-												New User Registration
-											</h4>
-
-											<div class="space-6"></div>
-											<p> Enter your details to begin: </p>
-
-											<form>
-												<fieldset>
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="Email" />
-															<i class="icon-envelope"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
-															<i class="icon-user"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
-															<i class="icon-lock"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Repeat password" />
-															<i class="icon-retweet"></i>
-														</span>
-													</label>
-
-													<label class="block">
-														<input type="checkbox" class="ace" />
-														<span class="lbl">
-															I accept the
-															<a href="#">User Agreement</a>
-														</span>
-													</label>
-
-													<div class="space-24"></div>
-
-													<div class="clearfix">
-														<button type="reset" class="width-30 pull-left btn btn-sm">
-															<i class="icon-refresh"></i>
-															Reset
-														</button>
-
-														<button type="button" class="width-65 pull-right btn btn-sm btn-success">
-															Register
-															<i class="icon-arrow-right icon-on-right"></i>
-														</button>
-													</div>
-												</fieldset>
-											</form>
-										</div>
-
-										<div class="toolbar center">
-											<a href="#" onclick="show_box('login-box'); return false;" class="back-to-login-link">
-												<i class="icon-arrow-left"></i>
-												Back to login
-											</a>
-										</div>
-									</div><!-- /widget-body -->
-								</div><!-- /signup-box -->
 							</div><!-- /position-relative -->
 						</div>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
 			</div>
 		</div><!-- /.main-container -->
-
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-
 		<script src="assets/js/jquery-2.0.3.min.js"></script>
 		<script src="assets/js/jquery.mobile.custom.min.js"></script>
 
