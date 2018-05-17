@@ -147,7 +147,7 @@ a.top-icon1{ float:left; padding-left:30px; background: url(../images/top-icon.p
 .slides_container {display: none; overflow: hidden;;width:1000px;}
 .slides_container {width: 1000px; text-align:center;}
 .slides_container div.slide {display: block;height: 300px;width: 1000px;position: relative}
-.pagination {position:absolute;left:350px; bottom:15px; text-align:center; width:320px; height:22px; overflow:hidden; z-index:99;}
+.pagination {position:absolute;left:1100px; bottom:15px; text-align:center; width:320px; height:22px; overflow:hidden; z-index:99;}
 .pagination li { float:left; margin:0 15px;  width:22px; height:22px; display:block; cursor:pointer;}
 .pagination li a {background:url(../images/top-icon.png) 0 -383px no-repeat; display:block; overflow: hidden; width:12px; height:22px;}
 .pagination li.current a {background:url(../images/top-icon.png) 0 -360px no-repeat; width:22px; height:22px;}

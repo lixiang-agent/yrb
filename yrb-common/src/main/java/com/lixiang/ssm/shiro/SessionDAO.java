@@ -9,6 +9,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -18,6 +19,7 @@ import com.lixiang.ssm.redis.RedisUtil;
 
 public class SessionDAO extends EnterpriseCacheSessionDAO {
 	
+	private Logger log = Logger.getLogger(SessionDAO.class);
 	
 	private RedisUtil redisUtil;
 	public RedisUtil getRedisUtil() {
@@ -41,7 +43,13 @@ public class SessionDAO extends EnterpriseCacheSessionDAO {
     @Override
     protected Session doReadSession(Serializable sessionId) {
         // 先从缓存中获取session，如果没有再去数据库中获取
-        Session session = super.doReadSession(sessionId); 
+    	Session session=null;
+    	try{
+    		 session = super.doReadSession(sessionId); 
+        }catch(RuntimeException exception){
+        	log.debug("获取session异常");
+        }
+    	
         if(session == null){
             byte[] bytes = (byte[]) redisUtil.get(ShiroConstant.PRIFFIX+sessionId.toString());
             if(bytes != null && bytes.length > 0){

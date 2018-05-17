@@ -43,6 +43,14 @@
     from t_user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+   <select id="selectByKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
@@ -227,4 +235,22 @@
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getUserInfoList" resultType="com.lixiang.ssm.entity.UserInfo">
+
+		SELECT * FROM t_user_info
+
+	</select>
+	
+		<select id="list" resultMap="BaseResultMap">
+		select * from t_user_info
+		<where>
+			<if test="account != null and account!=''">
+				<bind name="account2" value="'%'+account+'%'" />
+				and account like #{account2}
+			</if>
+
+		</where>
+	</select>
+
 </mapper>

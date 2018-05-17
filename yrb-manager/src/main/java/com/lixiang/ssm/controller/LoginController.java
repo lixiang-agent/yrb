@@ -97,9 +97,9 @@ public class LoginController {
 		return "redirect:/login.jsp";
 	}
 	
-	@RequestMapping("/main")
+	/*@RequestMapping("/main")
 	public String main(){
 		return "main";
 	}
-
+*/
 }

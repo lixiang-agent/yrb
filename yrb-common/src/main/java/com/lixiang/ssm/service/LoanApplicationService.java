@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -31,6 +32,28 @@ public class LoanApplicationService
 	{
 		//获取未处理申请的列表,参数为申请结果：0=未处理，1=申请未通过，2=通过申请
 		List<LoanApplication> list = mapper.listSelectByResult(0);
+		PageInfo<LoanApplication> page = new PageInfo<>(list);
+		return page;
+	}
+	
+	/**
+	 * 修改申请的信息
+	 */
+	@Transactional
+	public int updateByPrimaryKeySelective(LoanApplication application)
+	{
+		return mapper.updateByPrimaryKeySelective(application);
+	}
+	
+	/**
+	 * 查询真实姓名或联系电话获取未处理申请
+	 * @param realName 真实姓名
+	 * @param contactNumber 联系电话
+	 * @return
+	 */
+	public PageInfo<LoanApplication> listLoanApplication(String realName , String contactNumber)
+	{
+		List<LoanApplication> list = mapper.listSelectByRealNameORContactNumber(realName, contactNumber);
 		PageInfo<LoanApplication> page = new PageInfo<>(list);
 		return page;
 	}

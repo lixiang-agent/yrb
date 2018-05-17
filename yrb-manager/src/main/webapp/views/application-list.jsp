@@ -43,10 +43,10 @@
 						<div class="breadcrumbs" id="breadcrumbs" style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
 								<div class="col-lg-6"  style="width:100%;">
-									<form class="form-search" action="${ctx}/loanApplication/list" method="get">
+									<form class="form-search" action="${ctx}/loanApplication/listLoanApplication" method="get">
 										<div class="input-group">
-											<input type="text" name="username" class="input-group-input" placeholder="请输入您要查找的真实姓名" value="${user.username }"	aria-describedby="basic-addon2" style="magin-right:12px;">
-											<input type="text" name="realName" class="input-group-input" placeholder="请输入您要查找的联系电话" value="${user.realName }"	aria-describedby="basic-addon2" style="magin-right:12px;">
+											<input type="text" name="realName" class="input-group-input" placeholder="请输入您要查找的真实姓名" aria-describedby="basic-addon2" style="magin-right:12px;">
+											<input type="text" name="contactNumber" class="input-group-input" placeholder="请输入您要查找的联系电话" aria-describedby="basic-addon2" style="magin-right:12px;">
 											<span class="input-group-btn3">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
 											</span>
@@ -114,9 +114,50 @@
 	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="">
-					
+				<form id="updateForm">
+					<div class="panel panel-default">
+					  <div class="panel-heading">申请信息修改</div>
+					  <div class="panel-body">
+					  	<div class="container">
+							<div class="row">
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">申请id:</span>
+						      		<input id="updateId" name="id" readonly   />
+						    	</div>
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">真实姓名:</span>
+						      		<input id="updateRealName" name="realName"  readonly  />
+						    	</div>   
+							</div>
+							<div class="row">
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">联系电话:</span>
+						      		<input id="updateContactNumber" name="contactNumber"  readonly  />
+						    	</div>
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">联系地址:</span>
+						      		<input id="updateAddress" name="address" readonly  />
+						    	</div>
+							</div>
+							<div class="row">
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">借款金额:</span>
+						      		<input id="updateLoanBalance" type="number" name="loanBalance"  />
+						    	</div>
+						    	<div class="col-md-5">
+						    		<span class="label label-primary">借款期限:</span>
+						      		<input id="updateLoanTerm" type="number" name="loanTerm" />
+						    	</div>   
+							</div>
+						</div>
+						<input id="updateUserId" type="hidden" name="userId" />
+						
+						<input id="updateHandlerId" type="hidden" name="handlerId" value="${user.id}" />
+						<input id="updateHandlerName" type="hidden" name="handlerName" value="${user.username}" />
+					  </div>
+					</div>		
 				</form>
+				<button id="update" class="btn btn-primary"><i class="icon-save bigger-160"></i>修改</button>
 			</div>
 		</div>
 	</div>
