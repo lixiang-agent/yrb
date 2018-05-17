@@ -62,8 +62,8 @@ public class LoanApplicationController
 	 * @param model 模
 	 * @return
 	 */
-	@RequestMapping("listLoanApplication")
-	public String listLoanApplication(Model model,String realName , String contactNumber)
+	@RequestMapping("listquery")
+	public String listQuery(Model model,String realName , String contactNumber)
 	{
 		log.debug("查询真实姓名的申请");
 		log.debug("查询联系电话的申请");
