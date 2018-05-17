@@ -65,7 +65,7 @@
 		<div class="header min-width">
 			<div class="container">
 				<div class="fn-left logo">
-					<a class="" href="${ctx}/index.jsp"> <img src="images/logo.png"
+					<a class="" href="${ctx}/index.jsp"> <img src="${ctx }/images/logo.png"
 						title="">
 					</a>
 				</div>

@@ -29,7 +29,7 @@ public class InvProject {
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private Boolean projectType;
+    private Integer projectType;
 
     /**
      *
@@ -271,7 +271,7 @@ public class InvProject {
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public InvProject(Integer id, String projectName, Boolean projectType, Integer invNo, BigDecimal invTotbalance, BigDecimal rate, Integer paybackTime, String safeWay, String paybackWay, BigDecimal invBalance, Integer minInvBalance, Integer maxInvBalance, BigDecimal interest, String loanReason, Date biddingDate, String borrowerInfo, String riskControl, Integer projectStatus, Date financingEndTime, Boolean delayFlag, Date endTime, Integer creatorId, String creatorName, Integer modifiorId, String modifiorName, Date modifyDate, Boolean resource, Integer loanProjectId, Integer commendFlag) {
+    public InvProject(Integer id, String projectName, Integer projectType, Integer invNo, BigDecimal invTotbalance, BigDecimal rate, Integer paybackTime, String safeWay, String paybackWay, BigDecimal invBalance, Integer minInvBalance, Integer maxInvBalance, BigDecimal interest, String loanReason, Date biddingDate, String borrowerInfo, String riskControl, Integer projectStatus, Date financingEndTime, Boolean delayFlag, Date endTime, Integer creatorId, String creatorName, Integer modifiorId, String modifiorName, Date modifyDate, Boolean resource, Integer loanProjectId, Integer commendFlag) {
         this.id = id;
         this.projectName = projectName;
         this.projectType = projectType;
@@ -369,7 +369,7 @@ public class InvProject {
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public Boolean getProjectType() {
+    public Integer getProjectType() {
         return projectType;
     }
 
@@ -381,7 +381,7 @@ public class InvProject {
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setProjectType(Boolean projectType) {
+    public void setProjectType(Integer projectType) {
         this.projectType = projectType;
     }
 
