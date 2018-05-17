@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="w"  uri="http://com.lixiang/ssm/page"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +27,7 @@
 <!--个人中心-->
 <div class="wrapper wbgcolor">
   <div class="w1200 personal">
-    <div class="credit-ad"><img src="images/clist1.jpg" width="1000" height="80"></div>
+    <div class="credit-ad"><img src="${ctx}/images/clist1.jpg" width="1000" height="80"></div>
     <div id="personal-left" class="personal-left">
       <ul>
         <li class="pleft-cur"><span><a href="个人中心首页.html"><i class="dot dot1"></i>账户总览</a></span></li>
@@ -34,7 +37,7 @@
         <li class=""><span><a href="个人中心-开通第三方1.html"><i class="dot dot02"></i>开通第三方</a> </span> </li>
         <li><span><a href="个人中心-充值1.html"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="个人中心-提现1.html"><i class="dot dot04"></i>提现</a></span></li>
-        <li style="position:relative;" class=""> <span> <a href="个人中心-我的红包.html"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
+        <li style="position:relative;" class=""> <span> <a href="${ctx}/redpacket/list"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
         <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-兑换历史.html">兑换历史</a></span></li>
         <li style="position:relative;"> <span> <a href="个人中心-系统消息.html"><i class="dot dot08"></i>系统信息 </a> </span> </li>
         <li><span><a href="个人中心-账户设置.html"><i class="dot dot09"></i>账户设置</a></span></li>
@@ -87,29 +90,43 @@
 	          	//]]>
 	          </script>
           </span> </div>
-        <form id="form" name="form" method="post" action="">
+        <form id="form" name="form" method="post" action="${ctx}/redpacket/list">
           <script type="text/javascript">clearPage = function() {PrimeFaces.ab({source:'form:j_idt76',formId:'form',process:'form:j_idt76',params:arguments[0]});}</script>
           <span id="form:dataTable">
           <div id="wdhb-tab" class="wdhb-tab">
             <ul>
               <li class="on"><a href="#" title="未使用">未使用 </a> </li>
-              <li><a href="#" title="已使用" >已使用 </a> </li>
-              <li><a href="#" title="已过期">已过期 </a> </li>
             </ul>
           </div>
-          <div class="wdhb-title"><span class="wdhb-name">红包名称</span><span class="wdhb-con">红包简介</span><span class="wdhb-deadline">截止日期</span> <span class="wdhb-status">状态</span> </div>
+          <div class="wdhb-title">
+          			<span class="wdhb-name">红包名称</span>
+          			<span class="wdhb-con">红包简介</span>
+          			<span class="wdhb-deadline">截止日期</span> 
+          			<span class="wdhb-status">状态</span>
+          	 </div>
           <div class="zqzr-list">
+          <c:forEach items="${page.list}" var="redpacket" varStatus="stat">
             <ul>
-              <li><span class="wdhb-name">现金50元</span><span class="wdhb-con">可以作为投资使用</span><span class="wdhb-deadline">2015-10-1</span> <span class="wdhb-status"><a href="#">未使用</a></span></li>
-              <li><span class="wdhb-name">现金50元</span><span class="wdhb-con">可以作为投资使用</span><span class="wdhb-deadline">2015-10-1</span> <span class="wdhb-status"><a href="#">未使用</a></span></li>
-              <li><span class="wdhb-name">现金50元</span><span class="wdhb-con">可以作为投资使用</span><span class="wdhb-deadline">2015-10-1</span> <span class="wdhb-status"><a href="#">未使用</a></span></li>
+              <li>
+              <span class="wdhb-name">${redpacket.redpacketName}</span>
+              <span class="wdhb-con">${redpacket.remarks}</span>
+              <span class="wdhb-deadline"><fmt:formatDate value="${redpacket.stopTime}"
+								pattern="yyyy-MM-dd" /></span> 
+              <span class="wdhb-status">${redpacket.usedStatus=='0'?"未使用":(redpacket.usedStatus=='1'?"已使用":"已过期")}</span></li>
             </ul>
+            </c:forEach>
           </div>
           <!--<div style="float:left; width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
 					 <img src="images/nondata.png" width="60" height="60"><br><br>
 					   暂无红包记录</div>-->
           </span>
         </form>
+        
+         <div >
+			<w:pager pageSize="${page.pageSize }" url="${ctx }/ugroup/list"
+			recordCount="${page.total }" pageNum="${page.pageNum }" />
+	</div>
+        
       </div>
     </div>
     <div class="clear"></div>
@@ -120,7 +137,7 @@
 <%@ include file="/buttom.jsp" %>
 </div>
 
-<script src="script/jquery.datetimepicker.js" type="text/javascript"></script>
-<script src="script/datepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/jquery.datetimepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/datepicker.js" type="text/javascript"></script>
 </body>
 </html>

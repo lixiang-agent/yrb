@@ -24,7 +24,7 @@
 <!--个人中心-->
 <div class="wrapper wbgcolor">
   <div class="w1200 personal">
-    <div class="credit-ad"><img src="images/clist1.jpg" width="1200" height="96"></div>
+    <div class="credit-ad"><img src="${ctx}/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
         <li class="pleft-cur"><span><a href="个人中心首页.html"><i class="dot dot1"></i>账户总览</a></span></li>
@@ -32,7 +32,7 @@
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-投资记录.html">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-回款计划.html">回款计划</a></span></li>
         <li class=""><span><a href="个人中心-开通第三方1.html"><i class="dot dot02"></i>开通第三方</a> </span> </li>
-        <li><span><a href="个人中心-充值1.html"><i class="dot dot03"></i>充值</a></span></li>
+        <li><span><a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="个人中心-提现1.html"><i class="dot dot04"></i>提现</a></span></li>
         <li style="position:relative;" class=""> <span> <a href="个人中心-我的红包.html"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
         <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-兑换历史.html">兑换历史</a></span></li>
@@ -390,7 +390,8 @@
                   <label id="form:defaultBankName" style="font-size:16px;"> </label>
                   </em> </span> <span class="quick-error3" id="bankCardError"></span> </div>
                 <div class="bank-check" id="bank-check2"> <b class="selected" id="bankProtocol1"></b><span class="bank-agree">我同意并接受<a href="#" target="_blank">《亿人宝投资咨询与管理服务电子协议》</a></span> <span class="error" id="bankProtocol_message" style="display:none;margin-top:-3px;">请同意协议内容！</span> </div>
-                <input type="submit" name="" value="充值" class="btn-paycz" onclick="return getShowPayVal1()">
+                <input type="submit" name="" value="充值"  class="btn-paycz" onclick="return getShowPayVal1()">
+                <a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}">充值</a>
               </div>
               <div class="fr bank-info">
                 <p class="bank-tit">快捷支付支持银行：</p>
@@ -610,7 +611,7 @@
 <!-- 引入底部 -->
 <%@ include file="/buttom.jsp" %>
 
-<script src="script/jquery.datetimepicker.js" type="text/javascript"></script>
-<script src="script/datepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/jquery.datetimepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/datepicker.js" type="text/javascript"></script>
 </body>
 </html>

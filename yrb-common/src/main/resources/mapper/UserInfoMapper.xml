@@ -192,7 +192,7 @@
         pay_password = #{payPassword,jdbcType=CHAR},
       </if>
       <if test="totalBalance != null">
-        total_balance = #{totalBalance,jdbcType=DECIMAL},
+        total_balance =total_balance+ #{totalBalance,jdbcType=DECIMAL},
       </if>
       <if test="referee != null">
         referee = #{referee,jdbcType=VARCHAR},
