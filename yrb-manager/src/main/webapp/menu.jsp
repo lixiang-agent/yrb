@@ -87,6 +87,15 @@
 						</a></li>
 					</ul>
 				</li>
+				
+				<li>
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-group"></i> <span class="menu-text"> 借款信息处理 </span> <b class="arrow icon-angle-down"></b>
+					</a>
+					<ul class="submenu">
+						<li id="list"><a href="${ctx }/loanApplication/list"> <i class="icon-double-angle-right"></i> 申请列表</a></li>
+					</ul>
+				</li>
 
 				<li class="" id="auth">
 					<a href="#" class="dropdown-toggle">
