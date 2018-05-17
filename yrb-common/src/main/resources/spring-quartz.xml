@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+    <!-- 定义调用对象和调用对象的方法，这个配置和普通的一样的,id是JobDetail的名字  -->  
+    <bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+        <!-- 调用的类  -->  
+        <property name="targetObject" ref="initJob" />  
+        <!-- 调用类中的方法  -->  
+        <property name="targetMethod" value="initAllJob" />  
+        <!-- 是否并发  -->  
+        <property name ="concurrent" value ="false"  />          
+    </bean>  
+    
+     <!-- quartz实例化5秒后执行一次job -->
+     <bean id="taskJobTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="jobtask" />
+        <property name="startDelay" value="5000" /> <!-- 启动延迟  单位/毫秒-->
+        <property name="repeatInterval" value="1000" /> <!-- 多久执行一次 单位/毫秒-->
+        <property name="repeatCount" value="0" />  <!--  重复次数  -->
+    </bean>
+
+    <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序  -->  
+    <bean id="scheduler" lazy-init="true" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+        <property name="triggers">  
+            <list>  
+                <ref bean="taskJobTrigger" />  
+            </list>  
+        </property>  
+    </bean> 
+	
+</beans>

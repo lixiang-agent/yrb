@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!-- 配置自动扫描 -->
+	<context:component-scan base-package="com.lixiang.ssm">
+		<!-- 排除表现层的内容 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<!-- 加载属性文件 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!-- 配置数据连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="jdbcUrl" value="${url}"></property>
+		<property name="driverClass" value="${driverClass}"></property>
+	</bean>
+	<!-- 配置跟事务处理有关 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- 使用注解的方式来处理事务 -->
+	<!-- 
+		proxy-target-class:设置代理模式
+		true:使用cgLib代理模式
+	 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+	
+	<!-- 注册sqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 指定数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 指定mybatis的配置文件的地址 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 导入映射文件的地址，映射文件统一放在mapper文件夹下面 -->
+		<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+		<!-- 注意其他配置 -->
+		<property name="plugins">
+			<array>
+				<!-- 配置分页插件 -->
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<!--使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							helperDialect=mysql
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+
+	</bean>
+	<!-- 把包下面的接口的代理对象让IOC容器管理 ，base-package:指定mybatis映射文件接口类所在jar包 -->
+	<mybatis-spring:scan base-package="com.lixiang.ssm.dao" />
+	<!-- 导入shiro的配置 -->
+	<import resource="spring-shiro.xml"/>
+</beans>
