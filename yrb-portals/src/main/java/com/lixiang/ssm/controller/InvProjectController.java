@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.service.InvProjectService;
 /**
- * 项目列表查询控制
+ * 前台项目列表查询控制
  * @author Administrator
  *
  */
@@ -22,13 +24,23 @@ public class InvProjectController {
 	private InvProjectService invProjectService;
 	
 	@RequestMapping(path="list")
-	public String ListByInvProject(InvProject invProject,Model model){
+	public String ListByAll(InvProject invProject,Model model){
 		
 		List<InvProject> listInvProject = invProjectService.ListByInvProject(invProject);
 		
 		model.addAttribute("listInvProject", listInvProject);
 		
 		return "invProjectList";
+		
+	}
+	@ResponseBody
+	@RequestMapping(path="listByInvProject")
+	public List<InvProject> ListByInvProject(InvProject invProject){
+		
+		List<InvProject> listInvProject = invProjectService.ListByInvProject(invProject);
+		
+		
+		return listInvProject;
 		
 	}
 	

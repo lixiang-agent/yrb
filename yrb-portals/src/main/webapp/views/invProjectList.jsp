@@ -19,6 +19,103 @@
 		<script type="text/javascript" src="${ctx}/script/common.js"></script>
 		<script type="text/javascript" src="${ctx}/script/invProject.js"></script>
 </head>
+<script type="text/javascript">
+$().ready(function() {
+	
+	
+	//创建一个map来保存条件
+	var invCondition={};
+	$("#projectType li a").click(function() {
+		$("#projectType li a").removeClass("active");
+		$(this).addClass("active");
+		invCondition["projectType"]=$(this).attr("name");
+		queryList();
+	});
+
+	$("#rate li a").click(function() {
+		$("#rate li a").removeClass("active");
+		$(this).addClass("active");
+		var rate=new Array(2);
+		rate=$(this).attr("name").split(",");
+		invCondition["minRate"]=rate[0];
+		invCondition["maxRate"]=rate[1];
+		queryList();
+	});
+	$("#term li a").click(function() {
+		$("#term li a").removeClass("active");
+		$(this).addClass("active");
+		var term=new Array(2);
+		rate=$(this).attr("name").split(",");
+		invCondition["minMonth"]=rate[0];
+		invCondition["maxMonth"]=rate[1];
+		queryList();
+	});
+	$("#paybackWay li a").click(function() {
+		$("#paybackWay li a").removeClass("active");
+		$(this).addClass("active");
+	});
+
+	function queryList(){
+		var url="${ctx}/invProject/listByInvProject";
+		if(invCondition["minMonth"]!=null){
+			url=url+"?minMonth="+invCondition["minMonth"];
+		}else{
+			url=url+"?minMonth=0";
+		}
+		if(invCondition["maxMonth"]!=null){
+			url=url+"&maxMonth="+invCondition["maxMonth"];
+		}
+		if(invCondition["projectType"]!=null){
+			url=url+"&projectType="+invCondition["projectType"];
+		}
+		if(invCondition["minRate"]!=null){
+			url=url+"&minRate="+invCondition["minRate"];
+		}
+		if(invCondition["maxRate"]!=null){
+			url=url+"&maxRate="+invCondition["maxRate"];
+		}
+	
+		$.ajax({
+			url:url,
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				$("#projectItem").empty();
+		 	for(var i=0;data.length;i++){
+		 		
+		 		var item='<ul>'
+				+'<li class="col-330 col-t"><a href="infor.html"'
+				+'	target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a'
+				+'	class="f18" href="infor.html"'
+				+'	title="'+data[i].projectName+'" target="_blank">'
+				+'		'+data[i].projectName+'</a></li>'
+				+'<li class="col-180"><span class="f20 c-333">'+data[i].invTotbalance+'</span>元</li>'
+				+'	<li class="col-110 relative"><span class="f20 c-orange">'+data[i].paybackTime
+				+'	</span>%</li>'
+				+'	<li class="col-150"><span class="f20 c-333">'+data[i].paybackTime +'</span>个月'
+				+'	</li>'
+				+'	<li class="col-150">'+data[i].paybackWay+'</li>'
+				+'	<li class="col-120">'
+				+'		<div class="circle">'
+				+'				<div class="progress-bgPic progress-bfb10">'
+				+'					<div class="show-bar">'
+				+'					'+data[i].invBalance/data[i].invTotbalance+'</div>'
+				+'			</div>'
+				+'		</div>'
+				+'	</div>'
+				+'	</li>'
+				+'<li class="col-120-2"><a class="ui-btn btn-gray"'
+				+'	href="infor.html">投资</a></li>'
+				+'</ul>'
+				$("#projectItem").append(item);
+			} 
+			
+			
+			}
+		}); 
+	}
+});
+</script>
 <body>
 	<header> <!-- 头部 --> <jsp:include page="/top.jsp">
 		<jsp:param value="inv" name="menu" />
@@ -161,35 +258,38 @@
 						</ul>
 					</div>
 					<!------------投资列表-------------->
-					<c:forEach items="${listInvProject }" var="invProject">
-						<div class="item">
-							<ul>
-								<li class="col-330 col-t"><a href="infor.html"
-									target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a
-									class="f18" href="infor.html"
-									title="${invProject.projectName }" target="_blank">
-										赵女士长安福特福克斯汽车质... </a></li>
-								<li class="col-180"><span class="f20 c-333">${invProject.invTotbalance }</span>元</li>
-								<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
-								</span>%</li>
-								<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
-								</li>
-								<li class="col-150">${invProject.paybackWay }</li>
-								<li class="col-120">
-									<div class="circle">
-										<div class="left progress-bar">
-											<div class="progress-bgPic progress-bfb10">
-												<div class="show-bar">
-													${invProject.invBalance/invProject.invTotbalance }</div>
+					<div class="item" id="projectItem">
+						<c:if test="${not empty listInvProject}">
+							<c:forEach items="${listInvProject }" var="invProject">
+								<ul>
+									<li class="col-330 col-t"><a href="infor.html"
+										target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a
+										class="f18" href="infor.html"
+										title="${invProject.projectName }" target="_blank">
+											${invProject.projectName }</a></li>
+									<li class="col-180"><span class="f20 c-333">${invProject.invTotbalance }</span>元</li>
+									<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
+									</span>%</li>
+									<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
+									</li>
+									<li class="col-150">${invProject.paybackWay }</li>
+									<li class="col-120">
+										<div class="circle">
+											<div class="left progress-bar">
+												<div class="progress-bgPic progress-bfb10">
+													<div class="show-bar">
+														${invProject.invBalance/invProject.invTotbalance }</div>
+												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-								<li class="col-120-2"><a class="ui-btn btn-gray"
-									href="infor.html">投资</a></li>
-							</ul>
-						</div>
-					</c:forEach>
+									</li>
+									<li class="col-120-2"><a class="ui-btn btn-gray"
+										href="infor.html">投资</a></li>
+								</ul>
+							</c:forEach>
+						</c:if>
+					</div>
+
 					<!------------投资列表-------------->
 				</div>
 				<div class="pagination clearfix mrt30">
@@ -215,60 +315,6 @@
 		</div>
 	</div>
 	<!-- 引入底部 --> <%@ include file="/buttom.jsp"%>
-<script type="text/javascript">
-$().ready(function() {
-	
-	
-	//创建一个map来保存条件
-	var invCondition={};
-	var url="${ctx}/invProject/list";
-	$("#projectType li a").click(function() {
-		$("#projectType li a").removeClass("active");
-		$(this).addClass("active");
-		invCondition["projectType"]=$(this).attr("name");
-	});
-
-	$("#rate li a").click(function() {
-		$("#rate li a").removeClass("active");
-		$(this).addClass("active");
-		var rate=new Array(2);
-		rate=$(this).attr("name").split(",");
-		invCondition["minRate"]=rate[0];
-		invCondition["maxRate"]=rate[1];
-		
-	});
-	$("#term li a").click(function() {
-		$("#term li a").removeClass("active");
-		$(this).addClass("active");
-		var term=new Array(2);
-		rate=$(this).attr("name").split(",");
-		invCondition["minMonth"]=rate[0];
-		invCondition["maxMonth"]=rate[1];
-		queryList();
-	});
-	$("#paybackWay li a").click(function() {
-		$("#paybackWay li a").removeClass("active");
-		$(this).addClass("active");
-	});
-
-	function queryList(){
-		if(invCondition["minMonth"]!=null){
-			url=url+"?minMonth="+invCondition["minMonth"];
-		}else{
-			url=url+"?minMonth=0";
-		}
-		
-	/* 	$.ajax({
-			url:"ff",
-			dataType:"json",
-			success:function(data){
-				
-			}
-			
-		}); */
-	}
-});
-</script>
 </body>
 </html>
 

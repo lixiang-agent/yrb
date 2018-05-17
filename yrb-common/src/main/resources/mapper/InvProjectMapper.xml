@@ -460,36 +460,23 @@
 			<if test="invProject.projectType != null">
 				project_type=#{invProject.projectType}
 			</if>
-		</where>
-		<where>
-			<if test="invProject.maxRate!=null">
-				and rate >= #{invProject.maxRate}
-			</if>
-		</where>
-		<where>
 			<if test="invProject.minRate!=null">
-				and rate <![CDATA[<=]]>
-				#{invProject.minRate}
+				and rate > #{invProject.minRate}
 			</if>
-		</where>
-		<where>
+			<if test="invProject.maxRate!=null">
+				and rate <![CDATA[<=]]>
+				#{invProject.maxRate}
+			</if>
 			<if test="invProject.minMonth!=null">
 				and payback_time >= #{invProject.minMonth}
 			</if>
-		</where>
-		<where>
 			<if test="invProject.maxMonth!=null">
 				and payback_time <![CDATA[<=]]>
 				#{invProject.maxMonth}
 			</if>
-		</where>
-		<where>
 			<if test="invProject.paybackWay!=null">
 				payback_way=#{invProject.paybackWay}
 			</if>
-		</where>
-		
-		<where>
 			and project_status=40
 		</where>
 	</select>
