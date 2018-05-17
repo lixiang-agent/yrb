@@ -126,7 +126,16 @@ public class PaybackPlan extends BaseEntity{
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     private Date operatorDate;
-    private Integer uid;
+    public Integer getProjectType() {
+		return projectType;
+	}
+
+	public void setProjectType(Integer projectType) {
+		this.projectType = projectType;
+	}
+
+	private Integer uid;
+    private Integer projectType;
     
 	public Integer getUid() {
 		return uid;

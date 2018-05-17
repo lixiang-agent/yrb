@@ -7,11 +7,11 @@
 <title>p2p网贷平台</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="css/common.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/user.css" />
-<script type="text/javascript" src="script/jquery.min.js"></script>
-<script type="text/javascript" src="script/common.js"></script>
-<script src="script/user.js" type="text/javascript"></script>
+<link href="${ctx }/css/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="${ctx }/css/user.css" />
+<script type="text/javascript" src="${ctx }/script/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }/script/common.js"></script>
+<script src="${ctx }/script/user.js" type="text/javascript"></script>
 </head>
 <body>
 <!-- 引入头部 -->

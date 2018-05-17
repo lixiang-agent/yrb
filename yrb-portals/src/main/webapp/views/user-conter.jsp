@@ -54,8 +54,8 @@
 					href="${ctx }/css/fileupload.less.css">
 					<div class="pmain-profile">
 						<div class="pmain-welcome">
-							<span class="fl"><span id="outLogin">晚上好，</span>${paybackPlan.operatorName }
-								喝一杯下午茶，让心情放松一下~</span> <span class="fr">上次登录时间： 2015-09-11
+							<span class="fl"><span id="outLogin">晚上好，</span>${userInfo.realName }
+								喝一杯下午茶，让心情放松一下~</span> <span class="fr">上次登录时间：<fmt:formatDate value="${userInfo.modifyDate }" /> 
 								14:05:07 </span>
 						</div>
 						<div class="pmain-user">
@@ -96,7 +96,7 @@
 							</div>
 							<div class="user-info user-info1">
 								<ul>
-									<li>用户名<span>${paybackPlan.operatorName }</span></li>
+									<li>用户名<span>${userInfo.realName }</span></li>
 									<li>安全级别<span><i class="safe-level"><i
 												class="onlevel" style="width: 40%;"></i></i></span> <a href="#">[低]</a></li>
 									<li>您还未开通第三方支付账户，请 <a class="pmain-log" href="#">立即开通</a>以确保您的正常使用和资金安全。
@@ -110,16 +110,16 @@
 										class="markicon"></i><span class="arrow-show1"
 										style="display: none;">可用余额+待收本息</span><span
 										class="icon-show1" style="display: none;"></span></span> <span
-									class="truemoney"><i class="f26 fb">${paybackPlan.paybackMoney }
+									class="truemoney"><i class="f26 fb">${userInfo.totalBalance }
 									</i> 元</span></li>
 								<li><span><em>待收本息</em><i id="dsbx" class="markicon"></i><span
 										class="arrow-show2" style="display: none;">未到账的投资项目的本金、利息总额</span><span
 										class="icon-show2" style="display: none;"></span></span> <span
-									class="truemoney"><i class="f26 fb">${paybackPlan.paybackMoney+paybackPlan.paybackMargin } </i>元</span></li>
+									class="truemoney"><i class="f26 fb">0.00 </i>元</span></li>
 								<li><span><em>累计收益</em><i id="ljsy" class="markicon"></i><span
 										class="arrow-show3" style="display: none;">已到账的投资收益+未到账的投资收益</span><span
 										class="icon-show3" style="display: none;"></span></span> <span
-									class="truemoney"><i class="f26 fb c-pink">${paybackPlan.paybackMargin }
+									class="truemoney"><i class="f26 fb c-pink">0.00
 									</i> 元</span></li>
 							</ul>
 						</div>
@@ -184,11 +184,18 @@
 										<li><span class="pmain-titledate"><fmt:formatDate value="${results.planPaybackDate }" /></span><span
 											class="pmain-titleproject">${results.projectName }</span>
 											<span class="pmain-titletype">
-												<c:choose>
-													<c:when test="${results.projectType='0'?'true':'false' }">
-														1
-													</c:when>
-												</c:choose>
+												<c:if test="${results.projectType==1 }">
+													车易贷
+												</c:if>
+												<c:if test="${results.projectType==2 }">
+													房易贷
+												</c:if>
+												<c:if test="${results.projectType==3 }">
+													赎楼贷
+												</c:if>
+												<c:if test="${results.projectType==4 }">
+													债权贷
+												</c:if>
 											</span>
 											<span class="pmain-titlemoney">${results.paybackMoney }</span></li>
 									</c:forEach>
@@ -198,36 +205,82 @@
 							<div class="pmain-conmain2" style="display: none;">
 								<div class="pmain-contitle">
 									<span class="pmain-titledate">交易时间</span><span
-										class="pmain-w100">交易类型</span><span class="pmain-w120">交易金额</span><span
-										class="pmain-w120">余额</span><span class="pmain-w200">备注</span>
+										class="pmain-w100">交易类型</span><span class="pmain-w120">交易金额</span>
+										<span class="pmain-w200">备注</span>
 								</div>
 								<ul style="float: left;">
-									<li><span class="pmain-titledate">2015-10-20</span><span
-										class="pmain-w100">债权转让</span><span
-										class="pmain-w120 pmain-money">10.00</span><span
-										class="pmain-w120 pmain-money">10.00</span><span
-										class="pmain-w200">备注</span></li>
+									<c:forEach items="${fundPage.list }" var="results">
+										<li><span class="pmain-titledate"><fmt:formatDate value="${results.moneyTraDate }" /></span><span
+											class="pmain-w100">
+												<c:if test="${results.projectType==1 }">
+													车易贷
+												</c:if>
+												<c:if test="${results.projectType==2 }">
+													房易贷
+												</c:if>
+												<c:if test="${results.projectType==3 }">
+													赎楼贷
+												</c:if>
+												<c:if test="${results.projectType==4 }">
+													债权贷
+												</c:if>
+											</span>
+											<span class="pmain-w120 pmain-money">${results.moneyTraMoney }</span>
+											<span class="pmain-w200">备注</span></li>
 									<!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
 										 <img src="images/nondata.png" width="60" height="60"><br><br>
 										   暂无资金记录</div>-->
+									</c:forEach>
 								</ul>
 								<div class="pmain-morebtn" style="border-top: 0; margin-top: 0"></div>
 							</div>
 							<div class="pmain-conmain3" style="display: none;">
 								<div class="pmain-contitle">
 									<span class="pmain-titledate">交易时间</span><span
-										class="pmain-w210">项目</span><span class="pmain-w80">状态</span><span
-										class="pmain-whb200">我的投资</span><span class="pmain-whb110">我的收益</span>
+										class="pmain-w210">投资项目</span><span class="pmain-w80">投资状态</span><span
+										class="pmain-whb200">投资金额</span><span class="pmain-whb110">我的收益</span>
 								</div>
 								<ul style="float: left;">
-									<li><span class="pmain-titledate">2015-10-20</span><span
-										class="pmain-w210">债权转让</span><span
-										class="pmain-w80 pmain-money">10.00</span><span
-										class="pmain-whb200 pmain-money">10.00</span><span
-										class="pmain-whb110">备注</span></li>
+									<c:forEach items="${investPage.list }" var="results">
+										<li>
+											<span class="pmain-titledate"><fmt:formatDate value="${results.invDate }" /></span>
+											<span class="pmain-w210">${results.projectName }</span>
+											<span class="pmain-w80 pmain-money">
+												<c:if test="${results.projectStatus==10 }">
+													待提交
+												</c:if>
+												<c:if test="${results.projectStatus==11 }">
+													退回
+												</c:if>
+												<c:if test="${results.projectStatus==20 }">
+													待审批
+												</c:if>
+												<c:if test="${results.projectStatus==30 }">
+													待发布
+												</c:if>
+												<c:if test="${results.projectStatus==40 }">
+													筹款中
+												</c:if>
+												<c:if test="${results.projectStatus==50 }">
+													筹资成功
+												</c:if>
+												<c:if test="${results.projectStatus==60 }">
+													还款中
+												</c:if>
+												<c:if test="${results.projectStatus==70 }">
+													结束
+												</c:if>
+												<c:if test="${results.projectStatus==100 }">
+													流标
+												</c:if>
+											</span>
+											<span class="pmain-whb200 pmain-money">${results.invrecMoney }</span>
+											<span class="pmain-whb110"><fmt:formatNumber type="number" value="${results.interest }" pattern="0.00" maxFractionDigits="2"></fmt:formatNumber></span>
+										</li>
 									<!--	<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
 										    <img src="images/nondata.png" width="60" height="60"><br><br>
 										   暂无投资记录</div>-->
+									</c:forEach>
 								</ul>
 								<div class="pmain-morebtn" style="border-top: 0; margin-top: 0"></div>
 							</div>
