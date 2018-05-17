@@ -133,8 +133,8 @@
 								class="icon-double-angle-right"></i> 投资项目
 							</a>
 						</li>
-						<li id="role">
-							<a  href="${ctx }/getRolesList"> <i
+						<li id="oper">
+							<a  href="${ctx }/investManage/listOperProject"> <i
 								class="icon-double-angle-right"></i> 审批投资项目
 							</a>
 						</li>
@@ -155,11 +155,21 @@
 
 					</ul>
 			   </li>
-
-
-			</ul>
-			<!-- /.nav-list -->
-
+			   
+					<li class="" id="platfromuser">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 平台用户 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+					
+					<ul class="submenu">
+						<li id="platfrom">
+							<a href="${ctx }/getPlatfromList"> <i
+								class="icon-double-angle-right"></i> 平台用户列表
+							</a>
+						</li>
+					</ul>
+			   </li>
 		</div>
 	</div>
 	

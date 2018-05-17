@@ -64,12 +64,14 @@ public interface InvProjectMapper {
      */
     List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject);
 
-    boolean updateProjectStatus(Integer id);
+    boolean updateProjectStatus(@Param("status") Integer status,@Param("id") Integer id);
     /**
      * 查询全部
      * @param record
      * @return
      */
     List<InvProject> queryAllInvProject(InvProject record);
+    
+    List<InvProject> queryAllInvProjectByProStatus(InvProject record);
 
 }
