@@ -8,7 +8,7 @@ public class ScheduleJob extends BaseEntity{
      *
      * @mbg.generated Wed May 16 16:23:31 CST 2018
      */
-    private String jobId;
+    private Integer jobId;
 
     /**
      *
@@ -70,7 +70,7 @@ public class ScheduleJob extends BaseEntity{
      *
      * @mbg.generated Wed May 16 16:23:31 CST 2018
      */
-    public ScheduleJob(String jobId, String jobName, String jobGroup, Integer jobStatus, String cronExpression, String jobDesc, String jobClass) {
+    public ScheduleJob(Integer jobId, String jobName, String jobGroup, Integer jobStatus, String cronExpression, String jobDesc, String jobClass) {
         this.jobId = jobId;
         this.jobName = jobName;
         this.jobGroup = jobGroup;
@@ -98,7 +98,7 @@ public class ScheduleJob extends BaseEntity{
      *
      * @mbg.generated Wed May 16 16:23:31 CST 2018
      */
-    public String getJobId() {
+    public Integer getJobId() {
         return jobId;
     }
 
@@ -110,8 +110,8 @@ public class ScheduleJob extends BaseEntity{
      *
      * @mbg.generated Wed May 16 16:23:31 CST 2018
      */
-    public void setJobId(String jobId) {
-        this.jobId = jobId == null ? null : jobId.trim();
+    public void setJobId(Integer jobId) {
+        this.jobId = jobId;
     }
 
     /**
