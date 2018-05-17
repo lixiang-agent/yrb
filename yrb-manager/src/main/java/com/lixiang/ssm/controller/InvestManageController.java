@@ -80,7 +80,7 @@ public class InvestManageController {
 	}
 
 	@RequestMapping("/insert")
-	public String insertResources(InvProject invProject, Model model, HttpSession session) {
+	public String insertProject(InvProject invProject, Model model, HttpSession session) {
 		Subject currentUser = SecurityUtils.getSubject();
 		User result = (User) currentUser.getPrincipal();
 		SimpleDateFormat time = new SimpleDateFormat("yyyyMMddHH");
@@ -106,7 +106,7 @@ public class InvestManageController {
 	}
 	
 	@RequestMapping("/update")
-	public String updateResources(InvProject invProject,Model model,HttpSession session) throws ParseException{
+	public String updateProject(InvProject invProject,Model model,HttpSession session) throws ParseException{
 		Subject currentUser = SecurityUtils.getSubject();
 		User result = (User) currentUser.getPrincipal();
 		invProject.setModifiorId(result.getId());
@@ -152,7 +152,47 @@ public class InvestManageController {
 		return "redirect:/investManage/listOperProject";
 	}
 	
+	@RequestMapping("/toFail")
+	public String toFailOperProject(Integer id,Model model){
+		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		model.addAttribute("invProject", invProject);
+		return "oper-record-fail";
+	}
 	
+	@RequestMapping("/failOper")
+	public String failOperProject(OperateRecord operateRecord,Integer id,Model model,HttpSession session) throws ParseException{
+		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
+		String time1 = time.format(new Date());
+		boolean oper_result = invManageService.updateProjectStatus(11,id);
+		InvProject inv = invManageService.selectByPrimaryKey(id);
+		OperateRecord operRecord = new OperateRecord(null,3,time.parse(time1),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),operateRecord.getRemark());
+		invManageService.insertSelective(operRecord);
+		
+		session.setAttribute("oper_result", oper_result);
+		return "redirect:/investManage/listOperProject";
+	}
+	
+	@RequestMapping("/toRelease")
+	public String toReleaseProject(Integer id,Model model){
+		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		model.addAttribute("invProject", invProject);
+		return "oper-record-release";
+	}
+	@RequestMapping("/releaseOper")
+	public String releaseOperProject(Integer id,Model model,HttpSession session) throws ParseException{
+		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
+		String time1 = time.format(new Date());
+		
+		boolean oper_result = invManageService.updateProjectStatus(40,id);
+		InvProject inv = invManageService.selectByPrimaryKey(id);
+		inv.setBiddingDate(time.parse(time1));
+		invManageService.updateByPrimaryKeySelective(inv);
+		OperateRecord operRecord = new OperateRecord(null,5,time.parse(time1),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),"项目发布");
+		invManageService.insertSelective(operRecord);
+		
+		session.setAttribute("oper_result", oper_result);
+		return "redirect:/investManage/listOperProject";
+	}
 	
 	
 }

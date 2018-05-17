@@ -20,7 +20,7 @@
 
 		<!-- 指定实体类的路径 -->
 		<javaModelGenerator targetPackage="com.lixiang.ssm.entity" 
-			targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\java">
+			targetProject="D:\eclipse\works\yrb\yrb-common\src\main\java">
 			<property name="constructorBased" value="true"/>
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -28,12 +28,12 @@
 
 		<!-- 指定映射文件的路径 -->
 		<sqlMapGenerator targetPackage="mapper"
-			targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\resources">
+			targetProject="D:\eclipse\works\yrb\yrb-common\src\main\resources\mapper">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 指定生成接口路径 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.lixiang.ssm.dao" targetProject="D:\javaproject\Java\yrb\yrb-common\src\main\java">
+			targetPackage="com.lixiang.ssm.dao" targetProject="D:\eclipse\works\yrb\yrb-common\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -46,6 +46,10 @@
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		
+	<!-- 	<table tableName="product" domainObjectName="Product"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
 	</context>
 </generatorConfiguration>
