@@ -74,6 +74,7 @@ public interface InvProjectMapper {
     List<InvProject> queryAllInvProjectByProStatus(InvProject record);
 
 	List<InvProject> listIndexCommendProjects();
+	
 	List<InvProject> listIndexCarProjects();
 	List<InvProject> listIndexHouseProjects();
 	List<InvProject> listIndexObligationProjects();

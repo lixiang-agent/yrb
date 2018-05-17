@@ -39,7 +39,7 @@
           <i class="c-pink">0.00</i> 元 </span> <span><b class="fb">待收本金</b><br>
           <i>0.00</i> 元 </span> <span class="none"><b class="fb">待收收益</b><br>
           <i>0.00</i> 元 </span> </div>
-        <form id="form" name="form" method="post" action="">
+        <form id="form" name="form" method="post" action="${ctx }/invest/investPageList">
           <script type="text/javascript">clearPage = function() {PrimeFaces.ab({source:'form:j_idt82',formId:'form',process:'form:j_idt82',params:arguments[0]});}</script>
           <span id="form:dataTable">
           <div class="invest-tab">
@@ -52,15 +52,62 @@
           <div class="investnote-list">
             <div class="investnote-contitle"> <span class="investnote-w1 fb">交易时间</span> <span class="investnote-w2 fb">项目</span> <span class="investnote-w3 fb">状态</span> <span class="investnote-hbw4 fb">我的投资</span> <span class="investnote-hbw5 fb">我的收益</span> <span class="investnote-hbw6 fb">操作</span> </div>
             <ul>
+            <c:forEach items="${investPages.list }" var="results">
             	<c:if test="${results.projectStatus==40 }">
-              		<li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">筹款中...</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              		<li><span class="investnote-w1"><fmt:formatDate value="${results.invDate }" /></span><span class="investnote-w2">
+              			<c:if test="${results.projectType==1 }">
+							车易贷
+						</c:if>
+						<c:if test="${results.projectType==2 }">
+							房易贷
+						</c:if>
+						<c:if test="${results.projectType==3 }">
+							赎楼贷
+						</c:if>
+						<c:if test="${results.projectType==4 }">
+							债权贷
+						</c:if>
+              		</span>
+              		<span class="investnote-w3">筹款中...</span><span class="investnote-hbw4">${results.invrecMoney }</span> 
+              		<span class="investnote-hbw5"><fmt:formatNumber type="number" value="${results.interest }" pattern="0.00" maxFractionDigits="2"></fmt:formatNumber></span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
 				</c:if>
 				<c:if test="${results.projectStatus==60 }">
-              		<li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">还款中...</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              		<li><span class="investnote-w1"><fmt:formatDate value="${results.invDate }" /></span><span class="investnote-w2">
+              			<c:if test="${results.projectType==1 }">
+							车易贷
+						</c:if>
+						<c:if test="${results.projectType==2 }">
+							房易贷
+						</c:if>
+						<c:if test="${results.projectType==3 }">
+							赎楼贷
+						</c:if>
+						<c:if test="${results.projectType==4 }">
+							债权贷
+						</c:if>
+              		</span>
+              		<span class="investnote-w3">还款中...</span><span class="investnote-hbw4">${results.invrecMoney }</span> 
+              		<span class="investnote-hbw5"><fmt:formatNumber type="number" value="${results.interest }" pattern="0.00" maxFractionDigits="2"></fmt:formatNumber></span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
 				</c:if>
 				<c:if test="${results.projectStatus==100 }">
-              		<li><span class="investnote-w1">2015-10-1</span><span class="investnote-w2">债权转让</span><span class="investnote-w3">流标</span><span class="investnote-hbw4">12000.00</span> <span class="investnote-hbw5">12000.00</span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
+              		<li><span class="investnote-w1"><fmt:formatDate value="${results.invDate }" /></span><span class="investnote-w2">
+              			<c:if test="${results.projectType==1 }">
+							车易贷
+						</c:if>
+						<c:if test="${results.projectType==2 }">
+							房易贷
+						</c:if>
+						<c:if test="${results.projectType==3 }">
+							赎楼贷
+						</c:if>
+						<c:if test="${results.projectType==4 }">
+							债权贷
+						</c:if>
+              		</span>
+              		<span class="investnote-w3">流标</span><span class="investnote-hbw4">${results.invrecMoney }</span> 
+              		<span class="investnote-hbw5"><fmt:formatNumber type="number" value="${results.interest }" pattern="0.00" maxFractionDigits="2"></fmt:formatNumber></span> <span class="investnote-hbw6"><a href="#">删除</a></span></li>
 				</c:if>
+           	</c:forEach>
             </ul>
           </div>
           </span>
