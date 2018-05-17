@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- 读取属性文件 -->
-	<context:property-placeholder location="classpath:redis.properties"/>
+	<context:property-placeholder location="classpath:redis.properties" />
 
 	<!-- Shiro 核心组件 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -26,7 +26,7 @@
 		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
 		<!-- 设置sessionDAO -->
 		<property name="sessionDAO" ref="sessionDao"></property>
-		<!-- 设置超时时间  单位：毫秒-->
+		<!-- 设置超时时间 单位：毫秒 -->
 		<property name="globalSessionTimeout" value="#{30*60*1000}" />
 		<!-- 删除失效session -->
 		<property name="sessionValidationSchedulerEnabled" value="true" />
@@ -49,7 +49,7 @@
 		<property name="poolConfig" ref="poolConfig" />
 		<property name="port" value="7001" />
 		<property name="hostName" value="192.168.0.91" />
-		<property name="password" value="123456" /> 
+		<property name="password" value="123456" />
 		<property name="timeout" value="3000"></property>
 	</bean>
 	<!-- reids templete -->
@@ -72,7 +72,7 @@
 	</bean>
 
 	<!-- 配置realm 写一个类实现realm接口 -->
-	<bean id="jdbcRealm" class="com.lixiang.ssm.realms.ShiroRealm">
+	<bean id="jdbcRealm" class="com.lixiang.ssm.realms.PortalsRealm">
 		<!-- 指定密码匹配器 -->
 		<property name="credentialsMatcher">
 			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
@@ -110,13 +110,18 @@
 		<!-- 配置登录地址 -->
 		<property name="loginUrl" value="/login.jsp" />
 		<!-- 配置登录成功地址 -->
-		<property name="successUrl" value="/user.jsp" />
+		<property name="successUrl" value="/index.jsp" />
 		<!-- 配置未授权的路径 -->
 		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
 		<!-- 配置哪些资源需要受保护 配置哪些资源需要怎样的权限才能访问 /favicon.ico【资源】 = anon【过滤器】 anon：匿名访问，不需要登陆就可以访问的资源 
 			authc：需要认证后才可以访问 匹配优先： user:delete:zhangsan -->
-		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap">
 
+		<property name="filterChainDefinitions">
+			<value>
+				/usercenter/**=authc
+				/invapply**=authc
+				/** = anon
+			</value>
 		</property>
 
 	</bean>
