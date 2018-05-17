@@ -145,4 +145,9 @@
       user_id = #{userId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectFundRecord" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.TraRecord">
+  	SELECT tra.money_tra_date,invp.project_type,tra.money_tra_money 
+  	FROM t_inv_project invp,t_inv_record invr,t_tra_record tra 
+  	WHERE invr.inv_pro_id = invp.id AND tra.user_id = 1
+  </select>
 </mapper>
