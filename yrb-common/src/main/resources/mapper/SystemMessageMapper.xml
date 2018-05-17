@@ -145,4 +145,16 @@
       status = #{status,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="queryAllSystemMessagee" resultType="com.lixiang.ssm.entity.SystemMessage">
+		SELECT * FROM t_system_message
+		<where>
+			<if test="userId!=null and userId!=''">
+				<bind name="uid" value="'%' +userId+'%'" />
+				and user_id like #{uid}
+			</if>
+		</where>
+	</select>
+  
 </mapper>

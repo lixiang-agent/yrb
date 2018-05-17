@@ -61,8 +61,11 @@
 		</property>
 
 	</bean>
+	
 	<!-- 把包下面的接口的代理对象让IOC容器管理 ，base-package:指定mybatis映射文件接口类所在jar包 -->
 	<mybatis-spring:scan base-package="com.lixiang.ssm.dao" />
 	<!-- 导入shiro的配置 -->
 	<import resource="spring-shiro.xml"/>
+	<!-- 导入quartz配置 -->
+	<import resource="spring-quartz.xml"/>
 </beans>

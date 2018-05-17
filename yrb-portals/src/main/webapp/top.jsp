@@ -29,7 +29,7 @@
 					<li class="c_1"><a class="ico_head_weixin" id="wx"></a>
 						<div class="ceng" id="weixin_xlgz" style="display: none;">
 							<div class="cnr">
-								<img src="images/code.png">
+								<img src="${ctx}/images/code.png">
 							</div>
 							<b class="ar_up ar_top"></b> <b class="ar_up_in ar_top_in"></b>
 						</div></li>
@@ -65,13 +65,13 @@
 		<div class="header min-width">
 			<div class="container">
 				<div class="fn-left logo">
-					<a class="" href="${ctx}/index.jsp"> <img src="${ctx }/images/logo.png"
-						title="">
+					<a class="" href="${ctx}/index.jsp"> <img src="${ctx }/images/logo.png"/>
+
 					</a>
 				</div>
 				<ul class="top-nav fn-clear">
 					<li id="index"><a href="${ctx}/index.jsp">首页</a></li>
-					<li id="inv"><a href="list.html" class="">我要投资</a></li>
+					<li id="inv"><a href="${ctx}/invProject/list" class="">我要投资</a></li>
 					<li id="apply"><a href="apply.html" class="">我要借款</a></li>
 					<li id="security"><a href="帮助中心.html">安全保障</a></li>
 					<li class="top-nav-safe" id="usercenter"><a href="个人中心首页.html">我的账户</a></li>
