@@ -122,6 +122,24 @@
 
 					</ul>
 			   </li>
+				<li class="" id="inv">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text">投资管理 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+					<ul class="submenu">
+						<li id="invpro">
+							<a href="${ctx }/investManage/pageList"> <i
+								class="icon-double-angle-right"></i> 投资项目
+							</a>
+						</li>
+						<li id="role">
+							<a  href="${ctx }/getRolesList"> <i
+								class="icon-double-angle-right"></i> 审批投资项目
+							</a>
+						</li>
+					</ul>
+				</li>
 			   <li class="" id="schedule">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-calendar"></i> <span class="menu-text"> 任务管理 </span> <b

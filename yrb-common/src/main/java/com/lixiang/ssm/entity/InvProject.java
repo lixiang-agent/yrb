@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class InvProject implements Serializable{
-    /**
+
+public class InvProject extends BaseEntity implements Serializable{
+
+
+
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2650788921427845606L;
+	private static final long serialVersionUID = 1L;
 
 	/**
      *
@@ -35,7 +39,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private Boolean projectType;
+    private Integer projectType;
 
     /**
      *
@@ -89,7 +93,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private String paybackWay;
+    private Integer paybackWay;
 
     /**
      *
@@ -188,7 +192,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private Boolean delayFlag;
+    private Integer delayFlag;
 
     /**
      *
@@ -251,7 +255,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private Boolean resource;
+    private Integer resource;
 
     /**
      *
@@ -277,7 +281,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public InvProject(Integer id, String projectName, Boolean projectType, Integer invNo, BigDecimal invTotbalance, BigDecimal rate, Integer paybackTime, String safeWay, String paybackWay, BigDecimal invBalance, Integer minInvBalance, Integer maxInvBalance, BigDecimal interest, String loanReason, Date biddingDate, String borrowerInfo, String riskControl, Integer projectStatus, Date financingEndTime, Boolean delayFlag, Date endTime, Integer creatorId, String creatorName, Integer modifiorId, String modifiorName, Date modifyDate, Boolean resource, Integer loanProjectId, Integer commendFlag) {
+    public InvProject(Integer id, String projectName, Integer projectType, Integer invNo, BigDecimal invTotbalance, BigDecimal rate, Integer paybackTime, String safeWay, Integer paybackWay, BigDecimal invBalance, Integer minInvBalance, Integer maxInvBalance, BigDecimal interest, String loanReason, Date biddingDate, String borrowerInfo, String riskControl, Integer projectStatus, Date financingEndTime, Integer delayFlag, Date endTime, Integer creatorId, String creatorName, Integer modifiorId, String modifiorName, Date modifyDate, Integer resource, Integer loanProjectId, Integer commendFlag) {
         this.id = id;
         this.projectName = projectName;
         this.projectType = projectType;
@@ -375,7 +379,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public Boolean getProjectType() {
+    public Integer getProjectType() {
         return projectType;
     }
 
@@ -387,7 +391,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setProjectType(Boolean projectType) {
+    public void setProjectType(Integer projectType) {
         this.projectType = projectType;
     }
 
@@ -519,7 +523,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public String getPaybackWay() {
+    public Integer getPaybackWay() {
         return paybackWay;
     }
 
@@ -531,8 +535,8 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setPaybackWay(String paybackWay) {
-        this.paybackWay = paybackWay == null ? null : paybackWay.trim();
+    public void setPaybackWay(Integer paybackWay) {
+        this.paybackWay = paybackWay;
     }
 
     /**
@@ -783,7 +787,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public Boolean getDelayFlag() {
+    public Integer getDelayFlag() {
         return delayFlag;
     }
 
@@ -795,7 +799,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setDelayFlag(Boolean delayFlag) {
+    public void setDelayFlag(Integer delayFlag) {
         this.delayFlag = delayFlag;
     }
 
@@ -951,7 +955,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public Boolean getResource() {
+    public Integer getResource() {
         return resource;
     }
 
@@ -963,7 +967,7 @@ public class InvProject implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setResource(Boolean resource) {
+    public void setResource(Integer resource) {
         this.resource = resource;
     }
 
@@ -1065,5 +1069,20 @@ public class InvProject implements Serializable{
 	public void setMaxMonth(Integer maxMonth) {
 		this.maxMonth = maxMonth;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "InvProject [id=" + id + ", projectName=" + projectName + ", projectType=" + projectType + ", invNo="
+				+ invNo + ", invTotbalance=" + invTotbalance + ", rate=" + rate + ", paybackTime=" + paybackTime
+				+ ", safeWay=" + safeWay + ", paybackWay=" + paybackWay + ", invBalance=" + invBalance
+				+ ", minInvBalance=" + minInvBalance + ", maxInvBalance=" + maxInvBalance + ", interest=" + interest
+				+ ", loanReason=" + loanReason + ", biddingDate=" + biddingDate + ", borrowerInfo=" + borrowerInfo
+				+ ", riskControl=" + riskControl + ", projectStatus=" + projectStatus + ", financingEndTime="
+				+ financingEndTime + ", delayFlag=" + delayFlag + ", endTime=" + endTime + ", creatorId=" + creatorId
+				+ ", creatorName=" + creatorName + ", modifiorId=" + modifiorId + ", modifiorName=" + modifiorName
+				+ ", modifyDate=" + modifyDate + ", resource=" + resource + ", loanProjectId=" + loanProjectId
+				+ ", commendFlag=" + commendFlag + ", maxRate=" + maxRate + ", minRate=" + minRate + ", minMonth="
+				+ minMonth + ", maxMonth=" + maxMonth + "]";
+	}
+
 }
