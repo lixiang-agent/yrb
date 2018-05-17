@@ -1084,4 +1084,6 @@ public class InvProject extends BaseEntity{
 				+ minMonth + ", maxMonth=" + maxMonth + "]";
 	}
 
+
+
 }

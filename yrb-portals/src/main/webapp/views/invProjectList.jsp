@@ -100,20 +100,20 @@ $().ready(function() {
 		 		var item='<ul>'
 				+'<li class="col-330 col-t"><a href="infor.html"'
 				+'	target="_blank"><i class="icon ';
-					if(data[i].paybackWay==1){
+				
+					if(data[i].projectType==1){
 						item+="icon-che";
 					}
-					if(data[i].paybackWay==2){
+					if(data[i].projectType==2){
 						item+="icon-fang";
 					}
-					if(data[i].paybackWay==3){
+					if(data[i].projectType==3){
 						item+="icon-shu";
 					}
-					if(data[i].paybackWay==4){
+					if(data[i].projectType==4){
 						item+="icon-zhai";
 					}
-				
-				item+='title="车易贷"></i></a><a'
+				item+=' " title="车易贷"></i></a><a'
 				+'	class="f18" href="infor.html"'
 				+'	title="'+data[i].projectName+'" target="_blank">'
 				+'		'+data[i].projectName+'</a></li>'
@@ -123,13 +123,13 @@ $().ready(function() {
 				+'	<li class="col-150"><span class="f20 c-333">'+data[i].paybackTime +'</span>个月'
 				+'	</li>'
 				+'	<li class="col-150">';
-				if(data[i].paybackWay==0){
+				if(data[i].projectType==0){
 					item+="到期还本还息";
 				}
-				if(data[i].paybackWay==1){
+				if(data[i].projectType==1){
 					item+="按月付息，到期还本";
 				}
-				if(data[i].paybackWay==2){
+				if(data[i].projectType==2){
 					item+="等额本息";
 				}
 				item+='</li>'
@@ -282,9 +282,10 @@ $().ready(function() {
 					<div class="title clearfix">
 						<ul>
 							<li class="col-330">借款标题</li>
-							<li class="col-180"><a
-								href="javascript:void(0);" name="0">借款金额</a>
-								</li>
+							<li class="col-180" id="termSort">借款期限
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
 							<li class="col-110"><a
 								href="javascript:url('order','apr_up');" class="">年利率</a></li>
 							<li class="col-150"><a
@@ -367,4 +368,5 @@ $().ready(function() {
 	<!-- 引入底部 --> <%@ include file="/buttom.jsp"%>
 </body>
 </html>
-
+icon-arrow-down
+icon-arrow-up

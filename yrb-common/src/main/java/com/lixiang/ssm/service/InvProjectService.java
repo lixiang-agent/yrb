@@ -18,8 +18,7 @@ public class InvProjectService {
 	@Autowired
 	private InvProjectMapper invProjectMapper;
 	
-	public List<InvProject> ListByInvProject(InvProject  invProject){
-		
-		return invProjectMapper.ListByInvProject(invProject);
+	public List<InvProject> ListByInvProject(InvProject  invProject,String orderBy,Integer orderMethod){
+		return invProjectMapper.ListByInvProject(invProject,orderBy,orderMethod);
 	}
 }

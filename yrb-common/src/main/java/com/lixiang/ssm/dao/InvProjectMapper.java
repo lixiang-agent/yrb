@@ -62,7 +62,7 @@ public interface InvProjectMapper {
     /**
      * 按照条件来查询投资项目
      */
-    List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject);
+    List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject,@Param("orderBy")String orderBy,@Param("orderMethod")Integer orderMethod);
 
     boolean updateProjectStatus(Integer id);
     /**

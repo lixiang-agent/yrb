@@ -478,7 +478,19 @@
 				and payback_way=#{invProject.paybackWay}
 			</if>
 			and project_status=40
+			
 		</where>
+		<if test="orderBy!=null">
+				order by orderBy
+		</if>
+		<if test="orderMethod!=null">
+			<if test="prderMethod==0">
+					asc
+			</if>
+			<if test="prderMethod==1">
+					desc
+			</if>
+		</if>
 	</select>
 	
 	<update id="updateProjectStatus" parameterType="com.lixiang.ssm.entity.InvProject">
