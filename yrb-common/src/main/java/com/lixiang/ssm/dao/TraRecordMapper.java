@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.TraRecord;
 
 public interface TraRecordMapper {
@@ -50,4 +52,11 @@ public interface TraRecordMapper {
      * @mbg.generated Wed May 16 11:21:21 CST 2018
      */
     int updateByPrimaryKey(TraRecord record);
+    
+    /**
+     * 资金记录
+     * @param fraRecord
+     * @return
+     */
+    List<TraRecord> selectFundRecord(TraRecord traRecord);
 }
