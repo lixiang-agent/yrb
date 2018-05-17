@@ -172,7 +172,7 @@ $(function(){
           <div class="fn-right f14 c-888">常规发标时间每天<span class="c-555">10:00，13:00和20:00</span>，其余时间根据需要随机发</div>
         </div>
         <div class="bd">
-          <div class="des"><span class="fn-left">期限1-29天，期限短，收益见效快</span><a href="list.html" class="fn-right">查看更多&gt;&gt;</a></div>
+          <div class="des"><span class="fn-left">期限1-29天，期限短，收益见效快</span><a href="${ctx}/invProject/list" class="fn-right">查看更多&gt;&gt;</a></div>
           <div class="borrow-list">
             <ul>
               <li>
@@ -225,7 +225,7 @@ $(function(){
           <div class="fn-right f14 c-888">参与人次：<span class="c-555">61.37万次</span>&nbsp;&nbsp;&nbsp;平均满标时间：<span class="c-555">1小时24分11秒</span> </div>
         </div>
         <div class="bd">
-          <div class="des"><span class="fn-left">期限1-12月，收益更高</span><a href="list.html" class="fn-right">查看更多&gt;&gt;</a></div>
+          <div class="des"><span class="fn-left">期限1-12月，收益更高</span><a href="${ctx}/invProject/list" class="fn-right">查看更多&gt;&gt;</a></div>
           <div class="borrow-list">
             <ul>
               <li>
@@ -284,7 +284,7 @@ $(function(){
           <div class="fn-right f14 c-888">参与人次：<span class="c-555">8.35万次</span>&nbsp;&nbsp;&nbsp;平均满标时间：<span class="c-555">1小时41分19秒</span> </div>
         </div>
         <div class="bd">
-          <div class="des"> <span class="fn-left">期限12-60月，打理更加容易</span><a href="list.html" class="fn-right">查看更多&gt;&gt;</a></div>
+          <div class="des"> <span class="fn-left">期限12-60月，打理更加容易</span><a href="${ctx}/invProject/list" class="fn-right">查看更多&gt;&gt;</a></div>
           <div class="borrow-list">
             <ul>
               <li>
@@ -343,7 +343,7 @@ $(function(){
           <div class="fn-right f14 c-888">参与人次：<span class="c-555">8.06万次</span> &nbsp;&nbsp;&nbsp;平均转让用时：<span class="c-555">03小时06分22秒</span> </div>
         </div>
         <div class="bd">
-          <div class="des"><span class="fl">其他投资人折价转让，转让项目会随时更新，惊喜不断</span><a href="list.html" class="fn-right">查看更多&gt;&gt;</a></div>
+          <div class="des"><span class="fl">其他投资人折价转让，转让项目会随时更新，惊喜不断</span><a href="${ctx}/invProject/list" class="fn-right">查看更多&gt;&gt;</a></div>
           <div class="borrow-list">
             <ul>
               <li>
