@@ -58,8 +58,9 @@
 												aria-describedby="basic-addon2" maxlength="12"> <span
 												class="input-group-btn">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
-												<a style="margin-left: 50px" class="btn btn-primary btn-sm" href="${ctx }/investManage/toInsert" data-toggle="modal" 
-													data-target="#myOperRecordModal" role="button" title="新增项目">查看审核记录</a>
+												<a class="btn btn-primary btn-sm"
+												href="${ctx }/investManage/showOperRecord" data-toggle="modal"
+												data-target="#myOperRecordModal" role="button" title="新增项目">查看审核记录</a>
 											</span>
 
 										</div>
@@ -242,7 +243,15 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
-
+	
+	<!-- 审核操作记录的模态框 -->
+	<div class="modal fade" id="myOperRecordModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+	
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"
 			id="ace-settings-btn">

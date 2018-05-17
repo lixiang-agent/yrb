@@ -131,6 +131,15 @@ public class InvestManageController {
 		
 		return "oper-record-list";
 	}
+	
+	
+	public String showOperRecord(InvProject invProject,Model model){
+		
+		
+		return "oper-record-show";
+	}
+	
+	
 	@RequestMapping("/toPass")
 	public String toPassOperProject(Integer id,Model model){
 		InvProject invProject = invManageService.selectByPrimaryKey(id);
