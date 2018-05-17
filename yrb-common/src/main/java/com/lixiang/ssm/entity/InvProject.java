@@ -4,15 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
 public class InvProject extends BaseEntity implements Serializable{
 
+	private static final long serialVersionUID = -8119631353495271738L;
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	/**
      *
@@ -1084,5 +1079,4 @@ public class InvProject extends BaseEntity implements Serializable{
 				+ ", commendFlag=" + commendFlag + ", maxRate=" + maxRate + ", minRate=" + minRate + ", minMonth="
 				+ minMonth + ", maxMonth=" + maxMonth + "]";
 	}
-
 }

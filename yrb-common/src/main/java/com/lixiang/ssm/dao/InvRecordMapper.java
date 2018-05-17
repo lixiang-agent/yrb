@@ -59,4 +59,5 @@ public interface InvRecordMapper {
      * @return
      */
     List<InvRecord> selectInvestRecord(InvRecord invRecord );
+
 }
