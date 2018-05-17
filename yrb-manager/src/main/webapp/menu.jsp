@@ -133,8 +133,8 @@
 								class="icon-double-angle-right"></i> 投资项目
 							</a>
 						</li>
-						<li id="role">
-							<a  href="${ctx }/getRolesList"> <i
+						<li id="oper">
+							<a  href="${ctx }/investManage/listOperProject"> <i
 								class="icon-double-angle-right"></i> 审批投资项目
 							</a>
 						</li>
