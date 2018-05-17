@@ -45,12 +45,16 @@ public class ScheduleJobService {
 	}
 	
 	
-	public ScheduleJob getScheduleJobById(String jobId){
+	public ScheduleJob getScheduleJobById(Integer jobId){
 		return mapper.selectByPrimaryKey(jobId);
 	}
 	
 	public boolean updateJob(ScheduleJob job){
 		return mapper.updateByPrimaryKeySelective(job);
+	}
+	
+	public boolean insertJob(ScheduleJob job){
+		return mapper.insertSelective(job)>0;
 	}
 
 }

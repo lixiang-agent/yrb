@@ -4,7 +4,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+
+<style type="text/css">
+	.green{
+		color:green;
+	}
+	
+	.red{
+	color:red;}
+
+</style>
 </head>
+
 <body>
 	<%@ include file="/top.jsp"%>
 	<div class="main-container" id="main-container">
@@ -57,9 +68,14 @@
 												<option value="1"
 													${scheduleJob.jobStatus=='1'?'selected="selected"':'' }>进行中</option>
 												<option value="2"
-													${scheduleJob.jobStatus=='2'?'selected="selected"':'' }>暂定</option>
+													${scheduleJob.jobStatus=='2'?'selected="selected"':'' }>已暂定</option>
 											</select> <span class="input-group-btn3">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
+												
+												<span>
+													<a href="${ctx }/schedule/edit" data-toggle="modal"
+															data-target="#editModal" title="新增任务">新增</a>
+												</span>
 											</span>
 										</div>
 
@@ -95,13 +111,13 @@
 											</label></td>
 											<td>${job.jobName }</td>
 											<td>${job.jobGroup}</td>
-											<td>${job.jobStatus==1?'<span class="success">进行中</span>':'<span class="danger">暂停</span>'}</td>
+											<td>${job.jobStatus==1?'<span class="green">进行中</span>':'<span class="red">已暂停</span>'}</td>
 											<td>${job.cronExpression }</td>
 											<td class="hidden-480">${job.jobDesc }</td>
 											<td>${job.jobClass }</td>
 											<td>
 												<div
-													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+													class="">
 
 													<c:if test="${job.jobStatus=='0' }">
 														<a class="green"
@@ -171,52 +187,9 @@
 															<!-- /.modal-dialog -->
 														</div>
 													</c:if>
-												</div>
-												<div class="visible-xs visible-sm hidden-md hidden-lg">
-													<div class="inline position-relative">
-														<button class="btn btn-minier btn-yellow dropdown-toggle"
-															data-toggle="dropdown">
-															<i class="icon-caret-down icon-only bigger-120"></i>
-														</button>
-
-														<ul
-															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li><a href="#" class="tooltip-info"
-																data-rel="tooltip" title="View"> <span class="blue">
-																		<i class="icon-zoom-in bigger-120"></i>
-																</span>
-															</a></li>
-
-															<li><a href="javascript:void();" data-toggle="modal"
-																data-target="#roleModal" class="tooltip-success"
-																data-rel="tooltip" title="Edit"> <span class="green">
-																		<i class="icon-wrench bigger-120"></i>
-																</span>
-
-															</a></li>
-															<li><a href="javascript:void();" data-toggle="modal"
-																data-target="#userModal" class="tooltip-success"
-																data-rel="tooltip" title="Edit"> <span
-																	class="orange"> <i class="icon-edit  bigger-120"></i>
-																</span>
-
-															</a></li>
-															<li><a href="#" class="tooltip-success"
-																data-rel="tooltip" title="Unlock"> <span
-																	class="purple"> <i
-																		class="icon-unlock bigger-120"></i>
-																</span>
-															</a></li>
-
-
-															<li><a href="#" class="tooltip-error"
-																data-rel="tooltip" title="Delete"> <span class="red">
-																		<i class="icon-trash bigger-120"></i>
-																</span>
-															</a></li>
-
-														</ul>
-													</div>
+													|
+													<a href="${ctx }/schedule/edit?jobId=${job.jobId}" data-toggle="modal"
+															data-target="#editModal" title="修改任务">修改</a>
 												</div>
 											</td>
 										</tr>
@@ -237,27 +210,13 @@
 		</div>
 	</div>
 	<!-- 修改角色的模态框 -->
-	<div class="modal fade" id="roleModal" tabindex="-1" role="dialog"
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>
 	</div>
-	<!-- 修改用户的模态框 -->
-	<div class="modal fade" id="userModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
-
-	<!-- 修改角色的模态框 -->
-	<div class="modal fade" id="userModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
+	
 
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"
@@ -335,13 +294,12 @@
 
 	<script type="text/javascript">
 		//模态框隐藏的时候把原来模态框里面的内容去掉
-		$("#roleModal").on("hidden.bs.modal", function() {
+		$("#editModal").on("hidden.bs.modal", function() {
 			$(this).removeData("bs.modal");
 		});
 
-		$("#userModal").on("hidden.bs.modal", function() {
-			$(this).removeData("bs.modal");
-		});
 	</script>
+	
+	<%@ include file="/tip.jsp" %>
 </body>
 </html>

@@ -158,6 +158,9 @@ public class RedisUtil {
 	}
 	
 	
+	public Set<Serializable> keys(String keys){
+		return this.redisTemplate.keys(keys);
+	}
 	
 	
 }
