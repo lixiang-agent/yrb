@@ -481,13 +481,13 @@
 			
 		</where>
 		<if test="orderBy!=null">
-				order by orderBy
+				order by ${orderBy}
 		</if>
 		<if test="orderMethod!=null">
-			<if test="prderMethod==0">
+			<if test="orderMethod==0">
 					asc
 			</if>
-			<if test="prderMethod==1">
+			<if test="orderMethod==1">
 					desc
 			</if>
 		</if>

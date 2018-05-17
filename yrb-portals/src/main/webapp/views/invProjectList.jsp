@@ -67,6 +67,21 @@ $().ready(function() {
 		queryList();
 	});
 
+	$("#termSort a").click(function(){
+		invCondition["orderBy"]="payback_time";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	$("#balanceSort a").click(function(){
+		invCondition["orderBy"]="inv_totbalance";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	$("#rateSort a").click(function(){
+		invCondition["orderBy"]="rate";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
 	function queryList(){
 		var url="${ctx}/invProject/listByInvProject";
 		if(invCondition["minMonth"]!=null){
@@ -89,6 +104,10 @@ $().ready(function() {
 		if(invCondition["paybackWay"]!=null){
 			url=url+"&paybackWay="+invCondition["paybackWay"];
 		}
+		if(invCondition["orderBy"]!=null){
+			url=url+"&orderBy="+invCondition["orderBy"]+"&orderMethod="+invCondition["orderMethod"];
+		}
+		alert(url);
 		$.ajax({
 			url:url,
 			dataType:"json",
@@ -282,14 +301,18 @@ $().ready(function() {
 					<div class="title clearfix">
 						<ul>
 							<li class="col-330">借款标题</li>
-							<li class="col-180" id="termSort">借款期限
+							<li class="col-180" id="balanceSort">借款金额
 								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
 								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
 							</li>
-							<li class="col-110"><a
-								href="javascript:url('order','apr_up');" class="">年利率</a></li>
-							<li class="col-150"><a
-								href="javascript:url('order','period_up');" class="">借款期限</a></li>
+							<li class="col-110" id="rateSort">利率
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
+							<li class="col-150" id="termSort">借款期限
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
 							<li class="col-150">还款方式</li>
 							<li class="col-120"><a
 								href="javascript:url('order','scale_up');" class="">借款进度</a></li>
@@ -329,7 +352,7 @@ $().ready(function() {
 											<div class="left progress-bar">
 												<div class="progress-bgPic progress-bfb10">
 													<div class="show-bar">
-														${invProject.invBalance/invProject.invTotbalance }</div>
+														${(invProject.invBalance/invProject.invTotbalance)*100 }%</div>
 												</div>
 											</div>
 										</div>
@@ -368,5 +391,3 @@ $().ready(function() {
 	<!-- 引入底部 --> <%@ include file="/buttom.jsp"%>
 </body>
 </html>
-icon-arrow-down
-icon-arrow-up

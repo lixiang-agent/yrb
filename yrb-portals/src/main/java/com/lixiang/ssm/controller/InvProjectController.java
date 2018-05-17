@@ -53,7 +53,7 @@ public class InvProjectController {
 	public List<InvProject> ListByInvProject(InvProject invProject,String orderBy,Integer orderMethod){
 		
 		List<InvProject> listInvProject = invProjectService.ListByInvProject(invProject,orderBy,orderMethod);
-		log.error(listInvProject.toString());
+		log.error(listInvProject);
 		return listInvProject;
 		
 	}
