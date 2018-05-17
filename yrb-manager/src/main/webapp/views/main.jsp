@@ -39,7 +39,7 @@
 			<div class="page-content">
 
 				<div class="row">
-					<div class="col-sm-7 infobox-container">
+					<div class="col-lg-7 col-md-9 col-sm-12 infobox-container">
 						<div class="infobox infobox-green  ">
 							<div class="infobox-icon">
 								<i class="icon-comments"></i>
