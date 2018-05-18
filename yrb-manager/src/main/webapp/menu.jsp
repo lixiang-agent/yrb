@@ -130,12 +130,17 @@
 					<ul class="submenu">
 						<li id="invpro">
 							<a href="${ctx }/investManage/pageList"> <i
-								class="icon-double-angle-right"></i> 投资项目
+								class="icon-double-angle-right"></i> 投资项目总览
 							</a>
 						</li>
 						<li id="oper">
 							<a  href="${ctx }/investManage/listOperProject"> <i
-								class="icon-double-angle-right"></i> 审批投资项目
+								class="icon-double-angle-right"></i> 项目审批处理
+							</a>
+						</li>
+						<li id="serviceOper">
+							<a  href="${ctx }/investManage/listServiceProject"> <i
+								class="icon-double-angle-right"></i> 项目业务处理
 							</a>
 						</li>
 					</ul>
