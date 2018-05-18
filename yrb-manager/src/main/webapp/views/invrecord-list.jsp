@@ -6,7 +6,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
+				<button type="submit" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
@@ -47,8 +47,7 @@
 				</table>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn default btn-sm"
-					data-dismiss="modal">确定</button>
+				<button type="submit" class="btn btn-primary btn-sm">离开</button>
 			</div>
 		</div>
 	</div>

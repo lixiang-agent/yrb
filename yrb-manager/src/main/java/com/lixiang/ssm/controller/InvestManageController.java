@@ -208,7 +208,6 @@ public class InvestManageController {
 		InvProject inv = invManageService.selectByPrimaryKey(invProject.getId());
 		inv.setBiddingDate(new Date());
 		inv.setFinancingEndTime(invProject.getFinancingEndTime());
-		System.out.println("筹款解说时间："+invProject.getFinancingEndTime());
 		invManageService.updateByPrimaryKeySelective(inv);
 		OperateRecord operRecord = new OperateRecord(null,5,new Date() ,inv.getProjectType(),invProject.getId(),inv.getModifiorId(),inv.getModifiorName(),"项目发布");
 		invManageService.insertSelective(operRecord);
