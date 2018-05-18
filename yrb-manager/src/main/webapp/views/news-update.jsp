@@ -47,7 +47,7 @@
 							</select>
 						</p>
 						<p>
-							<TEXTAREA id="content" name="content" style="width: 100%;height: 350px">${news.content}</TEXTAREA>
+							<TEXTAREA id=container name="content" style="width: 100%;height: 350px">${news.content}</TEXTAREA>
 							<form:errors path="content"></form:errors>
 						</p>
 					</div>
@@ -66,7 +66,7 @@
 <SCRIPT type=text/javascript>
 	//var editor = new UE.ui.Editor();  
 	//editor.render("myEditor");  
-	UE.getEditor('content', {
+	UE.getEditor('container', {
 		toolbars : [ [ 'undo', 'redo', '|', 'bold', 'italic', 'underline',
 				'fontborder', 'strikethrough', 'superscript', 'subscript',
 				'removeformat', '|', 'forecolor', 'backcolor',
@@ -80,4 +80,6 @@
 		autoHeightEnabled : true,
 		autoFloatEnabled : true
 	});
+	
+	
 </SCRIPT>

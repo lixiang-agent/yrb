@@ -49,7 +49,10 @@ public class NewsService {
 	public News getNewsById(Integer id){
 		return mapper.selectByPrimaryKey(id);
 	}
-	
+	public boolean updateNewsStatusById(News news){
+		news.setStatus(true);
+		return mapper.updateNewsStatusById(news)>0;
+	}
 	public PageInfo<News> pageList(News news) {
 		// 获取第1页，10条内容，默认查询总数count
 		PageHelper.startPage(news.getPageNum(), news.getPageSize());

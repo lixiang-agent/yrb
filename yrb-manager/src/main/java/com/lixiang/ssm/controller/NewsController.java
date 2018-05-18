@@ -81,4 +81,11 @@ public class NewsController {
 		model.addAttribute("oper_result", result);
 		return "redirect:list";
 	}
+	
+	@RequestMapping("/updatestatus")
+	public String updateNewsStatusById(News news,Model model){
+		boolean result = service.updateNewsStatusById(news);
+		model.addAttribute("oper_result", result);
+		return "redirect:list";
+	}
 }
