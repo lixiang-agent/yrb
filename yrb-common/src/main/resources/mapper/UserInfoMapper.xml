@@ -200,7 +200,7 @@
         pay_password = #{payPassword,jdbcType=CHAR},
       </if>
       <if test="totalBalance != null">
-        total_balance =total_balance+ #{totalBalance,jdbcType=DECIMAL},
+        total_balance =#{totalBalance,jdbcType=DECIMAL},
       </if>
       <if test="referee != null">
         referee = #{referee,jdbcType=VARCHAR},
@@ -252,5 +252,24 @@
 
 		</where>
 	</select>
-
+	
+	<!-- 修改用户,充值 -->
+	 <update id="updateTopUp" parameterType="com.lixiang.ssm.entity.UserInfo">
+    update t_user_info
+    <set>
+      <if test="account != null">
+        account = #{account},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum},
+      </if>
+      <if test="password != null">
+        password = #{password},
+       </if>  
+      <if test="totalBalance != null">
+        total_balance =total_balance+ #{totalBalance},
+      </if>
+     </set>
+    where id = #{id}
+  </update>
 </mapper>
