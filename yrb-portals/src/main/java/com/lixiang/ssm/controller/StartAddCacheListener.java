@@ -65,8 +65,7 @@ public class StartAddCacheListener implements ApplicationListener<ContextRefresh
 			//创建任务数据
     		JobDetail job = JobBuilder.newJob(IncreaseCountDateJob.class).withIdentity("job1", "group1").build();
 			
-    		// Trigger the job to run now, and then repeat every 40 seconds
-    		//创建触发器
+    		//创建触发器,1个小时触发一次
     		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").startNow()
     				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(60).repeatForever()).build();
 

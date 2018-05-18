@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.News;
-import com.lixiang.ssm.service.NewsService;
-import com.lixiang.ssm.service.ProjectService;
 import com.lixiang.ssm.utils.RedisCacheUtil;
 
 @Controller
