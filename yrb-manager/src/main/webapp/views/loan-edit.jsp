@@ -84,19 +84,32 @@
 						
 						<tr>
 							<td>项目状态</td>
-							<%-- <td><select name="projectStatus">
-											
-											<option value="10" ${loaninfo.projectStatus==10 ?"selected='true'":"" }>待提交</option>
-											<option value="11" ${loaninfo.projectStatus==11 ?"selected='true'":"" }>退回</option>
-											<option value="20" ${loaninfo.projectStatus==20 ?"selected='true'":"" }>待审批</option>
-											<option value="30" ${loaninfo.projectStatus==30?"selected='true'":"" }>待放款</option>
-											<option value="40" ${loaninfo.projectStatus==40?"selected='true'":"" }>已放款</option>
-											<option value="50" ${loaninfo.projectStatus==50?"selected='true'":"" }>待还款</option>
-											<option value="60" ${loaninfo.projectStatus==60?"selected='true'":"" }>项目结束</option>
-											
-										</select>
-										</td> --%>
-										<td><input type="text" name="loanTerm" class="form-control" value="${loaninfo.projectStatus}" readonly="true"></td>	
+							<td><c:choose>
+													<c:when test="${loan.projectStatus == 10}">
+														待提交
+													</c:when>
+													<c:when test="${loan.projectStatus == 11}">
+														退回
+													</c:when>
+													<c:when test="${loan.projectStatus ==20}">
+														待审批
+													</c:when>
+													<c:when test="${loan.projectStatus ==30}">
+														待放款
+													</c:when>
+													<c:when test="${loan.projectStatus ==40}">
+														已放款
+													</c:when>
+													<c:when test="${loan.projectStatus ==50}">
+														待还款
+													</c:when>
+													<c:otherwise>
+														项目结束
+													</c:otherwise>
+
+
+												</c:choose></td>
+										<%-- <td><input type="text" name="loanTerm" class="form-control" value="${loaninfo.projectStatus}" readonly="true"></td>	 --%>
 						</tr>
 						
 						
