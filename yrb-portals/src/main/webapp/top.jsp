@@ -40,25 +40,30 @@
 				</ul>
 				<ul class="fn-right header-top-ul">
 					<li><a href="${ctx}/index.jsp" class="app">返回首页</a></li>
-					<shiro:guest>
+					<c:if test="${empty user }">
 						<li>
 							<div class="">
-								<a href="register.html" class="c-orange" title="免费注册">免费注册</a>
+								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册">免费注册</a>
 							</div>
 						</li>
 						<li>
 							<div class="">
-								<a href="login.html" class="js-login" title="登录">登录</a>
+								<a href="${ctx}/views/login.jsp" class="js-login" title="登录">登录</a>
 							</div>
 						</li>
-					</shiro:guest>
-					<shiro:authenticated>
+					</c:if>
+					<c:if test="${!empty user }">
 						<li>
 							<div class="">
-								<a href="logout" class="js-login" title="退出">退出</a>
+								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册">${user.account }</a>
 							</div>
 						</li>
-					</shiro:authenticated>
+						<li>
+							<div class="">
+								<a href="${ctx}/userInfo/logout" class="js-login" title="退出">退出</a>
+							</div>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -72,7 +77,7 @@
 				<ul class="top-nav fn-clear">
 					<li id="index"><a href="${ctx}/index.jsp">首页</a></li>
 					<li id="inv"><a href="${ctx}/invProject/list" class="">我要投资</a></li>
-					<li id="apply"><a href="apply.html" class="">我要借款</a></li>
+					<li id="apply"><a href="${ctx}/apply.jsp" class="">我要借款</a></li>
 					<li id="security"><a href="帮助中心.html">安全保障</a></li>
 					<li class="top-nav-safe" id="usercenter"><a href="个人中心首页.html">我的账户</a></li>
 					<li id="company"><a href="公司简介.html">关于我们</a></li>
