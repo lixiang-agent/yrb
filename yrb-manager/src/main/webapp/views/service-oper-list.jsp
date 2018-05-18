@@ -133,7 +133,13 @@
 															title="发布项目"> <i class="icon-upload bigger-130"></i>
 														</a>
 													</c:if>
-
+													<c:if test="${operService.projectStatus==40||operService.projectStatus==50||operService.projectStatus==60}">
+														<a class="blue"
+															href="${ctx }/investManage/listInvRecord?id=${operService.id}"
+															data-toggle="modal" data-target="#showInvRecordModal"
+															title="查看该项目投资记录"> <i class="icon-search bigger-130"></i>
+														</a>
+													</c:if>
 													<a class="green" data-toggle="modal"
 														data-target="#detailsModal"
 														href="${ctx }/investManage/detailsList?id=${operService.id}"
@@ -196,7 +202,14 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
-
+	
+	<!-- 查看项目投资记录的模态框 -->
+	<div class="modal fade" id="showInvRecordModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
 
 	<!-- 项目详情的模态框 -->
 	<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
