@@ -68,7 +68,7 @@ public class StartAddCacheListener implements ApplicationListener<ContextRefresh
     		// Trigger the job to run now, and then repeat every 40 seconds
     		//创建触发器
     		Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").startNow()
-    				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(10).repeatForever()).build();
+    				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInMinutes(60).repeatForever()).build();
 
     		// Tell quartz to schedule the job using our trigger
     		//把任务添加到调度器中

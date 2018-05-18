@@ -66,7 +66,7 @@ public class RedisCacheUtil<T> {
 		if (null != dataList) {
 			int size = dataList.size();
 			for (int i = 0; i < size; i++) {
-
+				
 				listOperation.rightPush(key, dataList.get(i));
 			}
 		}
@@ -88,6 +88,10 @@ public class RedisCacheUtil<T> {
 		 List<T> list= listOperation.range(key, 0, -1);
 		
 		return list;
+	}
+	
+	public void deleteCache(String key){
+		redisTemplate.delete(key);
 	}
 
 	/**

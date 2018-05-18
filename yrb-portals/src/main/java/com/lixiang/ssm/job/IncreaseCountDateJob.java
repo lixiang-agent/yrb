@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
+import org.jboss.logging.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -19,10 +20,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.lixiang.ssm.controller.NewsController;
 import com.lixiang.ssm.utils.RedisCacheUtil;
 
-@Component
 public class IncreaseCountDateJob implements Job{
+	
+	protected Logger log = Logger.getLogger(IncreaseCountDateJob.class);
+	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException{
 		//获取IOC容器
@@ -30,54 +34,23 @@ public class IncreaseCountDateJob implements Job{
 		//获取IOC容器里面的bean
 		RedisCacheUtil<Object> redisCache = wac.getBean(RedisCacheUtil.class);
 		
-		//读取属性文件
-		InputStream in = IncreaseCountDateJob.class.getClassLoader().getResourceAsStream("IndexCountDate.pro");
-		OutputStream out = null;
-		Properties prop = new Properties();
-		try {
-			prop.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
+		//从redis里面获取首页统计信息
+		List<BigDecimal> countDateCache = redisCache.getCacheList("CountDate:index");
 		
-		//获取属性
-		BigDecimal CountOfInvMoney = new BigDecimal(prop.getProperty("CountOfInvMoney"));
-		BigDecimal PaybackInterest = new BigDecimal(prop.getProperty("PaybackInterest"));
-		BigDecimal CountOfBalance = new BigDecimal(prop.getProperty("CountOfBalance"));
-		BigDecimal RegisterPerson = new BigDecimal(prop.getProperty("RegisterPerson"));
-		 
-		//将读取到的属性添加到List中
-		List<BigDecimal> countDate = new ArrayList<>();
-		countDate.add(CountOfInvMoney);
-		countDate.add(PaybackInterest);
-		countDate.add(CountOfBalance);
-		countDate.add(RegisterPerson);
-        
-		//将读取到的数据添加到redis缓存中
-		redisCache.setCacheList("CountDate:index", countDate);
-		
-		//将属性文件中的数据增加一定数量
-		BigDecimal newCountOfInvMoney = CountOfInvMoney.add(new BigDecimal(new Random().nextInt(9999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN));
-		BigDecimal newPaybackInterest = PaybackInterest.add(new BigDecimal(new Random().nextInt(999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN));
-		BigDecimal newCountOfBalance = CountOfBalance.add(new BigDecimal(new Random().nextInt(999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN));
-		BigDecimal newRegisterPerson = RegisterPerson.add(new BigDecimal(new Random().nextInt(99)));
-		System.out.println(newCountOfInvMoney+">"+newPaybackInterest+">"+newCountOfBalance+">"+newRegisterPerson);
-		prop.setProperty("CountOfInvMoney", newCountOfInvMoney+"");
-		prop.setProperty("PaybackInterest", newPaybackInterest+"");
-		prop.setProperty("CountOfBalance", newCountOfBalance+"");
-		prop.setProperty("RegisterPerson", newRegisterPerson+"");
-		
-		
-		
-//		try {
-//			prop.store(out, "This is new properties");
-//			
-//			out.close();
-//			
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
+		if(countDateCache == null||countDateCache.size()==0){
+			countDateCache.add(new BigDecimal("1047288129.79"));
+			countDateCache.add(new BigDecimal("400507750.81"));
+			countDateCache.add(new BigDecimal("677679983.07"));
+			countDateCache.add(new BigDecimal("20649"));
+			redisCache.setCacheList("CountDate:index", countDateCache);
+		}else{
+			countDateCache.set(0, countDateCache.get(0).add(new BigDecimal(new Random().nextInt(9999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN)));
+			countDateCache.set(1, countDateCache.get(1).add(new BigDecimal(new Random().nextInt(999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN)));
+			countDateCache.set(2, countDateCache.get(2).add(new BigDecimal(new Random().nextInt(999)+(float)new Random().nextInt(99)/100).setScale(2, BigDecimal.ROUND_DOWN)));
+			countDateCache.set(3, countDateCache.get(3).add(new BigDecimal(new Random().nextInt(99))));
+			//将修改后的数据添加到redis缓存中
+			redisCache.deleteCache("CountDate:index");
+			redisCache.setCacheList("CountDate:index", countDateCache);
+		}
 	}
 }
