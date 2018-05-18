@@ -62,4 +62,7 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
 
 	List<News> listIndexNews();
+	
+	List<News> list(News news);
 }
+

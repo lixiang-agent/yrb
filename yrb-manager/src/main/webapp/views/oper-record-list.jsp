@@ -58,8 +58,10 @@
 												aria-describedby="basic-addon2" maxlength="12"> <span
 												class="input-group-btn">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
-												<a style="margin-left: 50px" class="btn btn-primary btn-sm" href="${ctx }/investManage/toInsert" data-toggle="modal" 
-													data-target="#myOperRecordModal" role="button" title="新增项目">查看审核记录</a>
+												<a class="btn btn-primary btn-sm"
+												href="${ctx }/investManage/showOperRecord"
+												data-toggle="modal" data-target="#myOperRecordModal"
+												role="button" title="新增项目">查看审核记录</a>
 											</span>
 
 										</div>
@@ -128,21 +130,12 @@
 											<td>
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<c:if test="${operRecord.projectStatus==20}">
+													<c:if test="${invpro.projectStatus==20}">
 														<a class="green"
 															href="${ctx }/investManage/toPass?id=${operRecord.id}"
 															data-toggle="modal" data-target="#passModal" title="通过审核">
 															<i class="icon-check bigger-130"></i>
 														</a>
-													</c:if>
-													<c:if test="${operRecord.projectStatus==30}">
-														<a class="green"
-															href="${ctx }/investManage/toRelease?id=${operRecord.id}"
-															data-toggle="modal" data-target="#releaseModal"
-															title="发布项目"> <i class="icon-upload bigger-130"></i>
-														</a>
-													</c:if>
-													<c:if test="${operRecord.projectStatus==20}">
 														<a class="red"
 															href="${ctx }/investManage/toFail?id=${operRecord.id}"
 															data-toggle="modal" data-target="#failModal"
@@ -155,6 +148,7 @@
 														id="details" title="项目详情"> <i
 														class="icon-search bigger-130"></i>
 													</a>
+
 												</div>
 
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -198,8 +192,8 @@
 
 						<div class="modal-footer no-margin-top">
 							<w:pager pageSize="${inv.pageSize }"
-								url="${ctx }/investManage/pageList" recordCount="${inv.total }"
-								pageNum="${inv.pageNum }" />
+								url="${ctx }/investManage/listOperProject"
+								recordCount="${inv.total }" pageNum="${inv.pageNum }" />
 						</div>
 
 					</div>
@@ -219,14 +213,6 @@
 		</div>
 	</div>
 
-	<!-- 发布项目的模态框 -->
-	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
-
 	<!-- 删除项目的模态框 -->
 	<div class="modal fade" id="failModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -238,6 +224,14 @@
 	<!-- 项目详情的模态框 -->
 	<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<!-- 审核操作记录的模态框 -->
+	<div class="modal fade" id="myOperRecordModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>

@@ -31,6 +31,17 @@ public class InvManageService {
 		return page;
 	}
 
+	public PageInfo<InvProject> listServiceProject(InvProject record) {
+		// 获取第1页，10条内容，默认查询总数count
+		PageHelper.startPage(record.getPageNum(), record.getPageSize());
+		// 查询语句
+		List<InvProject> list = invProjectMapper.queryAllInvProjectService(record);
+		// 用PageInfo对结果进行包装
+		PageInfo<InvProject> page = new PageInfo<>(list);
+		System.out.println(page);
+		return page;
+	}
+	
 	public PageInfo<InvProject> listOperProject(InvProject record) {
 		// 获取第1页，10条内容，默认查询总数count
 		PageHelper.startPage(record.getPageNum(), record.getPageSize());
@@ -41,7 +52,13 @@ public class InvManageService {
 		System.out.println(page);
 		return page;
 	}
-
+	
+	public List<OperateRecord> queryOperRecord(OperateRecord record){
+		
+		List<OperateRecord> list = operateRecordMapper.queryOperRecord(record);
+		
+		return list;
+	}
 	public int insertSelective(InvProject record) {
 		return invProjectMapper.insertSelective(record);
 	}
