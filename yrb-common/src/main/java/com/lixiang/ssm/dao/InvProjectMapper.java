@@ -114,7 +114,14 @@ public interface InvProjectMapper {
      * @return
      */
     Integer updateInvProject(InvRecord invRecord);
-    
+    /**
+     * 修改用户的金额
+     * @param uid 用户id
+     * @param password 用户密码
+     * @param money	用户投资的金额
+     * @return
+     */
+    Integer updateUserBalance(@Param("uid")Integer uid,@Param("password")String password,@Param("money")Double money);
     
 
 }
