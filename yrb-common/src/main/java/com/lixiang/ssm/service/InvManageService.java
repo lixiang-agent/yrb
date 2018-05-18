@@ -10,9 +10,11 @@ import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.dao.InvProjectMapper;
 import com.lixiang.ssm.dao.InvRecordMapper;
 import com.lixiang.ssm.dao.OperateRecordMapper;
+import com.lixiang.ssm.dao.PaybackPlanMapper;
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.OperateRecord;
+import com.lixiang.ssm.entity.PaybackPlan;
 
 @Service
 public class InvManageService {
@@ -23,6 +25,8 @@ public class InvManageService {
 	private OperateRecordMapper operateRecordMapper;
 	@Autowired
 	private InvRecordMapper invRecordMapper;
+	@Autowired
+	private PaybackPlanMapper paybackPlanMapper;
 	
 	public PageInfo<InvProject> pageList(InvProject record) {
 		// 获取第1页，10条内容，默认查询总数count
@@ -100,5 +104,16 @@ public class InvManageService {
 	}
 	public List<InvRecord> queryListInvRecord(Integer id){
 		return invRecordMapper.queryListInvRecord(id);
+	}
+	
+	
+	public int addPaybackPlan(PaybackPlan record){
+		
+		return paybackPlanMapper.insertSelective(record);
+	}
+	
+	public int updatePaybackPlan(PaybackPlan record){
+		
+		return paybackPlanMapper.updateByPrimaryKeySelective(record);
 	}
 }

@@ -1,8 +1,9 @@
 package com.lixiang.ssm.utils;
 
-import java.sql.Date;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class InterestUtils {
@@ -10,7 +11,6 @@ public class InterestUtils {
 	public static final int MATURITY_REPAYMENT = 1;
 	/* 按月付息,到期还本 */
 	public static final int MATURITY_INTEREST_REPAYMENT = 2;
-
 	/* 等额本息 */
 	public static final int AVERAGE_CAPITAL_PLUS_INTEREST = 3;
 
@@ -29,12 +29,12 @@ public class InterestUtils {
 	 *            开始时间
 	 * @return
 	 */
-	public static List<InterestObject> getInterestList(int repaymentType, double balance, int periods, double rate,
+	public static List<InterestObject> getInterestList(int repaymentType, BigDecimal balance, int periods, BigDecimal rate,
 			Date startDate) {
 
 		List<InterestObject> interest = new ArrayList<>();
 
-		double monthRate = rate / 12;
+		BigDecimal monthRate = InterestUtils.div(rate.doubleValue(), 12, 2);
 		// 到期还本
 		if (repaymentType == MATURITY_REPAYMENT) {
 			InterestObject obj = new InterestObject();
@@ -43,7 +43,7 @@ public class InterestUtils {
 			// 设置本金
 			obj.setCapital(balance);
 			// 设置利息
-			obj.setInterest(balance * (monthRate * periods));
+			obj.setInterest(InterestUtils.mul(balance.doubleValue(),(InterestUtils.mul(monthRate.doubleValue(), periods)).doubleValue()));
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(startDate);
 			cal.add(Calendar.MONTH, 1);
@@ -57,7 +57,7 @@ public class InterestUtils {
 				// 设置期数
 				obj.setPeriods(i);
 				// 设置利息
-				obj.setInterest(balance * monthRate);
+				obj.setInterest(InterestUtils.mul(balance.doubleValue(),monthRate.doubleValue()));
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(startDate);
 				cal.add(Calendar.MONTH, i);
@@ -80,7 +80,7 @@ public class InterestUtils {
 				// 设置期数
 				obj.setPeriods(i);
 				// 设置利息
-				obj.setInterest(balance * monthRate);
+				obj.setInterest(InterestUtils.mul(balance.doubleValue(),monthRate.doubleValue()));
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(startDate);
 				cal.add(Calendar.MONTH, i);
@@ -88,7 +88,7 @@ public class InterestUtils {
 				obj.setPaymentDate(cal.getTime());
 				interest.add(obj);
 				// 设置本金
-				obj.setCapital(balance / periods);
+				obj.setCapital(InterestUtils.div(balance.doubleValue(), periods, 2));
 				interest.add(obj);
 			}
 
@@ -97,5 +97,28 @@ public class InterestUtils {
 		return interest;
 	}
 	
-	
+	public static BigDecimal add(double v1,double v2){     
+		BigDecimal b1 = new BigDecimal(Double.toString(v1));     
+		BigDecimal b2 = new BigDecimal(Double.toString(v2));     
+		return b1.add(b2);     
+		}   
+	public static BigDecimal sub(double v1,double v2){     
+		BigDecimal b1 = new BigDecimal(Double.toString(v1));     
+		BigDecimal b2 = new BigDecimal(Double.toString(v2));     
+		return b1.subtract(b2);     
+		} 
+	public static BigDecimal mul(double v1,double v2){     
+		BigDecimal b1 = new BigDecimal(Double.toString(v1));     
+		BigDecimal b2 = new BigDecimal(Double.toString(v2));     
+		return b1.multiply(b2);     
+		}    
+	public static BigDecimal div(double v1,double v2,int scale){     
+		if(scale<0){     
+		throw new IllegalArgumentException(     
+		"值必须为整数或者零");     
+		}     
+		BigDecimal b1 = new BigDecimal(Double.toString(v1));     
+		BigDecimal b2 = new BigDecimal(Double.toString(v2));     
+		return b2.divide(b1,scale,BigDecimal.ROUND_HALF_UP);     
+		} 
 }
