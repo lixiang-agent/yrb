@@ -36,7 +36,7 @@
     select 
     <include refid="Base_Column_List" />
     from t_operate_record
-    where id = #{id,jdbcType=INTEGER}
+    where project_id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
@@ -168,4 +168,9 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="getoperator" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  
+  select * from t_operate_record where project_id = #{id,jdbcType=INTEGER} and projectType = 1
+  </select>
 </mapper>

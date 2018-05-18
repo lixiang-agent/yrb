@@ -34,6 +34,7 @@ public class LoginController {
 		log.debug("开始登录,username="+username+",password="+password);
 		Subject currentUser = SecurityUtils.getSubject();
 		
+		/*User user = (User)currentUser.getPrincipal();*/
 		//封装错误信息
 		String msg=null;//默认是没有错误
 		// 判断是否登录
