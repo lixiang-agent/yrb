@@ -59,5 +59,19 @@ public interface InvRecordMapper {
      * @return
      */
     List<InvRecord> selectInvestRecord(InvRecord invRecord );
+    
+    /**
+     * 累积本金和利润
+     * @param invRecord
+     * @return
+     */
+    InvRecord acc(InvRecord invRecord);
+    
+    /**
+     * 待收本金和利润
+     * @param invRecord
+     * @return
+     */
+    InvRecord dueIn(InvRecord invRecord);
 
 }

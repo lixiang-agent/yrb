@@ -75,6 +75,7 @@ public interface InvProjectMapper {
     List<InvProject> queryAllInvProjectService(InvProject record);
     
 	List<InvProject> listIndexCommendProjects();
+	
 	List<InvProject> listIndexCarProjects();
 	List<InvProject> listIndexHouseProjects();
 	List<InvProject> listIndexObligationProjects();
