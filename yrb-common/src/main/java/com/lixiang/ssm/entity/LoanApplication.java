@@ -32,11 +32,13 @@ public class LoanApplication {
     private String contactNumber;
 
     //借款金额,最低10000，最高1999990000
-	@Size(min=10000,max=1999990000)
+	@Min(10000)
+	@Max(1999990000)
     private Integer loanBalance;
 
     //借款期限,最低1个月，最高999个月
-	@Size(min=1,max=999)
+	@Min(1)
+	@Max(999)
     private Integer loanTerm;
 
     //申请人所在地址,最长30位
@@ -45,7 +47,8 @@ public class LoanApplication {
     private String address;
 
 	//结果：0=未处理，1=申请未通过，2=通过申请
-	@Size(min=0,max=2)
+	@Min(0)
+	@Max(2)
     private Integer result;
 
 	//申请时间
@@ -382,4 +385,15 @@ public class LoanApplication {
     public void setHandlerDate(Date handlerDate) {
         this.handlerDate = handlerDate;
     }
+
+	@Override
+	public String toString()
+	{
+		return "LoanApplication [id=" + id + ", userId=" + userId + ", realName=" + realName + ", contactNumber="
+				+ contactNumber + ", loanBalance=" + loanBalance + ", loanTerm=" + loanTerm + ", address=" + address
+				+ ", result=" + result + ", appliyDate=" + appliyDate + ", handlerId=" + handlerId + ", handlerName="
+				+ handlerName + ", handlerDate=" + handlerDate + "]";
+	}
+    
+    
 }

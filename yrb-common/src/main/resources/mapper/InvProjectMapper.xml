@@ -31,7 +31,7 @@
 				jdbcType="INTEGER" />
 			<arg column="Financing_end_time" javaType="java.util.Date"
 				jdbcType="TIMESTAMP" />
-			<arg column="delay_flag" javaType="java.lang.Integer" jdbcType="BIT" />
+			<arg column="delay_flag" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
 			<arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
 			<arg column="creator_name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -533,10 +533,18 @@
 
 
 	<update id="updateProjectStatus" parameterType="com.lixiang.ssm.entity.InvProject">
-		update t_inv_project set project_status = 20 where id =
+		update t_inv_project set project_status = #{status,jdbcType=INTEGER} where id =
 		#{id,jdbcType=INTEGER}
 	</update>
-
+	
+	<select id="queryInvProjectByFinancingTime" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project
+		<where>
+		 project_status = 40 and inv_balance >= inv_totalbalance and Financing_end_time > now()
+		</where>
+	</select>
+	
 	<select id="queryAllInvProject" resultType="com.lixiang.ssm.entity.InvProject"
 		useCache="false">
 		SELECT * FROM t_inv_project
@@ -547,4 +555,27 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="queryAllInvProjectByProStatus" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project <where>
+			project_status = 20
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
+	</select>
+	<select id="queryAllInvProjectService" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project 
+		<where>
+			project_status = 30 || project_status = 40 || project_status = 50 || project_status = 60
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
+	</select>
+  
 </mapper>

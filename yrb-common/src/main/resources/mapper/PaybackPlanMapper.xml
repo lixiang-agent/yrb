@@ -227,4 +227,15 @@
       operator_date = #{operatorDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!-- <select id="selectpPrincipalAndInterest" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT  SUM(CASE payback_status WHEN #{paybackStatus } THEN payback_money+payback_margin ELSE 0 END) toal1,
+  	SUM(CASE payback_status WHEN  #{paybackStatus } THEN payback_margin ELSE 0 END) toal2
+  	<include refid="Base_Column_List" />
+  	FROM t_inv_record r,t_payback_plan p WHERE r.`id`=p.`inv_record_id` AND   r.user_id= #{id }
+  </select> -->
+  <select id="selectpPrincipalAndInterest" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.PaybackPlan" >
+  	SELECT p.`plan_payback_date`,p.`project_name`,p.`operator_name`,inv.`project_type`,p.`payback_money` 
+  	FROM t_payback_plan p,t_inv_project inv,t_inv_record r 
+  	WHERE p.`project_id`=inv.`id` AND inv.id = r.`inv_pro_id` AND p.`inv_record_id`= r.`id` AND r.`user_id` =#{userId }
+  </select>
 </mapper>

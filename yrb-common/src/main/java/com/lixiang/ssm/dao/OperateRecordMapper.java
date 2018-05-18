@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.OperateRecord;
 
 public interface OperateRecordMapper {
@@ -50,4 +52,6 @@ public interface OperateRecordMapper {
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     int updateByPrimaryKey(OperateRecord record);
+    
+    List<OperateRecord> queryOperRecord(OperateRecord record);
 }

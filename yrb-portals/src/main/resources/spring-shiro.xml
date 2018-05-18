@@ -31,12 +31,21 @@
 		<!-- 删除失效session -->
 		<property name="sessionValidationSchedulerEnabled" value="true" />
 		<!-- session 监听器 -->
-		<property name="sessionListeners" ref="myShiroSessionListener"></property>
+		<property name="sessionListeners" ref="myShiroSessionListener"/>
+		<property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
 	</bean>
 	<!-- 配置sessionDAO -->
 	<bean id="sessionDao" class="com.lixiang.ssm.shiro.SessionDAO">
 		<property name="redisUtil" ref="redisUtil"></property>
 	</bean>
+
+    <!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
+        当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="ycyintang.session.id"/>
+    </bean>
+	
 	<!-- 配置redis -->
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="100" />

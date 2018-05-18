@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-
-
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.InvProjectSingle;
 import com.lixiang.ssm.entity.InvRecord;
@@ -65,6 +63,10 @@ public interface InvProjectMapper {
     /**
      * 按照条件来查询投资项目
      */
+    List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject);
+
+    boolean updateProjectStatus(@Param("status") Integer status,@Param("id") Integer id);
+    
     List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject,@Param("orderBy")String orderBy,@Param("orderMethod")Integer orderMethod);
 
     /**
@@ -102,6 +104,19 @@ public interface InvProjectMapper {
      * @return
      */
     List<InvProject> queryAllInvProject(InvProject record);
+    
+    List<InvProject> queryInvProjectByFinancingTime(InvProject record);
+    
+    List<InvProject> queryAllInvProjectByProStatus(InvProject record);
+    
+    List<InvProject> queryAllInvProjectService(InvProject record);
+    
+	List<InvProject> listIndexCommendProjects();
+	
+	List<InvProject> listIndexCarProjects();
+	List<InvProject> listIndexHouseProjects();
+	List<InvProject> listIndexObligationProjects();
+	
     /**
      * 增加用户的投资记录
      * @param invRecord 根据页面传过来的InvRecord来增加记录

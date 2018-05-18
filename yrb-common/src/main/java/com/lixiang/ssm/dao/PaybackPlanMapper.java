@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.PaybackPlan;
 
 public interface PaybackPlanMapper {
@@ -50,4 +52,9 @@ public interface PaybackPlanMapper {
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     int updateByPrimaryKey(PaybackPlan record);
+    
+    /**
+     * 查找本息
+     */
+    List<PaybackPlan> selectpPrincipalAndInterest(PaybackPlan paybackPlan);
 }
