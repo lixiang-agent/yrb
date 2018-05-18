@@ -53,6 +53,14 @@ public class InvManageService {
 		return page;
 	}
 	
+	public List<InvProject> queryInvProjectByFinancingTime(InvProject record){
+		
+		List<InvProject> list = invProjectMapper.queryInvProjectByFinancingTime(record);
+		
+		
+		return list;
+	}
+	
 	public List<OperateRecord> queryOperRecord(OperateRecord record){
 		
 		List<OperateRecord> list = operateRecordMapper.queryOperRecord(record);
