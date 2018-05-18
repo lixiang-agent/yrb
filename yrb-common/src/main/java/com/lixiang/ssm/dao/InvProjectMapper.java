@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Param;
 
 
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.InvProjectSingle;
+import com.lixiang.ssm.entity.InvRecord;
+import com.lixiang.ssm.entity.PaybackPlan;
 
 public interface InvProjectMapper {
     /**
@@ -64,6 +67,34 @@ public interface InvProjectMapper {
      */
     List<InvProject> ListByInvProject(@Param("invProject") InvProject invProject,@Param("orderBy")String orderBy,@Param("orderMethod")Integer orderMethod);
 
+    /**
+     * 查询投资项目的详细信息
+     * @param id 根据投资项目id
+     * @return
+     */
+    InvProject getInvProjectById(Integer id);
+    
+    /**
+     * 查询投资项目的投标记录
+     * @param id 根据投资项目id
+     * @return
+     */
+    List<InvRecord> getInvRecordById(Integer id);
+    /**
+     * 查询投资项目的还款计划
+     * @param id 根据投资项目id
+     * @return
+     */
+    List<PaybackPlan> getPaybackPlan(Integer id);
+    
+    /**
+     * 查询投资项目已还金额
+     * @param id 根据投资项目id
+     * @return
+     */
+    Double getRepaymentBalance(Integer id);
+    
+    
     boolean updateProjectStatus(Integer id);
     /**
      * 查询全部

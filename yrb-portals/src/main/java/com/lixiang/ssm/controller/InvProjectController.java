@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.InvProjectSingle;
 import com.lixiang.ssm.service.InvProjectService;
 /**
  * 前台项目列表查询控制
@@ -56,6 +57,14 @@ public class InvProjectController {
 		log.error(listInvProject);
 		return listInvProject;
 		
+	}
+	
+	@RequestMapping(path="invProject")
+	public String ListByInvProjectSingle(Integer id,Model model){
+		InvProjectSingle invProjectSingle = invProjectService.getInvProjectSingle(id);
+		model.addAttribute("invProjectSingle", invProjectSingle);
+		log.error(invProjectSingle.toString());
+		return "invProjectInfo";
 	}
 	
 }

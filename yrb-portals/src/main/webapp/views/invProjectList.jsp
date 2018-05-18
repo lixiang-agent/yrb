@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String ctx = request.getServletContext().getContextPath();
 	application.setAttribute("ctx", ctx);
@@ -21,8 +22,7 @@
 </head>
 <script type="text/javascript">
 $().ready(function() {
-	
-	
+
 	//创建一个map来保存条件
 	var invCondition={};
 	$("#projectType li a").click(function() {
@@ -82,6 +82,11 @@ $().ready(function() {
 		invCondition["orderMethod"]=$(this).attr("name")
 		queryList();
 	});
+	$("#scheduleSort a").click(function(){
+		invCondition["orderBy"]="schedule";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
 	function queryList(){
 		var url="${ctx}/invProject/listByInvProject";
 		if(invCondition["minMonth"]!=null){
@@ -107,7 +112,6 @@ $().ready(function() {
 		if(invCondition["orderBy"]!=null){
 			url=url+"&orderBy="+invCondition["orderBy"]+"&orderMethod="+invCondition["orderMethod"];
 		}
-		alert(url);
 		$.ajax({
 			url:url,
 			dataType:"json",
@@ -117,6 +121,7 @@ $().ready(function() {
 		 	for(var i=0;data.length;i++){
 		 		
 		 		var item='<ul>'
+		 		+'<li id="invProjectId" style="display: none">'+data[i].id+'</li>'
 				+'<li class="col-330 col-t"><a href="infor.html"'
 				+'	target="_blank"><i class="icon ';
 				
@@ -134,21 +139,21 @@ $().ready(function() {
 					}
 				item+=' " title="车易贷"></i></a><a'
 				+'	class="f18" href="infor.html"'
-				+'	title="'+data[i].projectName+'" target="_blank">'
+				+' <input  name="invProjectId" type="hidden" value="'+data[i].id+'"/>'
 				+'		'+data[i].projectName+'</a></li>'
-				+'<li class="col-180"><span class="f20 c-333">'+data[i].invTotbalance+'</span>元</li>'
-				+'	<li class="col-110 relative"><span class="f20 c-orange">'+data[i].paybackTime
-				+'	</span>%</li>'
+				+'<li class="col-180"><span class="f20 c-333">'+data[i].invTotbalance+'.00</span>元</li>'
+				+'	<li class="col-110 relative"><span class="f20 c-orange">'+data[i].rate
+				+'.00	</span>%</li>'
 				+'	<li class="col-150"><span class="f20 c-333">'+data[i].paybackTime +'</span>个月'
 				+'	</li>'
 				+'	<li class="col-150">';
-				if(data[i].projectType==0){
+				if(data[i].paybackWay==0){
 					item+="到期还本还息";
 				}
-				if(data[i].projectType==1){
+				if(data[i].paybackWay==1){
 					item+="按月付息，到期还本";
 				}
-				if(data[i].projectType==2){
+				if(data[i].paybackWay==2){
 					item+="等额本息";
 				}
 				item+='</li>'
@@ -156,13 +161,13 @@ $().ready(function() {
 				+'		<div class="circle">'
 				+'				<div class="progress-bgPic progress-bfb10">'
 				+'					<div class="show-bar">'
-				+'					'+data[i].invBalance/data[i].invTotbalance+'</div>'
+				+'					'+(data[i].invBalance/data[i].invTotbalance)*100+'%</div>'
 				+'			</div>'
 				+'		</div>'
 				+'	</div>'
 				+'	</li>'
 				+'<li class="col-120-2"><a class="ui-btn btn-gray"'
-				+'	href="infor.html">投资</a></li>'
+				+'	href="${ctx }/invProject/invProject?id="'+data[i].id+'">投资</a></li>'
 				+'</ul>'
 				$("#projectItem").append(item);
 			} 
@@ -314,8 +319,10 @@ $().ready(function() {
 								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
 							</li>
 							<li class="col-150">还款方式</li>
-							<li class="col-120"><a
-								href="javascript:url('order','scale_up');" class="">借款进度</a></li>
+							<li class="col-120" id="scheduleSort">借款进度
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
 							<li class="col-120-t">操作</li>
 						</ul>
 					</div>
@@ -323,6 +330,7 @@ $().ready(function() {
 					<div class="item" id="projectItem">
 						<c:if test="${not empty listInvProject}">
 							<c:forEach items="${listInvProject }" var="invProject">
+								<input  name="invProjectId" type="hidden" value="${invProject.id }"/>
 								<ul>
 									<li class="col-330 col-t"><a href="infor.html"
 										target="_blank"><i class="icon
@@ -332,11 +340,11 @@ $().ready(function() {
 											<c:when test="${invProject.projectType ==3 }">icon-shu</c:when>
 											<c:when test="${invProject.projectType ==4 }">icon-zhai</c:when>
 										</c:choose></li>
-										  " title="车易贷"></i></a><a
+										  " ></i></a><a
 										class="f18" href="infor.html"
 										title="${invProject.projectName }" target="_blank">
 											${invProject.projectName }</a></li>
-									<li class="col-180"><span class="f20 c-333">${invProject.invTotbalance }</span>元</li>
+									<li class="col-180"><span class="f20 c-333"><br/>${invProject.invTotbalance }</span>元</li>
 									<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
 									</span>%</li>
 									<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
@@ -358,7 +366,7 @@ $().ready(function() {
 										</div>
 									</li>
 									<li class="col-120-2"><a class="ui-btn btn-gray"
-										href="infor.html">投资</a></li>
+										href="${ctx }/invProject/invProject?id=${invProject.id }">投资</a></li>
 								</ul>
 							</c:forEach>
 						</c:if>
