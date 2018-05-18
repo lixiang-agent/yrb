@@ -60,11 +60,22 @@ public interface NewsMapper {
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     int updateByPrimaryKey(News record);
-
+    /**
+     * 显示前端首页新闻信息
+     * @return
+     */
 	List<News> listIndexNews();
-	
+	/**
+     * 显示后端新闻信息
+     * @return
+     */
 	List<News> list(News news);
-	
+	/**
+	 * 修改新闻发布状态
+	 * @param news
+	 * @param model
+	 * @return
+	 */
 	int updateNewsStatusById(News news);
 }
 
