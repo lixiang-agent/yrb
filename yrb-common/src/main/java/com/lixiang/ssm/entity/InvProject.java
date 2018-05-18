@@ -3,15 +3,14 @@ package com.lixiang.ssm.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 public class InvProject extends BaseEntity{
 
 
 
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8119631353495271738L;
+
 
 	/**
      *
@@ -182,6 +181,7 @@ public class InvProject extends BaseEntity{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date financingEndTime;
 
     /**
@@ -1083,7 +1083,4 @@ public class InvProject extends BaseEntity{
 				+ ", commendFlag=" + commendFlag + ", maxRate=" + maxRate + ", minRate=" + minRate + ", minMonth="
 				+ minMonth + ", maxMonth=" + maxMonth + "]";
 	}
-
-
-
 }
