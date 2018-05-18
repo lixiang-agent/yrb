@@ -65,4 +65,12 @@ public interface UserInfoMapper {
     List<UserInfo> list(UserInfo userInfo);
     
     List<UserInfo> getUserInfoList();
+   
+    
+    /**
+     * 修改用户,充值 
+     * @param record
+     * @return
+     */
+    int updateTopUp(UserInfo record);
 }

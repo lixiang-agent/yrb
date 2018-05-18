@@ -71,12 +71,12 @@ public class UserInfoService {
 		}
 
 	/**
-	 * 修改用户
+	 * 修改用户,充值
 	 * @param userInfo
 	 * @return
 	 */
-	public boolean updateUserInfos(UserInfo userInfo){
-		return userInfoMapper.updateByPrimaryKey(userInfo)>0;
+	public boolean updateTopUp(UserInfo userInfo){
+		return userInfoMapper.updateTopUp(userInfo)>0;
 	}
 
 }
