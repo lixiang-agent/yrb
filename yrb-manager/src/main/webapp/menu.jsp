@@ -135,6 +135,7 @@
 								<i class="icon-double-angle-right"></i> 新闻
 						</a></li>
 				</ul></li>
+				
 				<li class="" id="inv">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-briefcase"></i> <span class="menu-text">投资管理 </span> <b
@@ -158,48 +159,12 @@
 						</li>
 					</ul>
 				</li>
+			
 			   <li class="" id="schedule">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-calendar"></i> <span class="menu-text"> 任务管理 </span> <b
 						class="arrow icon-angle-down"></b>
 					</a>
-
-  <!-- 借款项目管理 -->
-			   <li class="" id="loan">
-					<a href="#" class="dropdown-toggle">
-						<i class="icon-list"></i> <span class="menu-text"> 借款管理 </span> <b
-						class="arrow icon-angle-down"></b>
-					</a>
-						<li id="loanlist">
-							<a href="${ctx }/loan/listLoanProject"> <i
-								class="icon-double-angle-right"></i> 借款列表
-							</a>
-						</li>
-						<li id="loancheck">
-							<a  href="${ctx }/loan/listloancheck?projectStatus=20"> <i
-								class="icon-double-angle-right"></i> 项目审核
-							</a>
-						</li>
-						
-						 <li id="loansubmit">
-							<a  href="${ctx }/loan/loansubmit?projectStatus=10"> <i
-								class="icon-double-angle-right"></i> 未提交项目
-							</a>
-						</li>
-					<%-- <li id="checkrecord">
-							<a  href="${ctx }/loan/checkrecord"> <i
-								class="icon-double-angle-right"></i> 审核记录
-							</a>
-						</li> --%>
-						
-						<li id="readyloan">
-							<a  href="${ctx }/loan/readyloan"> <i
-								class="icon-double-angle-right"></i> 待放款项目
-							</a>
-						</li> 
-
-
-
 					<ul class="submenu">
 						<li id="schedulelist">
 							<a href="${ctx }/schedule/list"> <i
@@ -207,7 +172,47 @@
 							</a>
 						</li>
 					</ul>
-			   </li>
+					
+</li>
+
+
+  <!-- 借款项目管理 -->
+			   <li class="" id="loan">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 借款管理 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+					
+					<ul class=submenu>
+						<li id="loanlist">
+							<a href="${ctx }/loan/listLoanProject"> <i
+								class="icon-double-angle-right"></i> 借款列表
+							</a>
+						</li>
+						
+						<li id="loancheck">
+							<a  href="${ctx }/loan/listloancheck?projectStatus=20"> <i
+								class="icon-double-angle-right"></i> 项目审核
+							</a>
+						</li>
+						
+						
+						 <li id="loansubmit">
+							<a  href="${ctx }/loan/loansubmit?projectStatus=10"> <i
+								class="icon-double-angle-right"></i> 未提交项目
+							</a>
+						</li>
+		
+						<li id="readyloan">
+							<a  href="${ctx }/loan/readyloan?project_status=30"> <i
+								class="icon-double-angle-right"></i> 待放款项目
+							</a>
+						</li> 
+ 				</ul>
+				</li> 
+
+					
+			  
 					<li class="" id="platfromuser">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-list"></i> <span class="menu-text"> 平台用户 </span> <b
@@ -224,7 +229,7 @@
 			   </li>
 
 					</ul>
-			   </li>
+			 
 			   
 			   
 			   
@@ -252,7 +257,7 @@
 			</ul>
 			<!-- /.nav-list -->
 
->>>>>>> refs/heads/dev
+
 		</div>
 	</div>
 	
