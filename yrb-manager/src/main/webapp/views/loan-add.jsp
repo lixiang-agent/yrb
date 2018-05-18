@@ -87,14 +87,7 @@
 						
 						
 						
-						<tr>
-							<td>创建人id</td>
-							<td><input type="text" name="creatorId" class="form-control" ></td>
-						</tr>
-						<tr>
-							<td>创建人名字</td>
-							<td><input type="text" name="creatorName" class="form-control" ></td>
-						</tr>
+						
 						
 					</thead>
 				</table>
