@@ -181,4 +181,15 @@
       used_status = #{usedStatus,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+   <select id="queryAllRedpacket" resultType="com.lixiang.ssm.entity.Redpacket">
+		SELECT * FROM t_redpacket
+		<where>
+			<if test="userId!=null and userId!=''">
+				<bind name="uid" value="'%' +userId+'%'" />
+				and user_id like #{uid}
+			</if>
+		</where>
+	</select>
+  
 </mapper>

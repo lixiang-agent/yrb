@@ -69,4 +69,14 @@ public class UserInfoService {
 	public boolean updateByPrimaryKeySelective(UserInfo userInfo) {
 		return userInfoMapper.updateByPrimaryKeySelective(userInfo);
 		}
+
+	/**
+	 * 修改用户
+	 * @param userInfo
+	 * @return
+	 */
+	public boolean updateUserInfos(UserInfo userInfo){
+		return userInfoMapper.updateByPrimaryKey(userInfo)>0;
+	}
+
 }

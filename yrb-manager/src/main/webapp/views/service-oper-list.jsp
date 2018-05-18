@@ -113,11 +113,11 @@
 												</c:if> <c:if test="${operService.projectStatus==30}">
 													待发布
 												</c:if> <c:if test="${operService.projectStatus==40}">
-													筹款中
+													<span style="color:blue;">筹款中</span>
 												</c:if> <c:if test="${operService.projectStatus==50}">
-													筹资成功
+													<span style="color:green;">筹资成功</span>
 												</c:if> <c:if test="${operService.projectStatus==60}">
-													还款中
+													<span style="color:pink;">还款中</span>
 												</c:if> <c:if test="${operService.projectStatus==70}">
 													结束
 												</c:if> <c:if test="${operService.projectStatus==100}">

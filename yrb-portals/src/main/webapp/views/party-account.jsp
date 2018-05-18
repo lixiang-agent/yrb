@@ -24,14 +24,14 @@
 <!--个人中心-->
 <div class="wrapper wbgcolor">
   <div class="w1200 personal">
-    <div class="credit-ad"><img src="images/clist1.jpg" width="1200" height="96"></div>
+    <div class="credit-ad"><img src="${ctx}/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
         <li class="pleft-cur"><span><a href="个人中心首页.html"><i class="dot dot1"></i>账户总览</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-资金记录 .html">资金记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-投资记录.html">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-回款计划.html">回款计划</a></span></li>
-        <li class=""><span><a href="个人中心-开通第三方1.html"><i class="dot dot02"></i>开通第三方</a> </span> </li>
+        <li class=""><span><a href="party-account.jsp"><i class="dot dot02"></i>开通第三方</a> </span> </li>
         <li><span><a href="个人中心-充值1.html"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="个人中心-提现1.html"><i class="dot dot04"></i>提现</a></span></li>
         <li style="position:relative;" class=""> <span> <a href="个人中心-我的红包.html"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
@@ -133,7 +133,7 @@
             <p><a href="http://www.sumapay.com/" target="_blank">丰付支付</a>系统将为您分配唯一用户ID（格式为：TG_用户名），并与您亿人宝账户自动绑定，您无需修改和记忆。 </p>
           </div>
           <div class="pay-form">
-            <h6>请输入您的身份证信息</h6>
+            <h6>请输入您的信息</h6>
             <ul>
               <li>
                 <label for="realname">真实姓名</label>
@@ -147,25 +147,24 @@
                   <p style="margin-top:10px;">身份证信息认证后将不可修改，请您仔细填写</p>
                 </div>
               </li>
-            </ul>
-            <h6>邮箱已绑定</h6>
-            <ul>
-              <li>
-                <label for="email">邮箱</label>
-                <label id="form:email"> 348****@qq.com</label>
+               <li>
+                 <label for="bankcard">银行卡</label>
+                <input type="text"  class="pay-txt" maxlength="18"  placeholder="您的银行卡号">
+                <div id="bankcardErrorDiv"></div>
               </li>
-            </ul>
-            <h6>手机号已绑定</h6>
-            <ul>
-              <li>
+               <li>
                 <label for="phone">手机号</label>
-                <input type="hidden" name="" value="15055100139">
-                <label> 150****0139</label>
-              </li>
-              <li>
-                <input type="submit" name="" value="开户" style="border:none;" class="btn-paykh">
+                <input type="text"  class="pay-txt" maxlength="16"  placeholder="您的手机号">
+                <div id="phoneErrorDiv"></div>
               </li>
             </ul>
+           
+           <ul>
+              <li>
+                <input type="submit" name="" value="开户"  style="border:none;" class="btn-paykh" id="submit">
+              </li>
+              
+           </ul>
           </div>
         </form>
         <script type="text/javascript">
@@ -197,7 +196,11 @@
 			        	   var emailErrorFlag=$("#activeEmailemailErrorDiv").text()=="";
 			        	   return emailErrorFlag;
 			           }
-			//]]>
+			//]]> 
+			           $('#submit').click(function(){
+			        	    alert('开通账户成功！');
+			        	    $('form').submit();
+			        	});
 		</script>
         <div class="pay-tipcon"> 1、为切实保障投资人的利益，亿人宝将理财资金托管在<a href="http://www.sumapay.com/" target="_blank">丰付第三方支付</a>平台。平台是2012年6月获批中国人民银行支付许可证和中国证监会基金支付许可的第三方支付公司，在金融支付领域业界领先地位。详情请登录<a href="http://www.sumapay.com/" target="_blank">丰付支付</a>官方网站查看。<br>
           2、根据相关法律规定，亿人宝在开通资金托管账户时，需要验证您的身份信息。该信息一经设置，无法修改，请慎重选择。为了确保您可以顺利提现，请确认您拥有一张使用该身份证开户的有效储蓄卡。<br>
@@ -316,7 +319,7 @@
 <!-- 引入底部 -->
 <%@ include file="/buttom.jsp" %>
 
-<script src="script/jquery.datetimepicker.js" type="text/javascript"></script>
-<script src="script/datepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/jquery.datetimepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/datepicker.js" type="text/javascript"></script>
 </body>
 </html>

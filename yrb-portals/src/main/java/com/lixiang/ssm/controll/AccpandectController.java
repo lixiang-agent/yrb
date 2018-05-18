@@ -36,7 +36,7 @@ public class AccpandectController {
 
 		//2.查询回款计划
 		PaybackPlan paybackPlans = new PaybackPlan();
-		paybackPlans.setUid(userId);
+		paybackPlans.setUserId(userId);
 		PageInfo<PaybackPlan> page = accpandectService.pageList(paybackPlans);
 		model.addAttribute("page", page);
 		

@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>p2p网贷平台</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="css/common.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/user.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="script/jquery.min.js"></script>
-<script type="text/javascript" src="script/common.js"></script>
-<script src="script/user.js" type="text/javascript"></script>
+<link href="${ctx}/css/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/user.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="${ctx}/script/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/script/common.js"></script>
+<script src="${ctx}/script/user.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -23,7 +24,7 @@
 <!--个人中心-->
 <div class="wrapper wbgcolor">
   <div class="w1200 personal">
-    <div class="credit-ad"><img src="images/clist1.jpg" width="1200" height="96"></div>
+    <div class="credit-ad"><img src="${ctx}/images/clist1.jpg" width="1200" height="96"></div>
     <div id="personal-left" class="personal-left">
       <ul>
         <li class="pleft-cur"><span><a href="个人中心首页.html"><i class="dot dot1"></i>账户总览</a></span></li>
@@ -205,7 +206,7 @@
 <!-- 引入底部 -->
 <%@ include file="/buttom.jsp" %>
 
-<script src="script/jquery.datetimepicker.js" type="text/javascript"></script>
-<script src="script/datepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/jquery.datetimepicker.js" type="text/javascript"></script>
+<script src="${ctx}/script/datepicker.js" type="text/javascript"></script>
 </body>
 </html>

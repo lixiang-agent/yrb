@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.Redpacket;
 
 public interface RedpacketMapper {
@@ -50,4 +52,12 @@ public interface RedpacketMapper {
      * @mbg.generated Wed May 16 11:21:31 CST 2018
      */
     int updateByPrimaryKey(Redpacket record);
+    
+    
+    /**
+     * 查询全部Redpacket
+     * @param redpacket
+     * @return
+     */
+    List<Redpacket> queryAllRedpacket(Redpacket redpacket);
 }
