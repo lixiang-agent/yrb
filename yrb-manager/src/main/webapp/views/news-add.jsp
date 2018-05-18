@@ -32,8 +32,8 @@
 				<div class="row">
 					<div style="text-align: center; margin: 0 auto; width: 100%;">
 						<p>
-							标题:<input id="title" name="title" placeholder="请输入标题" maxlength="12">
-							<form:errors path="title"></form:errors>
+							标题:<input id="title" name="title" placeholder="请输入标题" maxlength="20">
+							
 						</p>
 						<p>
 							新闻类型：<select name="classify">
@@ -44,7 +44,6 @@
 						</p>
 						<p>
 							<TEXTAREA id="content" name="content" style="width: 100%;height: 350px"></TEXTAREA>
-							<form:errors path="content"></form:errors>
 						</p>
 					</div>
 				</div>

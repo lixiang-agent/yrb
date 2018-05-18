@@ -35,8 +35,8 @@
 						</p>
 						<p>
 							标题:<input id="title" name="title" placeholder="请输入标题"
-								maxlength="12" value="${news.title}">
-							<form:errors path="title"></form:errors>
+								maxlength="20" value="${news.title}">
+							
 						</p>
 						<p>
 							新闻类型：<select name="classify">
@@ -48,7 +48,7 @@
 						</p>
 						<p>
 							<TEXTAREA id=container name="content" style="width: 100%;height: 350px">${news.content}</TEXTAREA>
-							<form:errors path="content"></form:errors>
+							
 						</p>
 					</div>
 
