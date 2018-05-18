@@ -391,7 +391,7 @@
                   </em> </span> <span class="quick-error3" id="bankCardError"></span> </div>
                 <div class="bank-check" id="bank-check2"> <b class="selected" id="bankProtocol1"></b><span class="bank-agree">我同意并接受<a href="#" target="_blank">《亿人宝投资咨询与管理服务电子协议》</a></span> <span class="error" id="bankProtocol_message" style="display:none;margin-top:-3px;">请同意协议内容！</span> </div>
                 <input type="submit" name="" value="充值"  class="btn-paycz" onclick="return getShowPayVal1()">
-                <a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}">充值</a>
+               <%--  <a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}">充值</a> --%>
               </div>
               <div class="fr bank-info">
                 <p class="bank-tit">快捷支付支持银行：</p>
