@@ -70,6 +70,8 @@ public interface InvProjectMapper {
      */
     List<InvProject> queryAllInvProject(InvProject record);
     
+    List<InvProject> queryInvProjectByFinancingTime(InvProject record);
+    
     List<InvProject> queryAllInvProjectByProStatus(InvProject record);
     
     List<InvProject> queryAllInvProjectService(InvProject record);

@@ -113,7 +113,7 @@
 												</c:if> <c:if test="${operRecord.projectStatus==11}">
 													退回
 												</c:if> <c:if test="${operRecord.projectStatus==20}">
-													待审批
+													<span style="color:purple;">待审批</span>
 												</c:if> <c:if test="${operRecord.projectStatus==30}">
 													待发布
 												</c:if> <c:if test="${operRecord.projectStatus==40}">
@@ -128,9 +128,8 @@
 													流标
 												</c:if></td>
 											<td>
-												<div
-													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<c:if test="${invpro.projectStatus==20}">
+												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+													<c:if test="${operRecord.projectStatus==20}">
 														<a class="green"
 															href="${ctx }/investManage/toPass?id=${operRecord.id}"
 															data-toggle="modal" data-target="#passModal" title="通过审核">

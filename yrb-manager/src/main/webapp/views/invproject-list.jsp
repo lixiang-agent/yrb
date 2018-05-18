@@ -115,25 +115,25 @@
 													待提交
 												</c:if>
 												<c:if test="${invpro.projectStatus==11}">
-													<p style="color:red;">退回</p>
+													<span style="color:red;">退回</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==20}">
-													待审批
+													<span style="color:purple;">待审批</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==30}">
 													待发布
 												</c:if>
 												<c:if test="${invpro.projectStatus==40}">
-													筹款中
+													<span style="color:blue;">筹款中</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==50}">
-													筹资成功
+													<span style="color:green;">筹资成功</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==60}">
-													还款中
+													<span style="color:pink;">还款中</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==70}">
-													结束
+													<span style="color:red;">结束</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==100}">
 													流标
