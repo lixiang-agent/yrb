@@ -469,4 +469,5 @@ public class UserInfo extends BaseEntity{
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
+
 }
