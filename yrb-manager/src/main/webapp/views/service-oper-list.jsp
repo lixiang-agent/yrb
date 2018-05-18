@@ -140,6 +140,13 @@
 															title="查看该项目投资记录"> <i class="icon-search bigger-130"></i>
 														</a>
 													</c:if>
+													<c:if test="${operService.projectStatus==50}">
+														<a class="purple"
+															href="${ctx }/investManage/toEfiiective?id=${operService.id}"
+															data-toggle="modal" data-target="#effectiveModal"
+															title="项目生效"> <i class="icon-cloud-upload bigger-130"></i>
+														</a>
+													</c:if>
 													<a class="green" data-toggle="modal"
 														data-target="#detailsModal"
 														href="${ctx }/investManage/detailsList?id=${operService.id}"
@@ -197,6 +204,14 @@
 
 	<!-- 发布项目的模态框 -->
 	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+	
+	<!-- 项目生效的模态框 -->
+	<div class="modal fade" id="effectiveModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>

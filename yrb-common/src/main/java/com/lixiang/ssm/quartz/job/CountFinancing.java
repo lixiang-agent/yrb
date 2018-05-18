@@ -1,11 +1,9 @@
 package com.lixiang.ssm.quartz.job;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.junit.Test;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -15,6 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.service.InvManageService;
+import com.lixiang.ssm.utils.InterestUtils;
 
 public class CountFinancing implements Job {
 
@@ -30,15 +29,21 @@ public class CountFinancing implements Job {
 		invManageService = wac.getBean(InvManageService.class);
 		InvProject inv = new InvProject();
 		List<InvProject> list = invManageService.queryInvProjectByFinancingTime(inv);
-		for (Iterator it = list.iterator(); it.hasNext();) {
+		for (Iterator<InvProject> it = list.iterator(); it.hasNext();) {
 			InvProject obj = (InvProject) it.next();
-			obj.setProjectStatus(60);
-			obj.setEndTime(new Date());
-			int result = invManageService.updateByPrimaryKeySelective(obj);
-			if (result > 0) {
-				System.out.println("项目：" + obj.getProjectName() + "筹资成功,项目id为:" + obj.getId());
+			if ((InterestUtils.sub(obj.getInvBalance().doubleValue(), obj.getInvTotbalance().doubleValue()).doubleValue()) >=0) {
+				obj.setProjectStatus(50);
+				int result = invManageService.updateByPrimaryKeySelective(obj);
+				if (result > 0) {
+					System.out.println("项目：" + obj.getProjectName() + "筹资成功,项目id为:" + obj.getId());
+				}
+			}else if(InterestUtils.sub(obj.getInvBalance().doubleValue(), obj.getInvTotbalance().doubleValue()).doubleValue() < 0){
+				obj.setProjectStatus(100);
+				int result = invManageService.updateByPrimaryKeySelective(obj);
+				if (result > 0) {
+					System.out.println("项目：" + obj.getProjectName() + "筹资失败,项目id为:" + obj.getId());
+				}
 			}
-
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.lixiang.ssm.utils;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,10 +20,10 @@ public class InterestObject implements Serializable{
 	private Integer periods;
 	
 	//本金
-	private Double capital;
+	private BigDecimal capital;
 	
 	//利率
-	private Double interest;
+	private BigDecimal interest;
 	
 	//还款时间
 	private Date paymentDate;
@@ -35,19 +36,19 @@ public class InterestObject implements Serializable{
 		this.periods = periods;
 	}
 
-	public Double getCapital() {
+	public BigDecimal getCapital() {
 		return capital;
 	}
 
-	public void setCapital(Double capital) {
+	public void setCapital(BigDecimal capital) {
 		this.capital = capital;
 	}
 
-	public Double getInterest() {
+	public BigDecimal getInterest() {
 		return interest;
 	}
 
-	public void setInterest(Double interest) {
+	public void setInterest(BigDecimal interest) {
 		this.interest = interest;
 	}
 

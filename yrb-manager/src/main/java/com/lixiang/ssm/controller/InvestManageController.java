@@ -3,6 +3,7 @@ package com.lixiang.ssm.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,8 +21,11 @@ import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.OperateRecord;
+import com.lixiang.ssm.entity.PaybackPlan;
 import com.lixiang.ssm.entity.User;
 import com.lixiang.ssm.service.InvManageService;
+import com.lixiang.ssm.utils.InterestObject;
+import com.lixiang.ssm.utils.InterestUtils;
 
 @RequestMapping("/investManage")
 @Controller
@@ -228,5 +232,58 @@ public class InvestManageController {
 		List<InvRecord> invRec = invManageService.queryListInvRecord(id);
 		model.addAttribute("invRec", invRec);
 		return "invrecord-list";
+	}
+	
+	@RequestMapping("/toEfiiective")
+	public String toProjectEffective(Integer id,Model model){
+		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		model.addAttribute("invProject", invProject);
+		return "invproject-effective";
+	}
+	
+	@RequestMapping("/effective")
+	public String projectEffective(Integer id,Model model,HttpSession session){
+		List<InvRecord> invRecList = invManageService.queryListInvRecord(id);
+		PaybackPlan paybackPlan = new PaybackPlan();
+		Subject currentUser = SecurityUtils.getSubject();
+		User usr = (User) currentUser.getPrincipal();
+		for(Iterator<InvRecord> it = invRecList.iterator(); it.hasNext();){
+			InvRecord obj = (InvRecord) it.next();
+			// 设置投资记录id
+			paybackPlan.setInvRecordId(obj.getId());
+			// 设置项目id
+			paybackPlan.setProjectId(obj.getInvRecId());
+			// 设置操作人id
+			paybackPlan.setOperatorId(usr.getId());
+			// 设置操作人姓名
+			paybackPlan.setOperatorName(usr.getRealName());
+			// 设置操作时间
+			paybackPlan.setOperatorDate(new Date());
+			// 通过投资记录表中项目ID来查询项目的对象
+			InvProject invProject = invManageService.selectByPrimaryKey(obj.getInvRecId());
+			// 修改项目状态为待回款
+			invProject.setProjectStatus(60);
+			// 设置实际筹集结束时间
+			invProject.setEndTime(new Date());
+			invManageService.updateByPrimaryKeySelective(invProject);
+			// 设置项目名称
+			paybackPlan.setProjectName(invProject.getProjectName());
+			// 设置回款期数
+			paybackPlan.setPaybackNo(invProject.getPaybackTime());
+			List<InterestObject> intObj = InterestUtils.getInterestList(invProject.getPaybackWay(),obj.getInvrecMoney(),invProject.getPaybackTime(),invProject.getRate(),new Date());
+			for(Iterator<InterestObject> ite = intObj.iterator();it.hasNext();){
+				InterestObject interestObj = (InterestObject) ite.next();
+				paybackPlan.setPlanPaybackDate(interestObj.getPaymentDate());
+				paybackPlan.setPaybackMoney(interestObj.getCapital());
+				paybackPlan.setPaybackMargin(interestObj.getInterest());
+				int addResult = invManageService.addPaybackPlan(paybackPlan);
+				if (addResult > 0) {
+					System.out.println("成功生成回款计划,计划为：" + paybackPlan);
+				}
+				session.setAttribute("oper_result", addResult > 0);
+			}
+		}
+		
+		return "redirect:/investManage/listServiceProject";
 	}
 }

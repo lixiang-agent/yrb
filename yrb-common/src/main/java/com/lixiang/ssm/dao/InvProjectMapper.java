@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.lixiang.ssm.entity.InvProject;
-import com.lixiang.ssm.entity.InvProjectSingle;
 import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.PaybackPlan;
 
