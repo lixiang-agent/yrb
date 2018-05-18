@@ -491,4 +491,6 @@ public class PaybackPlan extends BaseEntity{
     public void setOperatorDate(Date operatorDate) {
         this.operatorDate = operatorDate;
     }
+    
+    
 }

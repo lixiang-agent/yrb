@@ -26,7 +26,6 @@
 					<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
 					<li class="active">平台用户</li>
 				</ul>
-				<!-- .breadcrumb -->
 
 				<div class="nav-search" id="nav-search">
 					<form class="form-search">
@@ -51,7 +50,7 @@
 										method="post">
 										<div class="input-group">
 											<input type="text" name="account" class="form-control"
-												placeholder="请输入权限名" value="${t_user_info.account}"
+												placeholder="请输入账号" value="${userInfo.account}"
 												aria-describedby="basic-addon2"> <span
 												class="input-group-btn">
 												<button class="btn btn-primary btn-sm" type="submit">
@@ -61,27 +60,27 @@
 									</form>
 								</div>
 							</div>
-							<!-- #nav-search -->
 
 						</div>
 						<div class="table-responsive">
 							<table id="sample-table-2"
 								class="table table-striped table-bordered table-hover">
 								<thead>
-									<tr>
+									<tr class="center">
 										<th class="center"><label> <input type="checkbox"
-												class="ace" /> <span class="lbl"></span>
+												class="ace" value="${userInfo.id}"/> <span class="lbl"></span>
 										</label></th>
-										<th>账号</th>
-										<th>手机号码</th>
-										<th>真实姓名</th>
-										<th>身份证号码</th>
-										<th>认证状态</th>
-										<td>邮箱</td>
-										<td>总金额</td>
-										<td>推荐人</td>
-										<td>创建时间</td>
-										<td>修改时间</td>
+										<th class="center">账号</th>
+										<th class="center">手机号码</th>
+										<th class="center">真实姓名</th>
+										<th class="center">身份证号码</th>
+										<th class="center">认证状态</th>
+										<th class="center">邮箱</th>
+										<th class="center">总金额</th>
+										<th class="center">推荐人</th>
+										<th class="center">创建时间</th>
+										<th class="center">修改时间</th>
+										<th class="center">操作</th>
 									</tr>
 								</thead>
 
@@ -100,10 +99,37 @@
 											<td>${userInfo.email}</td>
 											<td>${userInfo.totalBalance}</td>
 											<td>${userInfo.referee}</td>
-											<td><fmt:formatDate value="${userInfo.createDate  }"
+											<td><fmt:formatDate value="${userInfo.createDate }"
 													pattern="yyyy-MM-dd" /></td>
 											<td><fmt:formatDate value="${userInfo.modifyDate }"
 													pattern="yyyy-MM-dd" /></td>
+											<td>
+												<div align="center"
+													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+													 <a class="green" href="${ctx }/toUpdateUserInfo?id=${userInfo.id}"
+														data-toggle="modal" data-target="#myModal" title="初始化密码">
+														<i class="icon-edit bigger-130"></i>
+													</a>
+													</div> 
+														<div class="visible-xs visible-sm hidden-md hidden-lg">
+													    <div class="inline position-relative">
+														<button class="btn btn-minier btn-yellow dropdown-toggle"
+															data-toggle="dropdown">
+															<i class="icon-caret-down icon-only bigger-120"></i>
+														</button>
+														<ul
+															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+															<li><a href="${ctx }/toUpdateUserInfo?id=${userInfo.id}" data-toggle="modal"
+																data-target="#myModal" class="tooltip-success"
+																data-rel="tooltip" title="Edit"> <span class="green">
+																		<i class="icon-edit bigger-120"></i>
+																</span>
+															</a></li>
+														</ul>
+													</div>
+												</div>
+												
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -113,15 +139,18 @@
 							<w:pager pageSize="${userInfos.pageSize }" url="${ctx }/getPlatfromList"
 								recordCount="${userInfos.total }" pageNum="${userInfos.pageNum }" />
 						</div> 
-
 					</div>
-					<!-- /.modal-content -->
 				</div>
-				<!-- /.modal-dialog -->
 			</div>
-			<!-- PAGE CONTENT ENDS -->
 		</div>
-		<!-- /.col -->
+	</div>
+
+		<!-- 修改的模态框 -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
 	</div>
 
 	<div class="ace-settings-container" id="ace-settings-container">
@@ -142,7 +171,6 @@
 				</div>
 				<span>&nbsp; Choose Skin</span>
 			</div>
-
 			<div>
 				<input type="checkbox" class="ace ace-checkbox-2"
 					id="ace-settings-navbar" /> <label class="lbl"
@@ -200,13 +228,11 @@
 
 	<script type="text/javascript">
 		//模态框隐藏的时候把原来模态框里面的内容去掉
-		$("#resModal").on("hidden.bs.modal", function() {
-			$(this).removeData("bs.modal");
-		});
+		
 		$("#modModal").on("hidden.bs.modal", function() {
 			$(this).removeData("bs.modal");
 		});
-		$("#delModal").on("hidden.bs.modal", function() {
+		$("#myModal").on("hidden.bs.modal", function() {
 			$(this).removeData("bs.modal");
 		});
 	</script>

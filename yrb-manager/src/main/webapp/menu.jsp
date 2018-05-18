@@ -167,10 +167,8 @@
 								class="icon-double-angle-right"></i> 定时任务
 							</a>
 						</li>
-
 					</ul>
 			   </li>
-			   
 					<li class="" id="platfromuser">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-list"></i> <span class="menu-text"> 平台用户 </span> <b
