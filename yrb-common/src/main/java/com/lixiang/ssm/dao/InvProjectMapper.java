@@ -102,5 +102,19 @@ public interface InvProjectMapper {
      * @return
      */
     List<InvProject> queryAllInvProject(InvProject record);
+    /**
+     * 增加用户的投资记录
+     * @param invRecord 根据页面传过来的InvRecord来增加记录
+     * @return
+     */
+    Integer addInvRecord(InvRecord invRecord);
+    /**
+     * 当有人投资时，修改投资项目的记录
+     * @param invRecord 根据页面传过来的InvRecord来修改记录
+     * @return
+     */
+    Integer updateInvProject(InvRecord invRecord);
+    
+    
 
 }
