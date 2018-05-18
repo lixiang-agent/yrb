@@ -141,7 +141,7 @@
 											</td>
 											<td>
 												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<c:if test="${invpro.projectStatus==10}">
+													<c:if test="${invpro.projectStatus==10||invpro.projectStatus==11}">
 														<a class="green" href="${ctx }/investManage/subProject?id=${invpro.id}"title="提交项目"> <i
 															class="icon-pencil bigger-130"></i>
 														</a>

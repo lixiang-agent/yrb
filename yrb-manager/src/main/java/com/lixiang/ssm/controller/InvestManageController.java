@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.OperateRecord;
 import com.lixiang.ssm.entity.User;
 import com.lixiang.ssm.service.InvManageService;
@@ -145,6 +146,15 @@ public class InvestManageController {
 		return "oper-record-show";
 	}
 	
+	@RequestMapping("/showProOperRecord")
+	public String queryProOperRecord(Integer id, Model model) {
+		// 封装了总数，封装了分页信息，封装了查询出来的数据
+		System.out.println("这是查询操作记录的项目ID："+id);
+		List<OperateRecord> inv = invManageService.queryProOperRecord(id);
+		System.out.println("这是查询操作记录的项目："+inv);
+		model.addAttribute("inv", inv);
+		return "oper-record-showpro";
+	}
 	
 	@RequestMapping("/toPass")
 	public String toPassOperProject(Integer id,Model model){
@@ -213,5 +223,11 @@ public class InvestManageController {
 		PageInfo<InvProject> inv = invManageService.listServiceProject(invProject);
 		model.addAttribute("inv", inv);
 		return "service-oper-list";
+	}
+	@RequestMapping("/listInvRecord")
+	public String listInvRecord(Integer id,Model model){
+		List<InvRecord> invRec = invManageService.queryListInvRecord(id);
+		model.addAttribute("invRec", invRec);
+		return "invrecord-list";
 	}
 }

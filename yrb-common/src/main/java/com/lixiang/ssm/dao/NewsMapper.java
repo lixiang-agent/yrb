@@ -64,5 +64,7 @@ public interface NewsMapper {
 	List<News> listIndexNews();
 	
 	List<News> list(News news);
+	
+	int updateNewsStatusById(News news);
 }
 

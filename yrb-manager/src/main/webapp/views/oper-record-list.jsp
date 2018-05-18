@@ -113,7 +113,7 @@
 												</c:if> <c:if test="${operRecord.projectStatus==11}">
 													退回
 												</c:if> <c:if test="${operRecord.projectStatus==20}">
-													<span style="color:purple;">待审批</span>
+													<span style="color: purple;">待审批</span>
 												</c:if> <c:if test="${operRecord.projectStatus==30}">
 													待发布
 												</c:if> <c:if test="${operRecord.projectStatus==40}">
@@ -128,7 +128,8 @@
 													流标
 												</c:if></td>
 											<td>
-												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<div
+													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 													<c:if test="${operRecord.projectStatus==20}">
 														<a class="green"
 															href="${ctx }/investManage/toPass?id=${operRecord.id}"
@@ -142,6 +143,10 @@
 														</a>
 													</c:if>
 													<a class="green" data-toggle="modal"
+														data-target="#proOperRecordModal"
+														href="${ctx }/investManage/showProOperRecord?id=${operRecord.id}"
+														title="该项目审核记录"> <i class="icon-eye-open bigger-130"></i>
+													</a> <a class="green" data-toggle="modal"
 														data-target="#detailsModal"
 														href="${ctx }/investManage/detailsList?id=${operRecord.id}"
 														id="details" title="项目详情"> <i
@@ -170,10 +175,10 @@
 															</a></li>
 
 															<li><a
-																href="${ctx }/investManage/toDel?id=${operRecord.id }"
+																href="${ctx }/investManage/showProOperRecord?id=${operRecord.id}"
 																class="tooltip-error" data-rel="tooltip"
 																data-toggle="modal" data-target="#failModal"
-																title="Delete"> <span class="red"> <i
+																title="该项目操作记录"> <span class="red"> <i
 																		class="icon-inbox bigger-120"></i>
 																</span>
 															</a></li>
@@ -230,6 +235,14 @@
 
 	<!-- 审核操作记录的模态框 -->
 	<div class="modal fade" id="myOperRecordModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<!-- 单个项目的审核操作记录的模态框 -->
+	<div class="modal fade" id="proOperRecordModal" tabindex="-1"
 		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>

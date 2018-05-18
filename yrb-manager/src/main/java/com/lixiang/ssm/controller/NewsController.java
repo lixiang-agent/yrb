@@ -62,7 +62,9 @@ public class NewsController {
 	}
 	@RequestMapping("/update")
 	public String updateNews(News news,Model model){
+		log.debug(news);
 		boolean result = service.updateNews(news);
+		log.debug(result);
 		model.addAttribute("oper_result", result);
 		return "redirect:list";
 	}
@@ -76,6 +78,13 @@ public class NewsController {
 	@RequestMapping("/delete")
 	public String deleteNews(Integer id,Model model){
 		boolean result = service.deleteNews(id);
+		model.addAttribute("oper_result", result);
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/updatestatus")
+	public String updateNewsStatusById(News news,Model model){
+		boolean result = service.updateNewsStatusById(news);
 		model.addAttribute("oper_result", result);
 		return "redirect:list";
 	}

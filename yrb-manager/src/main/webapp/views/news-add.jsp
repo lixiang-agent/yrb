@@ -30,7 +30,7 @@
 
 			<div class="modal-body">
 				<div class="row">
-					<div style="text-align: center; margin: 0 auto; width: 80%;">
+					<div style="text-align: center; margin: 0 auto; width: 100%;">
 						<p>
 							标题:<input id="title" name="title" placeholder="请输入标题" maxlength="12">
 							<form:errors path="title"></form:errors>
@@ -43,7 +43,7 @@
 							</select>
 						</p>
 						<p>
-							<TEXTAREA id="content" name="content"></TEXTAREA>
+							<TEXTAREA id="content" name="content" style="width: 100%;height: 350px"></TEXTAREA>
 							<form:errors path="content"></form:errors>
 						</p>
 					</div>

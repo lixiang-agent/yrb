@@ -14,6 +14,9 @@
 	String ctx = request.getServletContext().getContextPath();
 	application.setAttribute("ctx", ctx);
 %>
+<script type="text/javascript">
+	var ctx = '${ctx}';
+</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
