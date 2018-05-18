@@ -49,7 +49,7 @@
 							style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
 								<div class="col-lg-6">
-									<form class="form-search" action="${ctx }/investManage/pageList"
+									<form class="form-search" action="${ctx}/investManage/pageList"
 										method="post">
 										<div class="input-group">
 											<input type="text" name="projectName" class="form-control"
@@ -115,25 +115,25 @@
 													待提交
 												</c:if>
 												<c:if test="${invpro.projectStatus==11}">
-													<p style="color:red;">退回</p>
+													<span style="color:red;">退回</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==20}">
-													待审批
+													<span style="color:purple;">待审批</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==30}">
 													待发布
 												</c:if>
 												<c:if test="${invpro.projectStatus==40}">
-													筹款中
+													<span style="color:blue;">筹款中</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==50}">
-													筹资成功
+													<span style="color:green;">筹资成功</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==60}">
-													还款中
+													<span style="color:pink;">还款中</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==70}">
-													结束
+													<span style="color:red;">结束</span>
 												</c:if>
 												<c:if test="${invpro.projectStatus==100}">
 													流标
@@ -141,7 +141,7 @@
 											</td>
 											<td>
 												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<c:if test="${invpro.projectStatus==10}">
+													<c:if test="${invpro.projectStatus==10||invpro.projectStatus==11}">
 														<a class="green" href="${ctx }/investManage/subProject?id=${invpro.id}"title="提交项目"> <i
 															class="icon-pencil bigger-130"></i>
 														</a>

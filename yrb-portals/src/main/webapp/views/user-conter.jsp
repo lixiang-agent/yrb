@@ -227,9 +227,6 @@
 											</span>
 											<span class="pmain-w120 pmain-money">${results.moneyTraMoney }</span>
 											<span class="pmain-w200">备注</span></li>
-									<!--<div style=" width:760px;height:200px;padding-top:100px; text-align:center;color:#d4d4d4; font-size:16px;">
-										 <img src="images/nondata.png" width="60" height="60"><br><br>
-										   暂无资金记录</div>-->
 									</c:forEach>
 								</ul>
 								<div class="pmain-morebtn" style="border-top: 0; margin-top: 0"></div>

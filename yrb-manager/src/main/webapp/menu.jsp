@@ -122,16 +122,20 @@
 
 					</ul>
 			   </li>
+
 			   <li class="" id="news"><a href="#" class="dropdown-toggle">
 						<i class="icon-list"></i> <span class="menu-text"> 新闻管理 </span> <b
 						class="arrow icon-angle-down"></b>
 				</a>
 
+
 					<ul class="submenu">
+
 						<li id="resources"><a href="${ctx }/news/list">
 								<i class="icon-double-angle-right"></i> 新闻
 						</a></li>
 				</ul></li>
+				
 				<li class="" id="inv">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-briefcase"></i> <span class="menu-text">投资管理 </span> <b
@@ -140,32 +144,75 @@
 					<ul class="submenu">
 						<li id="invpro">
 							<a href="${ctx }/investManage/pageList"> <i
-								class="icon-double-angle-right"></i> 投资项目
+								class="icon-double-angle-right"></i> 投资项目总览
 							</a>
 						</li>
 						<li id="oper">
 							<a  href="${ctx }/investManage/listOperProject"> <i
-								class="icon-double-angle-right"></i> 审批投资项目
+								class="icon-double-angle-right"></i> 项目审批处理
+							</a>
+						</li>
+						<li id="serviceOper">
+							<a  href="${ctx }/investManage/listServiceProject"> <i
+								class="icon-double-angle-right"></i> 项目业务处理
 							</a>
 						</li>
 					</ul>
 				</li>
+			
 			   <li class="" id="schedule">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-calendar"></i> <span class="menu-text"> 任务管理 </span> <b
 						class="arrow icon-angle-down"></b>
 					</a>
-
 					<ul class="submenu">
 						<li id="schedulelist">
 							<a href="${ctx }/schedule/list"> <i
 								class="icon-double-angle-right"></i> 定时任务
 							</a>
 						</li>
-
 					</ul>
-			   </li>
-			   
+					
+</li>
+
+
+  <!-- 借款项目管理 -->
+			   <li class="" id="loan">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 借款管理 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+					
+					<ul class=submenu>
+						<li id="loanlist">
+							<a href="${ctx }/loan/listLoanProject"> <i
+								class="icon-double-angle-right"></i> 借款列表
+							</a>
+						</li>
+						
+						<li id="loancheck">
+							<a  href="${ctx }/loan/listloancheck?projectStatus=20"> <i
+								class="icon-double-angle-right"></i> 项目审核
+							</a>
+						</li>
+						
+						
+						 <li id="loansubmit">
+							<a  href="${ctx }/loan/loansubmit?projectStatus=10"> <i
+								class="icon-double-angle-right"></i> 未提交项目
+							</a>
+						</li>
+		
+						<li id="readyloan">
+							<a  href="${ctx }/loan/readyloan?project_status=30"> <i
+								class="icon-double-angle-right"></i> 待放款项目
+							</a>
+						</li> 
+ 				</ul>
+				</li> 
+
+					
+			  
 					<li class="" id="platfromuser">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-list"></i> <span class="menu-text"> 平台用户 </span> <b
@@ -180,6 +227,37 @@
 						</li>
 					</ul>
 			   </li>
+
+					</ul>
+			 
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			 
+			</ul>
+			<!-- /.nav-list -->
+
+
 		</div>
 	</div>
 	

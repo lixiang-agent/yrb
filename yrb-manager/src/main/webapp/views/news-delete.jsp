@@ -23,7 +23,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn default btn-sm"
 					data-dismiss="modal">取消</button>
-				<button id="submit1" disabled="disabled" type="submit" class="btn btn-primary btn-sm">确定</button>
+				<button type="submit" class="btn btn-primary btn-sm">确定</button>
 			</div>
 		</div>
 	</div>

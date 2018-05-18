@@ -63,9 +63,16 @@
 						</tr>
 						<tr>
 							<td>回款方式:</td>
-							<td><input type="text" name="paybackWay"
-								class="form-control" value="${invProject.paybackWay }"
-								maxlength="12"></td>
+							<td><label class="radio-inline"><input type="radio"
+									name="paybackWay" value="0"
+									${invProject.projectType==0?"checked='checked'":"" }>到期还本</label>
+								<label class="radio-inline"><input type="radio"
+									name="paybackWay" value="1"
+									${invProject.projectType==1?"checked='checked'":"" }>按月付息</label>
+								<label class="radio-inline"><input type="radio"
+									name="paybackWay" value="2"
+									${invProject.projectType==2?"checked='checked'":"" }>等额本息</label>
+							</td>
 						</tr>
 						<tr>
 							<td>已投资金额:</td>

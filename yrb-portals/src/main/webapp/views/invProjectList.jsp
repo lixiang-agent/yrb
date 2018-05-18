@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String ctx = request.getServletContext().getContextPath();
 	application.setAttribute("ctx", ctx);
@@ -19,6 +20,181 @@
 		<script type="text/javascript" src="${ctx}/script/common.js"></script>
 		<script type="text/javascript" src="${ctx}/script/invProject.js"></script>
 </head>
+<script type="text/javascript">
+$().ready(function() {
+	//格式化数字
+	function fnumber(s, n) {
+	    /*
+	     * 参数说明：
+	     * s：要格式化的数字
+	     * n：保留几位小数
+	     * */
+	    n = n > 0 && n <= 20 ? n : 2;
+	    s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+	    var l = s.split(".")[0].split("").reverse(),
+	        r = s.split(".")[1];
+	    t = "";
+	    for (i = 0; i < l.length; i++) {
+	        t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+	    }
+	    return t.split("").reverse().join("") + "." + r;
+	}
+	
+	//创建一个map来保存条件
+	var invCondition={};
+	$("#projectType li a").click(function() {
+		$("#projectType li a").removeClass("active");
+		$(this).addClass("active");
+		invCondition["projectType"]=$(this).attr("name");
+		queryList();
+	});
+
+	$("#rate li a").click(function() {
+		$("#rate li a").removeClass("active");
+		$(this).addClass("active");
+		var rate=new Array(2);
+		if($(this).attr("name")!=undefined){
+			rate=$(this).attr("name").split(",");
+			invCondition["minRate"]=rate[0];
+			invCondition["maxRate"]=rate[1];
+		}else{
+			invCondition["minRate"]=undefined;
+			invCondition["maxRate"]=undefined;
+		}
+		queryList();
+	});
+	$("#term li a").click(function() {
+		$("#term li a").removeClass("active");
+		$(this).addClass("active");
+		var term=new Array(2);
+		if($(this).attr("name")!=undefined){
+		rate=$(this).attr("name").split(",");
+		invCondition["minMonth"]=rate[0];
+		invCondition["maxMonth"]=rate[1];
+		}else{
+			invCondition["minMonth"]=undefined;
+			invCondition["maxMonth"]=undefined;
+		}
+		queryList();
+	});
+	$("#paybackWay li a").click(function() {
+		$("#paybackWay li a").removeClass("active");
+		$(this).addClass("active");
+		invCondition["paybackWay"]=$(this).attr("name");
+		queryList();
+	});
+
+	$("#termSort a").click(function(){
+		invCondition["orderBy"]="payback_time";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	$("#balanceSort a").click(function(){
+		invCondition["orderBy"]="inv_totbalance";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	$("#rateSort a").click(function(){
+		invCondition["orderBy"]="rate";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	$("#scheduleSort a").click(function(){
+		invCondition["orderBy"]="schedule";
+		invCondition["orderMethod"]=$(this).attr("name")
+		queryList();
+	});
+	function queryList(){
+		var url="${ctx}/invProject/listByInvProject";
+		if(invCondition["minMonth"]!=null){
+			url=url+"?minMonth="+invCondition["minMonth"];
+		}else{
+			url=url+"?minMonth=0";
+		}
+		if(invCondition["maxMonth"]!=null){
+			url=url+"&maxMonth="+invCondition["maxMonth"];
+		}
+		if(invCondition["projectType"]!=null){
+			url=url+"&projectType="+invCondition["projectType"];
+		}
+		if(invCondition["minRate"]!=null){
+			url=url+"&minRate="+invCondition["minRate"];
+		}
+		if(invCondition["maxRate"]!=null){
+			url=url+"&maxRate="+invCondition["maxRate"];
+		}
+		if(invCondition["paybackWay"]!=null){
+			url=url+"&paybackWay="+invCondition["paybackWay"];
+		}
+		if(invCondition["orderBy"]!=null){
+			url=url+"&orderBy="+invCondition["orderBy"]+"&orderMethod="+invCondition["orderMethod"];
+		}
+		$.ajax({
+			url:url,
+			dataType:"json",
+			type:"post",
+			success:function(data){
+				$("#projectItem").empty();
+		 	for(var i=0;data.length;i++){
+		 		
+		 		var item='<ul>'
+		 		+'<li id="invProjectId" style="display: none">'+data[i].id+'</li>'
+				+'<li class="col-330 col-t"><a href="infor.html"'
+				+'	target="_blank"><i class="icon ';
+				
+					if(data[i].projectType==1){
+						item+="icon-che";
+					}
+					if(data[i].projectType==2){
+						item+="icon-fang";
+					}
+					if(data[i].projectType==3){
+						item+="icon-shu";
+					}
+					if(data[i].projectType==4){
+						item+="icon-zhai";
+					}
+				item+=' " title="车易贷"></i></a><a'
+				+'	class="f18" href="infor.html"'
+				+' <input  name="invProjectId" type="hidden" value="'+data[i].id+'"/>'
+				+'		'+data[i].projectName+'</a></li>'
+				+'<li class="col-180"><span class="f20 c-333">'+data[i].invTotbalance+'.00</span>元</li>'
+				+'	<li class="col-110 relative"><span class="f20 c-orange">'+data[i].rate
+				+'.00	</span>%</li>'
+				+'	<li class="col-150"><span class="f20 c-333">'+data[i].paybackTime +'</span>个月'
+				+'	</li>'
+				+'	<li class="col-150">';
+				if(data[i].paybackWay==0){
+					item+="到期还本还息";
+				}
+				if(data[i].paybackWay==1){
+					item+="按月付息，到期还本";
+				}
+				if(data[i].paybackWay==2){
+					item+="等额本息";
+				}
+				item+='</li>'
+				+'	<li class="col-120">'
+				+'		<div class="circle">'
+				+'				<div class="progress-bgPic progress-bfb10">'
+				+'					<div class="show-bar">'
+				+'					'+fnumber((data[i].invBalance/data[i].invTotbalance).toFixed(2)*100,2)+'%</div>'
+				+'			</div>'
+				+'		</div>'
+				+'	</div>'
+				+'	</li>'
+				+'<li class="col-120-2"><a class="ui-btn btn-gray"'
+				+'	href="${ctx }/invProject/invProject?id="'+data[i].id+'">投资</a></li>'
+				+'</ul>'
+				$("#projectItem").append(item);
+			} 
+			
+			
+			}
+		}); 
+	}
+});
+</script>
 <body>
 	<header> <!-- 头部 --> <jsp:include page="/top.jsp">
 		<jsp:param value="inv" name="menu" />
@@ -61,9 +237,8 @@
 							<dt>年利率</dt>
 							<dd>
 								<ul id="rate">
-									<li class="n1"><a
-										href="javascript:url('borrow_interestrate','');"
-										id="borrow_interestrate_" class="active">不限</a></li>
+									<li class="n1"><a href="javascript:void(0);"
+										id="post_type_" class="active">不限</a></li>
 									<li class="n2"><a id="borrow_interestrate_1"
 										href="javascript:url('borrow_interestrate','1');" name="0,12">12%以下</a>
 									</li>
@@ -111,12 +286,12 @@
 									<li class="n1"><a href="javascript:url('repay_style','');"
 										id="repay_style_" class="active">不限</a></li>
 									<li class="n2"><a id="repay_style_end"
-										href="javascript:url('repay_style','end');">到期还本付息</a></li>
+										href="javascript:url('repay_style','end');" name="0">到期还本付息</a></li>
 									<li class="n2"><a id="repay_style_endmonth"
-										href="javascript:url('repay_style','endmonth');">按月付息,到期还本</a>
+										href="javascript:url('repay_style','endmonth');" name="1">按月付息,到期还本</a>
 									</li>
 									<li class="n2"><a id="repay_style_month"
-										href="javascript:url('repay_style','month');">等额本息</a></li>
+										href="javascript:url('repay_style','month');" name="2">等额本息</a></li>
 								</ul>
 							</dd>
 						</dl>
@@ -148,48 +323,75 @@
 					<div class="title clearfix">
 						<ul>
 							<li class="col-330">借款标题</li>
-							<li class="col-180"><a
-								href="javascript:url('order','account_up');" class="">借款金额</a></li>
-							<li class="col-110"><a
-								href="javascript:url('order','apr_up');" class="">年利率</a></li>
-							<li class="col-150"><a
-								href="javascript:url('order','period_up');" class="">借款期限</a></li>
+							<li class="col-180" id="balanceSort">借款金额
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
+							<li class="col-110" id="rateSort">利率
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
+							<li class="col-150" id="termSort">借款期限
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
 							<li class="col-150">还款方式</li>
-							<li class="col-120"><a
-								href="javascript:url('order','scale_up');" class="">借款进度</a></li>
+							<li class="col-120" id="scheduleSort">借款进度
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_up.png'); cursor:pointer" title="升序" name="0"></a>
+								<a href="javascript:void(0)" style="background-image:url('${ctx }/images/arrow_down.png'); cursor:pointer" title="降序" name="1"></a>
+							</li>
 							<li class="col-120-t">操作</li>
 						</ul>
 					</div>
 					<!------------投资列表-------------->
-					<c:forEach items="${listInvProject }" var="invProject">
-						<div class="item">
-							<ul>
-								<li class="col-330 col-t"><a href="infor.html"
-									target="_blank"><i class="icon icon-che" title="车易贷"></i></a><a
-									class="f18" href="infor.html"
-									title="${invProject.projectName }" target="_blank">
-										赵女士长安福特福克斯汽车质... </a></li>
-								<li class="col-180"><span class="f20 c-333">${invProject.invTotbalance }</span>元</li>
-								<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
-								</span>%</li>
-								<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
-								</li>
-								<li class="col-150">${invProject.paybackWay }</li>
-								<li class="col-120">
-									<div class="circle">
-										<div class="left progress-bar">
-											<div class="progress-bgPic progress-bfb10">
-												<div class="show-bar">
-													${invProject.invBalance/invProject.invTotbalance }</div>
+					<div class="item" id="projectItem">
+						<c:if test="${not empty listInvProject}">
+							<c:forEach items="${listInvProject }" var="invProject">
+								<input  name="invProjectId" type="hidden" value="${invProject.id }"/>
+								<ul>
+									<li class="col-330 col-t"><a href="infor.html"
+										target="_blank"><i class="icon
+										<c:choose>
+											<c:when test="${invProject.projectType ==1 }">icon-che</c:when>
+											<c:when test="${invProject.projectType ==2 }">icon-fang</c:when>
+											<c:when test="${invProject.projectType ==3 }">icon-shu</c:when>
+											<c:when test="${invProject.projectType ==4 }">icon-zhai</c:when>
+										</c:choose></li>
+										  " ></i></a><a
+										class="f18" href="infor.html"
+										title="${invProject.projectName }" target="_blank">
+											${invProject.projectName }</a></li>
+									<li class="col-180"><span class="f20 c-333"><br/>
+									<fmt:formatNumber value="${invProject.invTotbalance }" type="currency" pattern="#0.00"/>
+									</span>元</li>
+									<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
+									</span>%</li>
+									<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
+									</li>
+									<li class="col-150">
+									<c:choose>
+											<c:when test="${invProject.paybackWay ==0 }">到期还本还息</c:when>
+											<c:when test="${invProject.paybackWay ==1 }">按月付息，到期还本</c:when>
+											<c:when test="${invProject.paybackWay ==2 }">等额本息</c:when>
+										</c:choose></li>
+									<li class="col-120">
+										<div class="circle">
+											<div class="left progress-bar">
+												<div class="progress-bgPic progress-bfb10">
+													<div class="show-bar">
+													<fmt:formatNumber value="${(invProject.invBalance/invProject.invTotbalance)*100 }" pattern="#0.00" />%
+														</div>
+												</div>
 											</div>
 										</div>
-									</div>
-								</li>
-								<li class="col-120-2"><a class="ui-btn btn-gray"
-									href="infor.html">投资</a></li>
-							</ul>
-						</div>
-					</c:forEach>
+									</li>
+									<li class="col-120-2"><a class="ui-btn btn-gray"
+										href="${ctx }/invProject/invProject?id=${invProject.id }">投资</a></li>
+								</ul>
+							</c:forEach>
+						</c:if>
+					</div>
+
 					<!------------投资列表-------------->
 				</div>
 				<div class="pagination clearfix mrt30">
@@ -215,60 +417,5 @@
 		</div>
 	</div>
 	<!-- 引入底部 --> <%@ include file="/buttom.jsp"%>
-<script type="text/javascript">
-$().ready(function() {
-	
-	
-	//创建一个map来保存条件
-	var invCondition={};
-	var url="${ctx}/invProject/list";
-	$("#projectType li a").click(function() {
-		$("#projectType li a").removeClass("active");
-		$(this).addClass("active");
-		invCondition["projectType"]=$(this).attr("name");
-	});
-
-	$("#rate li a").click(function() {
-		$("#rate li a").removeClass("active");
-		$(this).addClass("active");
-		var rate=new Array(2);
-		rate=$(this).attr("name").split(",");
-		invCondition["minRate"]=rate[0];
-		invCondition["maxRate"]=rate[1];
-		
-	});
-	$("#term li a").click(function() {
-		$("#term li a").removeClass("active");
-		$(this).addClass("active");
-		var term=new Array(2);
-		rate=$(this).attr("name").split(",");
-		invCondition["minMonth"]=rate[0];
-		invCondition["maxMonth"]=rate[1];
-		queryList();
-	});
-	$("#paybackWay li a").click(function() {
-		$("#paybackWay li a").removeClass("active");
-		$(this).addClass("active");
-	});
-
-	function queryList(){
-		if(invCondition["minMonth"]!=null){
-			url=url+"?minMonth="+invCondition["minMonth"];
-		}else{
-			url=url+"?minMonth=0";
-		}
-		
-	/* 	$.ajax({
-			url:"ff",
-			dataType:"json",
-			success:function(data){
-				
-			}
-			
-		}); */
-	}
-});
-</script>
 </body>
 </html>
-

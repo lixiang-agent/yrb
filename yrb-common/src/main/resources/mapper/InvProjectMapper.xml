@@ -484,51 +484,119 @@
 
 	<select id="ListByInvProject" resultType="com.lixiang.ssm.entity.InvProject">
 		select
-		project_name,project_type,inv_totbalance,rate,payback_time,payback_way,inv_balance
+		id,project_name,project_type,inv_totbalance,rate,payback_time,payback_way,inv_balance
 		from t_inv_project
 		<where>
 			<if test="invProject.projectType != null">
 				project_type=#{invProject.projectType}
 			</if>
-		</where>
-		<where>
-			<if test="invProject.maxRate!=null">
-				and rate >= #{invProject.maxRate}
-			</if>
-		</where>
-		<where>
 			<if test="invProject.minRate!=null">
-				and rate <![CDATA[<=]]>
-				#{invProject.minRate}
+				and rate > #{invProject.minRate}
 			</if>
-		</where>
-		<where>
+			<if test="invProject.maxRate!=null">
+				and rate <![CDATA[<=]]>
+				#{invProject.maxRate}
+			</if>
 			<if test="invProject.minMonth!=null">
 				and payback_time >= #{invProject.minMonth}
 			</if>
-		</where>
-		<where>
 			<if test="invProject.maxMonth!=null">
 				and payback_time <![CDATA[<=]]>
 				#{invProject.maxMonth}
 			</if>
-		</where>
-		<where>
 			<if test="invProject.paybackWay!=null">
-				payback_way=#{invProject.paybackWay}
+				and payback_way=#{invProject.paybackWay}
 			</if>
-		</where>
-		
-		<where>
 			and project_status=40
+			
 		</where>
+		<if test="orderBy!=null">
+				
+			<choose>
+				<when test="orderBy=='schedule'">
+					ORDER BY (SELECT inv_balance/inv_totbalance)
+				</when>
+				<otherwise>
+					order by ${orderBy}
+				</otherwise>
+			</choose>
+			
+		</if>
+		<if test="orderMethod!=null">
+			<if test="orderMethod==0">
+					asc
+			</if>
+			<if test="orderMethod==1">
+					desc
+			</if>
+		</if>
 	</select>
 	
+	<select id="getInvProjectById" resultType="com.lixiang.ssm.entity.InvProject">
+		select 
+		id,project_name,project_type,inv_totbalance,rate,payback_time,payback_way,inv_balance,inv_no,bidding_date,Safe_way,loan_reason,min_inv_balance,max_inv_balance,
+		borrower_info,risk_control
+		from t_inv_project
+		where id=#{id}
+	</select>
+	
+	<select id="getInvRecordById" resultType="com.lixiang.ssm.entity.InvRecord">
+		select 
+		invrec_money,inv_date,inv_user_name,inv_way
+		from t_inv_record
+		where inv_pro_id=#{id}
+	</select>
+
+	<select id="getPaybackPlan" resultType="com.lixiang.ssm.entity.PaybackPlan">
+		SELECT	
+		plan_payback_date,payback_no,payback_money,payback_margin,payback_status
+		FROM t_payback_plan
+		WHERE project_id=#{id}
+	</select>
+
+	<select id="getRepaymentBalance" resultType="double">
+		SELECT
+		SUM((SELECT payback_money+payback_margin)) repaymentBalance 
+		FROM t_payback_plan 
+		WHERE project_id=#{id} AND payback_status=1 
+	</select>
+
+	<select id="updateUserBalance" resultType="int">
+		UPDATE 
+		t_user_info 
+		SET total_balance=total_balance - ${money}
+		WHERE id=#{id} AND total_balance>=${money}
+	</select>
+
+	<select id="addInvRecord" resultType="int">
+		insert into 
+		t_inv_record
+		values(inv_pro_id=#{invRecord.invRecId},invrec_no=#{invRecord.invrecNo},invrec_money=#{invRecord.invrecMoney},user_id=#{invRecord.userId},inv_date=#{invRecord.invDate},inv_user_name=#{invRecord.invUserName},inv_way=#{invRecord.invWay})
+	</select>
+
+	<select id="updateInvProject" resultType="int">
+		UPDATE 
+		t_inv_project
+		SET
+		inv_balance=inv_balance+${invRecord.invrecMoney}
+		WHERE 
+		id=#{invRecord.invRecId} AND inv_totbalance>=(t_inv_project.inv_balance+${invRecord.invrecMoney})
+	</select>
+
+
 	<update id="updateProjectStatus" parameterType="com.lixiang.ssm.entity.InvProject">
 		update t_inv_project set project_status = #{status,jdbcType=INTEGER} where id =
 		#{id,jdbcType=INTEGER}
 	</update>
-
+	
+	<select id="queryInvProjectByFinancingTime" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project
+		<where>
+		 project_status = 40 and inv_balance >= inv_totalbalance and Financing_end_time > now()
+		</where>
+	</select>
+	
 	<select id="queryAllInvProject" resultType="com.lixiang.ssm.entity.InvProject"
 		useCache="false">
 		SELECT * FROM t_inv_project
@@ -539,9 +607,27 @@
 			</if>
 		</where>
 	</select>
+	
 	<select id="queryAllInvProjectByProStatus" resultType="com.lixiang.ssm.entity.InvProject"
 		useCache="false">
-		SELECT * FROM t_inv_project where project_status = 20 || project_status = 30
+		SELECT * FROM t_inv_project <where>
+			project_status = 20
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
+	</select>
+	<select id="queryAllInvProjectService" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project 
+		<where>
+			project_status = 30 || project_status = 40 || project_status = 50 || project_status = 60
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
 	</select>
   
 </mapper>

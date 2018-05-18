@@ -55,8 +55,12 @@
 						</tr>
 						<tr>
 							<td>回款方式:</td>
-							<td><input type="text" name="paybackWay"
-								class="form-control" maxlength="12"></td>
+							<td><label class="radio-inline"><input type="radio"
+									name="paybackWay" value="0">到期还本</label> <label
+								class="radio-inline"><input type="radio"
+									name="paybackWay" value="1">按月付息</label> <label
+								class="radio-inline"><input type="radio"
+									name="paybackWay" value="2">等额本息</label></td>
 						</tr>
 						<tr>
 							<td>已投资金额:</td>

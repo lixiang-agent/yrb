@@ -20,7 +20,7 @@
 
 		<!-- 指定实体类的路径 -->
 		<javaModelGenerator targetPackage="com.lixiang.ssm.entity" 
-			targetProject="D:\eclipse\works\yrb\yrb-common\src\main\java">
+			targetProject="D:\workspace\yrb\yrb-common\src\main\java">
 			<property name="constructorBased" value="true"/>
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -28,28 +28,48 @@
 
 		<!-- 指定映射文件的路径 -->
 		<sqlMapGenerator targetPackage="mapper"
-			targetProject="D:\eclipse\works\yrb\yrb-common\src\main\resources\mapper">
+			targetProject="D:\workspace\yrb\yrb-common\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 指定生成接口路径 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.lixiang.ssm.dao" targetProject="D:\eclipse\works\yrb\yrb-common\src\main\java">
+			targetPackage="com.lixiang.ssm.dao" targetProject="D:\workspace\yrb\yrb-common\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
+		
 
-		<!-- <table tableName="user" domainObjectName="User" enableCountByExample="false" 
+		<table tableName="t_news" domainObjectName="News" enableCountByExample="false" 
 			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
-			selectByExampleQueryId="false"></table> -->
+			selectByExampleQueryId="false"></table>
+			
+			<table tableName="t_operate_record" domainObjectName="OperateRecord" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table>
+			
+			<table tableName="t_payback_plan" domainObjectName="PaybackPlan" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table>
 
-		<table tableName="t_user_credit" domainObjectName="UserCredit"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			selectByExampleQueryId="false">
-		</table>
-	<!-- 	<table tableName="product" domainObjectName="Product"
+		<!-- <table tableName="product" domainObjectName="Product"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table> -->
+	<!-- 	<table tableName="role" domainObjectName="Role"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="ugroup" domainObjectName="Ugroup"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="resources" domainObjectName="Resources"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> -->
+
 	</context>
 </generatorConfiguration>

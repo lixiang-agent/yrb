@@ -36,9 +36,7 @@ public class RolesController {
 	
 	@RequestMapping("/addRoles")
 	public String InsertRoles(HttpServletRequest request,Role role,Model model){
-		
 		Subject currentUser = SecurityUtils.getSubject();
-		
 		User user = (User)currentUser.getPrincipal();
 		role.setCreatorDate(new Date());
 		role.setCreatorId(user.getId());

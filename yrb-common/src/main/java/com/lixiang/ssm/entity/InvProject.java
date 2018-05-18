@@ -1,10 +1,13 @@
 package com.lixiang.ssm.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class InvProject extends BaseEntity implements Serializable{
+import org.springframework.format.annotation.DateTimeFormat;
+public class InvProject extends BaseEntity{
+
+
+
 
 	private static final long serialVersionUID = -8119631353495271738L;
 
@@ -178,6 +181,7 @@ public class InvProject extends BaseEntity implements Serializable{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date financingEndTime;
 
     /**

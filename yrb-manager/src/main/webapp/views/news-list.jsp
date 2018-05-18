@@ -59,8 +59,8 @@
 											</select> <span class="input-group-btn3">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
 												<a class="btn btn-primary btn-sm" data-toggle="modal"
-													data-target="#insertModal" type="button"
-													href="${ctx}/news/to-insert">新增</a>
+												data-target="#insertModal" type="button"
+												href="${ctx}/news/to-insert">新增</a>
 											</span>
 
 										</div>
@@ -105,8 +105,11 @@
 											<td>
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<a class="green"
-														href="${ctx}/news/toUpdateNews?id=${news.id}"
+													<a class="orange"
+														href="${ctx}/news/updatestatus?id=${news.id}" title="发布">
+														<i class="icon-circle-arrow-up bigger-130"></i>
+													</a> <a class="green"
+														href="${ctx}/news/to-update?id=${news.id}"
 														data-toggle="modal" data-target="#updateModal"
 														title="修改信息"> <i class="icon-pencil bigger-130"></i>
 													</a>
@@ -127,6 +130,13 @@
 
 														<ul
 															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+															<li><a href="${ctx}/news/updatestatus?id=${news.id}"
+																class="tooltip-success" data-rel="tooltip" title="Edit">
+																	<span class="orange"> <i
+																		class="icon-circle-arrow-up bigger-120"></i>
+																</span>
+
+															</a></li>
 															<li><a href="javascript:void();" data-toggle="modal"
 																data-target="#updateModal" class="tooltip-success"
 																data-rel="tooltip" title="Edit"> <span class="green">
@@ -134,11 +144,10 @@
 																</span>
 
 															</a></li>
-															<li><a href="javascript:void();"data-toggle="modal"
-																data-target="#deleteModal"
-																class="tooltip-error" data-rel="tooltip" title="Delete">
-																	<span class="red"> <i
-																		class="icon-trash bigger-120"></i>
+															<li><a href="javascript:void();" data-toggle="modal"
+																data-target="#deleteModal" class="tooltip-error"
+																data-rel="tooltip" title="Delete"> <span class="red">
+																		<i class="icon-trash bigger-120"></i>
 																</span>
 															</a></li>
 
@@ -269,12 +278,13 @@
 
 	<script type="text/javascript">
 		//模态框隐藏的时候把原来模态框里面的内容去掉
-		 $("#roleModal").on("hidden.bs.modal", function() {
-			 $(this).removeData("bs.modal");
-			}); 
-		 
-		$("#userModal").on("hidden.bs.modal", function() {
+		$("#insertModal").on("hidden.bs.modal", function() {
 			$(this).removeData("bs.modal");
+			UE.getEditor('content').destroy();
+		});
+		$("#updateModal").on("hidden.bs.modal", function() {
+			$(this).removeData("bs.modal");
+			UE.getEditor('container').destroy();
 		});
 	</script>
 

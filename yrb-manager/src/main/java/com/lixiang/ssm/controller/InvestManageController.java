@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.OperateRecord;
 import com.lixiang.ssm.entity.User;
 import com.lixiang.ssm.service.InvManageService;
@@ -31,6 +32,8 @@ public class InvestManageController {
 	
 	protected Logger log = Logger.getLogger(LoginController.class);
 
+	
+	//项目总览controller
 	@RequestMapping("/subProject")
 	public String submitProject(Integer id, Model model, HttpSession session) {
 		Subject currentUser = SecurityUtils.getSubject();
@@ -125,6 +128,8 @@ public class InvestManageController {
 		return "redirect:/investManage/pageList";
 	}
 	
+	
+	//审核项目相关controller
 	@RequestMapping("/listOperProject")
 	public String listOperProject(InvProject invProject, Model model){
 		// 封装了总数，封装了分页信息，封装了查询出来的数据
@@ -136,13 +141,20 @@ public class InvestManageController {
 	
 	@RequestMapping("/showOperRecord")
 	public String showOperRecord(OperateRecord operateRecord,Model model){
-		
 		List<OperateRecord> showList = invManageService.queryOperRecord(operateRecord);
-		
 		model.addAttribute("showList", showList);
 		return "oper-record-show";
 	}
 	
+	@RequestMapping("/showProOperRecord")
+	public String queryProOperRecord(Integer id, Model model) {
+		// 封装了总数，封装了分页信息，封装了查询出来的数据
+		System.out.println("这是查询操作记录的项目ID："+id);
+		List<OperateRecord> inv = invManageService.queryProOperRecord(id);
+		System.out.println("这是查询操作记录的项目："+inv);
+		model.addAttribute("inv", inv);
+		return "oper-record-showpro";
+	}
 	
 	@RequestMapping("/toPass")
 	public String toPassOperProject(Integer id,Model model){
@@ -174,11 +186,9 @@ public class InvestManageController {
 	
 	@RequestMapping("/failOper")
 	public String failOperProject(OperateRecord operateRecord,Integer id,Model model,HttpSession session) throws ParseException{
-		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
-		String time1 = time.format(new Date());
 		boolean oper_result = invManageService.updateProjectStatus(11,id);
 		InvProject inv = invManageService.selectByPrimaryKey(id);
-		OperateRecord operRecord = new OperateRecord(null,3,time.parse(time1),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),operateRecord.getRemark());
+		OperateRecord operRecord = new OperateRecord(null,3,new Date(),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),operateRecord.getRemark());
 		invManageService.insertSelective(operRecord);
 		
 		session.setAttribute("oper_result", oper_result);
@@ -192,20 +202,31 @@ public class InvestManageController {
 		return "oper-record-release";
 	}
 	@RequestMapping("/releaseOper")
-	public String releaseOperProject(Integer id,Model model,HttpSession session) throws ParseException{
-		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
-		String time1 = time.format(new Date());
-		
-		boolean oper_result = invManageService.updateProjectStatus(40,id);
-		InvProject inv = invManageService.selectByPrimaryKey(id);
-		inv.setBiddingDate(time.parse(time1));
+	public String releaseOperProject(InvProject invProject,Model model,HttpSession session) throws ParseException{
+		boolean oper_result = invManageService.updateProjectStatus(40,invProject.getId());
+		System.out.println("项目id："+invProject.getId());
+		InvProject inv = invManageService.selectByPrimaryKey(invProject.getId());
+		inv.setBiddingDate(new Date());
+		inv.setFinancingEndTime(invProject.getFinancingEndTime());
 		invManageService.updateByPrimaryKeySelective(inv);
-		OperateRecord operRecord = new OperateRecord(null,5,time.parse(time1),inv.getProjectType(),id,inv.getModifiorId(),inv.getModifiorName(),"项目发布");
+		OperateRecord operRecord = new OperateRecord(null,5,new Date() ,inv.getProjectType(),invProject.getId(),inv.getModifiorId(),inv.getModifiorName(),"项目发布");
 		invManageService.insertSelective(operRecord);
 		
 		session.setAttribute("oper_result", oper_result);
-		return "redirect:/investManage/listOperProject";
+		return "redirect:/investManage/listServiceProject";
 	}
 	
-	
+	@RequestMapping("/listServiceProject")
+	public String listServiceProject(InvProject invProject, Model model) {
+		// 封装了总数，封装了分页信息，封装了查询出来的数据
+		PageInfo<InvProject> inv = invManageService.listServiceProject(invProject);
+		model.addAttribute("inv", inv);
+		return "service-oper-list";
+	}
+	@RequestMapping("/listInvRecord")
+	public String listInvRecord(Integer id,Model model){
+		List<InvRecord> invRec = invManageService.queryListInvRecord(id);
+		model.addAttribute("invRec", invRec);
+		return "invrecord-list";
+	}
 }

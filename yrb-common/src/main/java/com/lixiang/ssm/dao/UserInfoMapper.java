@@ -49,7 +49,7 @@ public interface UserInfoMapper {
      * @param record
      * @return
      */
-    int updateByPrimaryKeySelective(UserInfo record);
+    boolean updateByPrimaryKeySelective(UserInfo record);
     
     
     /**
@@ -57,7 +57,6 @@ public interface UserInfoMapper {
      *
      */
     List<UserInfo> selectByPrimaryKey(UserInfo UserInfo);
-
 
     int updateByPrimaryKey(UserInfo record);
     
