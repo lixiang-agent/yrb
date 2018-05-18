@@ -79,7 +79,7 @@ public class InvRecord extends BaseEntity{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    private Boolean invWay;
+    private Integer invWay;
     
     private String projectName;
     private Integer projectStatus;
@@ -93,7 +93,7 @@ public class InvRecord extends BaseEntity{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public InvRecord(Integer id, Integer invRecId, Integer invrecNo, BigDecimal invrecMoney, Integer userId, Date invDate, String invUserName, Boolean invWay) {
+    public InvRecord(Integer id, Integer invRecId, Integer invrecNo, BigDecimal invrecMoney, Integer userId, Date invDate, String invUserName, Integer invWay) {
         this.id = id;
         this.invRecId = invRecId;
         this.invrecNo = invrecNo;
@@ -341,7 +341,7 @@ public class InvRecord extends BaseEntity{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public Boolean getInvWay() {
+    public Integer getInvWay() {
         return invWay;
     }
 
@@ -353,7 +353,17 @@ public class InvRecord extends BaseEntity{
      *
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
-    public void setInvWay(Boolean invWay) {
+    public void setInvWay(Integer invWay) {
         this.invWay = invWay;
     }
+
+	@Override
+	public String toString() {
+		return "InvRecord [id=" + id + ", invRecId=" + invRecId + ", invrecNo=" + invrecNo + ", invrecMoney="
+				+ invrecMoney + ", userId=" + userId + ", invDate=" + invDate + ", invUserName=" + invUserName
+				+ ", invWay=" + invWay + ", projectName=" + projectName + ", projectStatus=" + projectStatus
+				+ ", interest=" + interest + ", projectType=" + projectType + ", paybackMoney=" + paybackMoney
+				+ ", paybackMargin=" + paybackMargin + "]";
+	}
+    
 }
