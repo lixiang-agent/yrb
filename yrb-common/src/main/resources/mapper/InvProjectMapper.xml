@@ -531,6 +531,28 @@
 		WHERE project_id=#{id} AND payback_status=1 
 	</select>
 
+	<select id="updateUserBalance" resultType="int">
+		UPDATE 
+		t_user_info 
+		SET total_balance=total_balance - ${money}
+		WHERE id=#{id} AND total_balance>=${money}
+	</select>
+
+	<select id="addInvRecord" resultType="int">
+		insert into 
+		t_inv_record
+		values(inv_pro_id=#{invRecord.invRecId},invrec_no=#{invRecord.invrecNo},invrec_money=#{invRecord.invrecMoney},user_id=#{invRecord.userId},inv_date=#{invRecord.invDate},inv_user_name=#{invRecord.invUserName},inv_way=#{invRecord.invWay})
+	</select>
+
+	<select id="updateInvProject" resultType="int">
+		UPDATE 
+		t_inv_project
+		SET
+		inv_balance=inv_balance+${invRecord.invrecMoney}
+		WHERE 
+		id=#{invRecord.invRecId} AND inv_totbalance>=(t_inv_project.inv_balance+${invRecord.invrecMoney})
+	</select>
+
 
 	<update id="updateProjectStatus" parameterType="com.lixiang.ssm.entity.InvProject">
 		update t_inv_project set project_status = #{status,jdbcType=INTEGER} where id =

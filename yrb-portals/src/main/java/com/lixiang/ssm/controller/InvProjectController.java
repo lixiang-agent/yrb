@@ -1,5 +1,6 @@
 package com.lixiang.ssm.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.InvProjectSingle;
+import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.service.InvProjectService;
 /**
  * 前台项目列表查询控制
@@ -58,13 +60,30 @@ public class InvProjectController {
 		return listInvProject;
 		
 	}
-	
+	/**
+	 * 查询单个投资项目信息
+	 * @param id 根据Id来查询
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(path="invProject")
 	public String ListByInvProjectSingle(Integer id,Model model){
 		InvProjectSingle invProjectSingle = invProjectService.getInvProjectSingle(id);
 		model.addAttribute("invProjectSingle", invProjectSingle);
 		log.error(invProjectSingle.toString());
 		return "invProjectInfo";
+	}
+	@ResponseBody
+	@RequestMapping(path="toInvest")
+	public String toInvert(InvRecord invRecord,@RequestParam("password")String password){
+		String msg=null;
+		boolean flag = invProjectService.addInvRecordByInvRecord(invRecord, password);
+		if(flag){
+			msg= "投资成功";
+		}else{
+			msg= "投资失败";
+		}
+		return msg;
 	}
 	
 }
