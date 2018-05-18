@@ -27,6 +27,13 @@ public class NewsService {
 	@Autowired
 	private UserMapper usermapper;
 	
+	/**
+	 * 添加新闻
+	 * @param news
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@Transactional
 	public boolean addNews(News news){
 		
@@ -37,22 +44,52 @@ public class NewsService {
 		news.setCreateDate(new Date());
 		return mapper.insertSelective(news)>0;
 	}
-	
+	/**
+	 * 修改新闻
+	 * @param news
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@Transactional
 	public boolean updateNews(News news){
 		return mapper.updateByPrimaryKeySelective(news)>0;
 	}
+	/**
+	 * 删除新闻
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@Transactional
 	public boolean deleteNews(Integer id){
 		return mapper.deleteByPrimaryKey(id)>0;
 	}
+	/**
+	 * 根据id查询信息
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	public News getNewsById(Integer id){
 		return mapper.selectByPrimaryKey(id);
 	}
+	/**
+	 * 修改新闻发布状态
+	 * @param news
+	 * @param model
+	 * @return
+	 */
 	public boolean updateNewsStatusById(News news){
 		news.setStatus(true);
 		return mapper.updateNewsStatusById(news)>0;
 	}
+	/**
+	 * 查询显示信息
+	 * @param news
+	 * @param model
+	 * @return
+	 */
 	public PageInfo<News> pageList(News news) {
 		// 获取第1页，10条内容，默认查询总数count
 		PageHelper.startPage(news.getPageNum(), news.getPageSize());

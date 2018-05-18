@@ -173,7 +173,7 @@
   
   <select id="getoperator" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   
-  select * from t_operate_record where project_id = #{id,jdbcType=INTEGER} and projectType = 1
+  select * from t_operate_record where project_id = #{id,jdbcType=INTEGER} and project_type = 1
   </select>
 
 

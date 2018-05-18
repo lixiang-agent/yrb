@@ -79,7 +79,7 @@
       creator_name, create_date, publish_date, 
       publisher_id, publisher_name, content
       )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{classify,jdbcType=BIT}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{classify,jdbcType=INTEGER}, 
       #{readNumber,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, 
       #{creatorName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{publishDate,jdbcType=DATE}, 
       #{publisherId,jdbcType=INTEGER}, #{publisherName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
@@ -138,7 +138,7 @@
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="classify != null">
-        #{classify,jdbcType=BIT},
+        #{classify,jdbcType=INTEGER},
       </if>
       <if test="readNumber != null">
         #{readNumber,jdbcType=INTEGER},
@@ -181,7 +181,7 @@
         title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="classify != null">
-        classify = #{classify,jdbcType=BIT},
+        classify = #{classify,jdbcType=INTEGER},
       </if>
       <if test="readNumber != null">
         read_number = #{readNumber,jdbcType=INTEGER},
@@ -221,7 +221,7 @@
     -->
     update t_news
     set title = #{title,jdbcType=VARCHAR},
-      classify = #{classify,jdbcType=BIT},
+      classify = #{classify,jdbcType=INTEGER},
       read_number = #{readNumber,jdbcType=INTEGER},
       status = #{status,jdbcType=BIT},
       creator_id = #{creatorId,jdbcType=INTEGER},
@@ -241,7 +241,7 @@
     -->
     update t_news
     set title = #{title,jdbcType=VARCHAR},
-      classify = #{classify,jdbcType=BIT},
+      classify = #{classify,jdbcType=INTEGER},
       read_number = #{readNumber,jdbcType=INTEGER},
       status = #{status,jdbcType=BIT},
       creator_id = #{creatorId,jdbcType=INTEGER},

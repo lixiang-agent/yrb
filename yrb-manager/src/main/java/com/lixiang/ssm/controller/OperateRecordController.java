@@ -24,22 +24,19 @@ public class OperateRecordController {
 	
 	@RequestMapping("/loanprojectcheck")
 		public String loanprojectcheck(int id, Model model){
-			System.out.println("***************id**********************");
-				System.out.println(id);
+		
 			 LoanProject loanProject = loanProjectService.getLoan(id);
-			 
-			 System.out.println("*****************loanProject********************");
-			 System.out.println(loanProject);
-			 
+	
 			 List<OperateRecord> operateRecord= operateRecordService.getoperator(loanProject.getProjectNo());
-			 model.addAttribute("operateRecord", operateRecord);
-			 model.addAttribute("loanProject", loanProject);
-			 System.out.println("*************************************");
-			 
+			 System.out.println("*******************************************");
 			 System.out.println(operateRecord);
-			 System.out.println("*************************************");
+			 System.out.println("*******************************************");
+			 model.addAttribute("operateRecord", operateRecord);
+			 model.addAttribute("loan", loanProject);
+		
 		return "loanprojectcheck";
 		
 	}
+	
 
 }

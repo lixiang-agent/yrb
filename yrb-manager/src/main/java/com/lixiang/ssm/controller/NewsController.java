@@ -22,19 +22,33 @@ public class NewsController {
 	protected Logger log = Logger.getLogger(NewsController.class);
 	@Autowired
 	private NewsService service;
-
+	/**
+	 * 查询显示信息
+	 * @param news
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/list")
 	public String newsList(News news, Model model) {
 		PageInfo<News> page = service.pageList(news);
 		model.addAttribute("page", page);
 		return "news-list";
 	}
-
+	/**
+	 * 去添加信息
+	 * @return
+	 */
 	@RequestMapping("/to-insert")
 	public String toInsertNews() {
 		return "news-add";
 	}
-
+	/**
+	 * 添加新闻
+	 * @param news
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/insert")
 	public String insertNews(@Valid News news, BindingResult bindingResult, Model model) {
 		if (news.getTitle().length() > 20) {
@@ -51,21 +65,37 @@ public class NewsController {
 			return "redirect:list";
 		}
 	}
-
+	/**
+	 * 去修改信息
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/to-update")
 	public String toUpdateNews(Integer id, Model model) {
 		News news = service.getNewsById(id);
 		model.addAttribute("news", news);
 		return "news-update";
 	}
-
+	/**
+	 * 根据id查询信息
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/getNewsById")
 	public String getNewsById(Integer id, Model model) {
 		News news = service.getNewsById(id);
 		model.addAttribute("news", news);
 		return "news-content";
 	}
-
+	/**
+	 * 修改新闻
+	 * @param news
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/update")
 	public String updateNews(@Valid News news, BindingResult bindingResult, Model model) {
 		if (news.getTitle().length() > 20) {
@@ -84,7 +114,12 @@ public class NewsController {
 		return "redirect:list";
 		}
 	}
-
+	/**
+	 * 去删除新闻
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/toDelete")
 	public String toDeleteNews(Integer id, Model model) {
 		String tip = "确定要删除吗？确定请确定！";
@@ -92,14 +127,24 @@ public class NewsController {
 		model.addAttribute("news", id);
 		return "news-delete";
 	}
-
+	/**
+	 * 删除新闻
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/delete")
 	public String deleteNews(Integer id, Model model) {
 		boolean result = service.deleteNews(id);
 		model.addAttribute("oper_result", result);
 		return "redirect:list";
 	}
-
+	/**
+	 * 修改新闻发布状态
+	 * @param news
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/updatestatus")
 	public String updateNewsStatusById(News news, Model model) {
 		boolean result = service.updateNewsStatusById(news);

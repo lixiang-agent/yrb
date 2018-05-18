@@ -34,7 +34,7 @@ public class UserInfo extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:18:32 CST 2018
      */
-    private Integer phoneNum;
+    private Long phoneNum;
 
     /**
      *
@@ -132,7 +132,7 @@ public class UserInfo extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:18:32 CST 2018
      */
-    public UserInfo(Integer id, String account, Integer phoneNum, String password, String realName, String idcard, Integer authStatus, String email, String payPassword, BigDecimal totalBalance, String referee, Date createDate, Date modifyDate) {
+    public UserInfo(Integer id, String account, Long phoneNum, String password, String realName, String idcard, Integer authStatus, String email, String payPassword, BigDecimal totalBalance, String referee, Date createDate, Date modifyDate) {
         this.id = id;
         this.account = account;
         this.phoneNum = phoneNum;
@@ -214,7 +214,7 @@ public class UserInfo extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:18:32 CST 2018
      */
-    public Integer getPhoneNum() {
+    public Long getPhoneNum() {
         return phoneNum;
     }
 
@@ -226,7 +226,7 @@ public class UserInfo extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:18:32 CST 2018
      */
-    public void setPhoneNum(Integer phoneNum) {
+    public void setPhoneNum(Long phoneNum) {
         this.phoneNum = phoneNum;
     }
 

@@ -3,15 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<div class="modal-dialog">
-	<div class="modal-content">
+<div class="modal-dialog" style="width: 1000px">
+	<div class="modal-content" >
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal"
 				aria-label="Close">
 				<span aria-hidden="true">×</span>
 			</button>
 			<h4 class="modal-title">
-				<strong>查看项目详情</strong>
+				<strong>${loan.projectName}的项目审核记录</strong>
 			</h4>
 		</div>
 		<div class="modal-body">
@@ -24,14 +24,14 @@
 										<th class="center"><label> <input type="checkbox"
 												class="ace" /> <span class="lbl"></span>
 										</label></th>
-										<th>项目名称</th>
-										<th>项目编号</th>										
+										<!-- <th>项目名称</th> -->
+										<!-- <th>项目编号</th>										
 									
 										<th>借款金额</th>
 										<th>年利率(%)</th>
 										<th>借款期限</th>
 										<th>还款方式</th>									
-										<th>风险控制</th>
+										<th>风险控制</th> -->
 										<th>项目状态</th>
 										
 										<th>项目类型</th>
@@ -43,16 +43,16 @@
 								</thead>
 
 								<tbody>
-									<c:forEach items="${page.list  }" var="loan">
+									<c:forEach items="${operateRecord  }" var="operateRecord">
 										<tr>
 											<td class="center"><label> <input
 													type="checkbox" class="ace" value="${loan.id }" /> <span
 													class="lbl"></span>
 											</label></td>
-											<td>${loan.projectName}</td>
-											<td>${loan.projectNo}</td>
-											<%-- <td>${loan.loanUserId}</td> --%>
-											<td>${loan.loanUserName}</td>
+											<%-- <td>${loan.projectName}</td> --%>
+											<%-- <td>${loan.projectNo}</td>
+											
+											
 											<td>${loan.loanBalance}</td>
 											<td>${loan.annualRate}</td>
 											<td>${loan.loanTerm}</td>
@@ -60,11 +60,11 @@
 
 											<td>${loan.repaymentMethod==1?'到期还本付息':(loan.repaymentMethod==2?'按月付息,到期还本':'等额本息')}</td>
 
-											<%-- <td>${loan.loanReason}</td> --%>
-										<%-- 	<td>${loan.borrowerInfo}</td> --%>
-											<td>${loan.riskControl}</td>
+										
+											<td>${loan.riskControl}</td> --%>
 
 											
+											<%-- <td>${loan.projectStatus }</td> --%>
 											<td><c:choose>
 													<c:when test="${loan.projectStatus == 10}">
 														待提交
@@ -90,6 +90,15 @@
 
 
 												</c:choose></td>
+											
+											
+											
+											<td>${operateRecord.projectType==1?"借款项目":"投资项目"}</td>
+											<td>${operateRecord.operatorName}</td>
+											<td>${operateRecord.operatorDate}</td>
+											<td>${operateRecord.remark}</td>
+											
+											
 
 											<td>
 												<div

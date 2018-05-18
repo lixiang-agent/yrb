@@ -10,7 +10,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="account" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="phone_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="phone_num" javaType="java.lang.Long" jdbcType="BIGINT" />
       <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="idcard" javaType="java.lang.String" jdbcType="CHAR" />
