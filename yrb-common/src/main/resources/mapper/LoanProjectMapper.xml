@@ -16,13 +16,14 @@
       <arg column="loan_balance" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="annual_rate" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
       <arg column="loan_term" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="repayment_method" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="repayment_method" javaType="java.lang.Integer" jdbcType="BIT" />
       <arg column="loan_reason" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="borrower_info" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="risk_control" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="project_status" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="creator_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+       <arg column="creator_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="modifior_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="modifior_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="modify_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
@@ -36,8 +37,9 @@
     -->
     id, project_name, project_no, loan_user_id, loan_user_name, loan_balance, annual_rate, 
     loan_term, repayment_method, loan_reason, borrower_info, risk_control, project_status, 
-    creator_id, creator_name, modifior_id, modifior_name, modify_date
+    creator_id, creator_name,creator_Date, modifior_id, modifior_name, modify_date
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
       WARNING - @mbg.generated
@@ -73,7 +75,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectNo,jdbcType=INTEGER}, 
       #{loanUserId,jdbcType=INTEGER}, #{loanUserName,jdbcType=VARCHAR}, #{loanBalance,jdbcType=INTEGER}, 
-      #{annualRate,jdbcType=DECIMAL}, #{loanTerm,jdbcType=INTEGER}, #{repaymentMethod,jdbcType=BIT}, 
+      #{annualRate,jdbcType=DECIMAL}, #{loanTerm,jdbcType=INTEGER}, #{repaymentMethod,jdbcType=INTEGER}, 
       #{loanReason,jdbcType=VARCHAR}, #{borrowerInfo,jdbcType=VARCHAR}, #{riskControl,jdbcType=VARCHAR}, 
       #{projectStatus,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{creatorName,jdbcType=VARCHAR}, 
       #{modifiorId,jdbcType=INTEGER}, #{modifiorName,jdbcType=VARCHAR}, #{modifyDate,jdbcType=TIMESTAMP}
@@ -132,6 +134,9 @@
       <if test="creatorName != null">
         creator_name,
       </if>
+       <if test="creatorDate != null">
+        creator_date,
+      </if>
       <if test="modifiorId != null">
         modifior_id,
       </if>
@@ -168,7 +173,7 @@
         #{loanTerm,jdbcType=INTEGER},
       </if>
       <if test="repaymentMethod != null">
-        #{repaymentMethod,jdbcType=BIT},
+        #{repaymentMethod,jdbcType=INTEGER},
       </if>
       <if test="loanReason != null">
         #{loanReason,jdbcType=VARCHAR},
@@ -188,6 +193,9 @@
       <if test="creatorName != null">
         #{creatorName,jdbcType=VARCHAR},
       </if>
+      <if test="creatorDate != null">
+        #{creatorDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="modifiorId != null">
         #{modifiorId,jdbcType=INTEGER},
       </if>
@@ -199,6 +207,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.lixiang.ssm.entity.LoanProject">
     <!--
       WARNING - @mbg.generated
@@ -229,7 +238,7 @@
         loan_term = #{loanTerm,jdbcType=INTEGER},
       </if>
       <if test="repaymentMethod != null">
-        repayment_method = #{repaymentMethod,jdbcType=BIT},
+        repayment_method = #{repaymentMethod,jdbcType=INTEGER},
       </if>
       <if test="loanReason != null">
         loan_reason = #{loanReason,jdbcType=VARCHAR},
@@ -249,6 +258,9 @@
       <if test="creatorName != null">
         creator_name = #{creatorName,jdbcType=VARCHAR},
       </if>
+      <if test="creatorDate != null">
+        creator_date = #{creatorDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="modifiorId != null">
         modifior_id = #{modifiorId,jdbcType=INTEGER},
       </if>
@@ -261,6 +273,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.lixiang.ssm.entity.LoanProject">
     <!--
       WARNING - @mbg.generated
@@ -275,7 +288,7 @@
       loan_balance = #{loanBalance,jdbcType=INTEGER},
       annual_rate = #{annualRate,jdbcType=DECIMAL},
       loan_term = #{loanTerm,jdbcType=INTEGER},
-      repayment_method = #{repaymentMethod,jdbcType=BIT},
+      repayment_method = #{repaymentMethod,jdbcType=INTEGER},
       loan_reason = #{loanReason,jdbcType=VARCHAR},
       borrower_info = #{borrowerInfo,jdbcType=VARCHAR},
       risk_control = #{riskControl,jdbcType=VARCHAR},
@@ -287,4 +300,46 @@
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="listLoanProject" resultMap="BaseResultMap">
+  	select * from t_loan_project
+  	<where>
+			<if test="projectNo != null and projectNo!=''">
+				<bind name="projectNo2" value="'%'+projectNo+'%'"/>
+				and project_no like #{projectNo2}
+			</if>
+			<if test="projectStatus != null and projectStatus!=''">
+				
+				and project_status = #{projectStatus}
+			</if>
+		
+			<!-- and project_status in (10,20) -->
+		</where>
+
+  </select>
+  
+  
+  <update id="updateLoanSubmit" parameterType="com.lixiang.ssm.entity.LoanProject">
+   update t_loan_project set  project_status=20 where id= #{id}
+
+  </update>
+  
+  
+  <update id="subloanproject" parameterType="com.lixiang.ssm.entity.LoanProject">
+   update t_loan_project set  project_status=30 where id= #{id}
+
+  </update>
+  
+  
+   <update id="backloanproject" parameterType="com.lixiang.ssm.entity.LoanProject">
+   update t_loan_project set  project_status=11 where id= #{id}
+
+  </update>
+  
+  
+  
+  
+  
+  
+  
 </mapper>
