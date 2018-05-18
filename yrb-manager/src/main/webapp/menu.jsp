@@ -122,6 +122,16 @@
 
 					</ul>
 			   </li>
+			   <li class="" id="news"><a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 新闻管理 </span> <b
+						class="arrow icon-angle-down"></b>
+				</a>
+
+					<ul class="submenu">
+						<li id="resources"><a href="${ctx }/news/list">
+								<i class="icon-double-angle-right"></i> 新闻
+						</a></li>
+				</ul></li>
 				<li class="" id="inv">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-briefcase"></i> <span class="menu-text">投资管理 </span> <b

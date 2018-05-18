@@ -10,7 +10,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="classify" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="classify" javaType="java.lang.Integer" jdbcType="BIT" />
       <arg column="read_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="status" javaType="java.lang.Boolean" jdbcType="BIT" />
       <arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -25,7 +25,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="classify" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="classify" javaType="java.lang.Integer" jdbcType="BIT" />
       <arg column="read_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="status" javaType="java.lang.Boolean" jdbcType="BIT" />
       <arg column="creator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -252,4 +252,21 @@
       publisher_name = #{publisherName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="list" resultMap="ResultMapWithBLOBs">
+  	select *
+    from t_news
+    <where>
+    	<if test="title!=null and title!=''">
+    	<bind name="title2" value="'%'+title+'%'"/>
+    	title like #{title2}
+    	</if>
+    	<if test="classify!=null and classify!=''">
+    	classify=#{classify}
+    	</if>
+    	<if test="status!=null and status!=''">
+    	status=#{status}
+    	</if>
+    </where>
+  </select>
+
 </mapper>

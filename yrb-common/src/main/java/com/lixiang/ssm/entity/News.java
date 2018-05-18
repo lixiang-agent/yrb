@@ -1,10 +1,11 @@
 package com.lixiang.ssm.entity;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 
-public class News implements Serializable{
+import javax.validation.constraints.NotNull;
+
+public class News extends BaseEntity{
     /**
 	 * 
 	 */
@@ -26,6 +27,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
+    @NotNull
     private String title;
 
     /**
@@ -35,7 +37,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    private Boolean classify;
+    private Integer classify;
 
     /**
      *
@@ -116,6 +118,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
+    @NotNull
     private byte[] content;
 
     /**
@@ -124,7 +127,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    public News(Integer id, String title, Boolean classify, Integer readNumber, Boolean status, Integer creatorId, String creatorName, Date createDate, Date publishDate, Integer publisherId, String publisherName, byte[] content) {
+    public News(Integer id, String title, Integer classify, Integer readNumber, Boolean status, Integer creatorId, String creatorName, Date createDate, Date publishDate, Integer publisherId, String publisherName, byte[] content) {
         this.id = id;
         this.title = title;
         this.classify = classify;
@@ -205,7 +208,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    public Boolean getClassify() {
+    public Integer getClassify() {
         return classify;
     }
 
@@ -217,7 +220,7 @@ public class News implements Serializable{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    public void setClassify(Boolean classify) {
+    public void setClassify(Integer classify) {
         this.classify = classify;
     }
 
