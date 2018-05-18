@@ -236,6 +236,6 @@
   <select id="selectpPrincipalAndInterest" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.PaybackPlan" >
   	SELECT p.`plan_payback_date`,p.`project_name`,p.`operator_name`,inv.`project_type`,p.`payback_money` 
   	FROM t_payback_plan p,t_inv_project inv,t_inv_record r 
-  	WHERE p.`project_id`=inv.`id` AND inv.id = r.`inv_pro_id` AND r.`user_id` = #{uid }
+  	WHERE p.`project_id`=inv.`id` AND inv.id = r.`inv_pro_id` AND p.`inv_record_id`= r.`id` AND r.`user_id` =#{userId }
   </select>
 </mapper>
