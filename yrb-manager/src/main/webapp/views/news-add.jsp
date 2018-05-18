@@ -31,19 +31,21 @@
 			<div class="modal-body">
 				<div class="row">
 					<div style="text-align: center; margin: 0 auto; width: 80%;">
- 						<table>
-							<tr>
-								<td>标题:<input name="title"> <form:errors
-										path="title"></form:errors>
-								</td>
-							</tr>
-							<tr>
+						<p>
+							标题:<input id="title" name="title" placeholder="请输入标题" maxlength="12">
+							<form:errors path="title"></form:errors>
+						</p>
+						<p>
+							新闻类型：<select name="classify">
+								<option value="1">新闻公告</option>
+								<option value="2">媒体知识</option>
+								<option value="3">理财知识</option>
+							</select>
+						</p>
+						<p>
 							<TEXTAREA id="content" name="content"></TEXTAREA>
-								<form:errors path="content"></form:errors>
-							</tr>
-						</table> 
-								
-						
+							<form:errors path="content"></form:errors>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -56,28 +58,29 @@
 		</div>
 	</div>
 </form>
- <SCRIPT type=text/javascript>
+<SCRIPT type=text/javascript>
 	//var editor = new UE.ui.Editor();  
 	//editor.render("myEditor");  
 	UE.getEditor('content', {
-		toolbars : [ [
-			'fullscreen', 'source','|',
-			'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|',
-            'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
-            'touppercase', 'tolowercase', '|',
-            'link', 'unlink', 'anchor', '|',
-            'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'preview', 'help'
-		] ],
+		toolbars : [ [ 'undo', 'redo', '|', 'bold', 'italic', 'underline',
+				'fontborder', 'strikethrough', 'superscript', 'subscript',
+				'removeformat', '|', 'forecolor', 'backcolor',
+				'insertorderedlist', 'insertunorderedlist', '|', 'paragraph',
+				'fontfamily', 'fontsize', 'indent', '|', 'justifyleft',
+				'justifycenter', 'justifyright', 'justifyjustify', '|',
+				'touppercase', 'tolowercase', '|', 'link', 'unlink', '|',
+				'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+				'simpleupload', 'insertimage', 'emotion', '|', 'horizontal',
+				'time', 'spechars', '|', 'preview', 'help' ] ],
 		autoHeightEnabled : true,
 		autoFloatEnabled : true
 	});
-</SCRIPT> 
+	$("#title").on("blur", function() {
+		if ($("#title").val() != null && $("#title").val() != ''&&$("#content").val() != null && $("#content").val() != '') {
+			$("#submit1").attr("disabled", true);
+		} else {
+			$("#submit1").attr("disabled", false);
+
+		}
+	});
+</SCRIPT>
