@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.News;
 
 public interface NewsMapper {
@@ -58,4 +60,9 @@ public interface NewsMapper {
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
     int updateByPrimaryKey(News record);
+
+	List<News> listIndexNews();
+	
+	List<News> list(News news);
 }
+

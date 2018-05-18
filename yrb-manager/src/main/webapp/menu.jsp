@@ -122,6 +122,16 @@
 
 					</ul>
 			   </li>
+			   <li class="" id="news"><a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 新闻管理 </span> <b
+						class="arrow icon-angle-down"></b>
+				</a>
+
+					<ul class="submenu">
+						<li id="resources"><a href="${ctx }/news/list">
+								<i class="icon-double-angle-right"></i> 新闻
+						</a></li>
+				</ul></li>
 				<li class="" id="inv">
 					<a href="#" class="dropdown-toggle">
 						<i class="icon-briefcase"></i> <span class="menu-text">投资管理 </span> <b
@@ -130,12 +140,17 @@
 					<ul class="submenu">
 						<li id="invpro">
 							<a href="${ctx }/investManage/pageList"> <i
-								class="icon-double-angle-right"></i> 投资项目
+								class="icon-double-angle-right"></i> 投资项目总览
 							</a>
 						</li>
-						<li id="role">
-							<a  href="${ctx }/getRolesList"> <i
-								class="icon-double-angle-right"></i> 审批投资项目
+						<li id="oper">
+							<a  href="${ctx }/investManage/listOperProject"> <i
+								class="icon-double-angle-right"></i> 项目审批处理
+							</a>
+						</li>
+						<li id="serviceOper">
+							<a  href="${ctx }/investManage/listServiceProject"> <i
+								class="icon-double-angle-right"></i> 项目业务处理
 							</a>
 						</li>
 					</ul>
@@ -152,14 +167,22 @@
 								class="icon-double-angle-right"></i> 定时任务
 							</a>
 						</li>
-
 					</ul>
 			   </li>
-
-
-			</ul>
-			<!-- /.nav-list -->
-
+					<li class="" id="platfromuser">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 平台用户 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+					
+					<ul class="submenu">
+						<li id="platfrom">
+							<a href="${ctx }/getPlatfromList"> <i
+								class="icon-double-angle-right"></i> 平台用户列表
+							</a>
+						</li>
+					</ul>
+			   </li>
 		</div>
 	</div>
 	

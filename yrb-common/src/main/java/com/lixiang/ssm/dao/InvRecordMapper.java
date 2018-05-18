@@ -1,5 +1,7 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.InvRecord;
 
 public interface InvRecordMapper {
@@ -50,4 +52,26 @@ public interface InvRecordMapper {
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
     int updateByPrimaryKey(InvRecord record);
+    
+    /**
+     * 投资
+     * @param invRecord
+     * @return
+     */
+    List<InvRecord> selectInvestRecord(InvRecord invRecord );
+    
+    /**
+     * 累积本金和利润
+     * @param invRecord
+     * @return
+     */
+    InvRecord acc(InvRecord invRecord);
+    
+    /**
+     * 待收本金和利润
+     * @param invRecord
+     * @return
+     */
+    InvRecord dueIn(InvRecord invRecord);
+
 }

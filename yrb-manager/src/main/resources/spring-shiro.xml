@@ -17,8 +17,8 @@
 		<property name="realm" ref="jdbcRealm" />
 		<property name="rememberMeManager.cookie.maxAge" value="#{10*24*60*60}">
 		</property>
-		<property name="sessionManager" ref="sessionManager">
-		</property>
+		<!-- <property name="sessionManager" ref="sessionManager">
+		</property> -->
 	</bean>
 
 	<!-- 配饰session管理 -->
