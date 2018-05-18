@@ -34,7 +34,7 @@
       <arg column="publish_date" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="publisher_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="publisher_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="content" javaType="_byte[]" jdbcType="LONGVARBINARY" />
+      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
@@ -82,7 +82,7 @@
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{classify,jdbcType=BIT}, 
       #{readNumber,jdbcType=INTEGER}, #{status,jdbcType=BIT}, #{creatorId,jdbcType=INTEGER}, 
       #{creatorName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{publishDate,jdbcType=DATE}, 
-      #{publisherId,jdbcType=INTEGER}, #{publisherName,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARBINARY}
+      #{publisherId,jdbcType=INTEGER}, #{publisherName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lixiang.ssm.entity.News">
@@ -165,7 +165,7 @@
         #{publisherName,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        #{content,jdbcType=LONGVARBINARY},
+        #{content,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -208,7 +208,7 @@
         publisher_name = #{publisherName,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
-        content = #{content,jdbcType=LONGVARBINARY},
+        content = #{content,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -230,7 +230,7 @@
       publish_date = #{publishDate,jdbcType=DATE},
       publisher_id = #{publisherId,jdbcType=INTEGER},
       publisher_name = #{publisherName,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARBINARY}
+      content = #{content,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lixiang.ssm.entity.News">

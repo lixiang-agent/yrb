@@ -62,7 +62,9 @@ public class NewsController {
 	}
 	@RequestMapping("/update")
 	public String updateNews(News news,Model model){
+		log.debug(news);
 		boolean result = service.updateNews(news);
+		log.debug(result);
 		model.addAttribute("oper_result", result);
 		return "redirect:list";
 	}

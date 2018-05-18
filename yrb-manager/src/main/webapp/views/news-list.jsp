@@ -106,7 +106,7 @@
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 													<a class="green"
-														href="${ctx}/news/toUpdateNews?id=${news.id}"
+														href="${ctx}/news/to-update?id=${news.id}"
 														data-toggle="modal" data-target="#updateModal"
 														title="修改信息"> <i class="icon-pencil bigger-130"></i>
 													</a>
@@ -269,13 +269,9 @@
 
 	<script type="text/javascript">
 		//模态框隐藏的时候把原来模态框里面的内容去掉
-		 $("#roleModal").on("hidden.bs.modal", function() {
+		 $("#updateModal").on("hidden.bs.modal", function() {
 			 $(this).removeData("bs.modal");
 			}); 
-		 
-		$("#userModal").on("hidden.bs.modal", function() {
-			$(this).removeData("bs.modal");
-		});
 	</script>
 
 </body>
