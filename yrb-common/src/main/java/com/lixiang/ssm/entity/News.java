@@ -27,7 +27,7 @@ public class News extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    @NotNull
+    @NotNull(message="标题不能为空")
     private String title;
 
     /**
@@ -118,7 +118,7 @@ public class News extends BaseEntity{
      *
      * @mbg.generated Wed May 16 11:53:23 CST 2018
      */
-    @NotNull
+    @NotNull(message="内容不能为空")
     private byte[] content;
 
     /**

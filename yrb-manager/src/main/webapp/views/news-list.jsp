@@ -106,13 +106,13 @@
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 													<a class="green"
-														href="${ctx}/user/toUpdateNews?id=${news.id}"
+														href="${ctx}/news/toUpdateNews?id=${news.id}"
 														data-toggle="modal" data-target="#updateModal"
 														title="修改信息"> <i class="icon-pencil bigger-130"></i>
 													</a>
 
 													<!-- 发送请求(删除) -->
-													<a class="red" href="${ctx}/toDelete?id=${news.id}"
+													<a class="red" href="${ctx}/news/toDelete?id=${news.id}"
 														data-toggle="modal" data-target="#deleteModal"
 														title="删除信息"> <i class="icon-trash bigger-130"></i>
 													</a>
