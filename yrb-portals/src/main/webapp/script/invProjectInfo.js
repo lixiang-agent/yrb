@@ -1,5 +1,6 @@
 $().ready(function() {
 	$("#submit").click(function() {
+		$("#errorInfo").html("");
 		var reg=/((^([1-9]\d*))|^0)(\.\d{1,2})?$|(^[-]0\.\d{1,2}$)/;
 		if($("#investBalance").val()==""){
 			$("#errorInfo").html("请输入金额");
