@@ -35,6 +35,10 @@ public class NewsController {
 		List<InvProject> invProjectsMap = redisCacheProjects.getCacheList("projectsList:index");
 		model.addAttribute("projectsMap",invProjectsMap);
 		
+		//获取统计信息
+		List<Double> countDateList = redisCacheProjects.getCacheList("CountDate:index");
+		model.addAttribute("countDateList",countDateList);
+		
 		return "index";
 	}
 }

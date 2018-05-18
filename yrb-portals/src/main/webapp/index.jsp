@@ -151,7 +151,7 @@ $(function(){
     </div>
   </div>
   <a class="more" href="#">更多</a> </div>
-<div class="ipubs"><span class="o1">累计投资金额:<strong>1,047,288,128.79</strong>元</span> <span class="o2">已还本息:<strong>400,507,750.81</strong>元</span><span class="o2">余额:<strong>677,679,983.07</strong>元</span><span class="o4">注册人数:<strong>20649</strong>人</span></div>
+<div class="ipubs"><span class="o1">累计投资金额:<strong><fmt:formatNumber value="${countDateList[0]}" pattern="#,#00.0#"/></strong>元</span> <span class="o2">已还本息:<strong><fmt:formatNumber value="${countDateList[1]}" pattern="#,#00.0#"/></strong>元</span><span class="o2">余额:<strong><fmt:formatNumber value="${countDateList[2]}" pattern="#,#00.0#"/></strong>元</span><span class="o4">注册人数:<strong>${countDateList[3]}</strong>人</span></div>
 <div class="feature"> <a class="fea1" href="#"> <i></i>
   <h3>高收益</h3>
   <span>年化收益率最高达“20%<br>
@@ -190,7 +190,7 @@ $(function(){
                       <td><div class="circle">
                           <div class="left progress-bar">
                             <div class="progress-bgPic progress-bfb5">
-                              <div class="show-bar"><fmt:formatNumber value="0.56" type="number" pattern="0.0%" /></div>
+                              <div class="show-bar"><fmt:formatNumber value="${projects.invBalance/projects.invTotbalance}" type="number" pattern="0.0%" /></div>
                             </div>
                           </div>
                         </div></td>
@@ -225,7 +225,7 @@ $(function(){
                       <td><div class="circle">
                           <div class="left progress-bar">
                             <div class="progress-bgPic progress-bfb10">
-                              <div class="show-bar"> 100% </div>
+                              <div class="show-bar"><fmt:formatNumber value="${projectCar.invBalance/projectCar.invTotbalance}" type="number" pattern="0.0%" /></div>
                             </div>
                           </div>
                         </div></td>
@@ -260,7 +260,7 @@ $(function(){
                       <td><div class="circle">
                           <div class="left progress-bar">
                             <div class="progress-bgPic progress-bfb10">
-                              <div class="show-bar"> 100% </div>
+                              <div class="show-bar"><fmt:formatNumber value="${projectHouse.invBalance/projectHouse.invTotbalance}" type="number" pattern="0.0%" /></div>
                             </div>
                           </div>
                         </div></td>
@@ -295,7 +295,7 @@ $(function(){
                       <td><div class="circle">
                           <div class="left progress-bar">
                             <div class="progress-bgPic progress-bfb10">
-                              <div class="show-bar"> 100% </div>
+                              <div class="show-bar"><fmt:formatNumber value="${projectObligation.invBalance/projectObligation.invTotbalance}" type="number" pattern="0.0%" /></div>
                             </div>
                           </div>
                         </div></td>

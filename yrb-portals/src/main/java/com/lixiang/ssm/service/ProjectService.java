@@ -24,10 +24,11 @@ public class ProjectService {
 		List<InvProject> listIndexHouseProjects = invProjectMapper.listIndexHouseProjects();
 		List<InvProject> listIndexObligationProjects = invProjectMapper.listIndexObligationProjects();
 						
-		invProject.addAll(listIndexCommendProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()-1));
-		invProject.addAll(listIndexCarProjects.subList(listIndexCarProjects.size()-2, listIndexCarProjects.size()-1));
-		invProject.addAll(listIndexHouseProjects.subList(listIndexHouseProjects.size()-2, listIndexHouseProjects.size()-1));
-		invProject.addAll(listIndexObligationProjects.subList(listIndexObligationProjects.size()-2, listIndexObligationProjects.size()-1));
+//		invProject.addAll(listIndexCommendProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()-1));
+		invProject.addAll(listIndexCommendProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()));
+		invProject.addAll(listIndexCarProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()));
+		invProject.addAll(listIndexHouseProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()));
+		invProject.addAll(listIndexObligationProjects.subList(listIndexCommendProjects.size()-2, listIndexCommendProjects.size()));
 		
 		return invProject;
 	}
