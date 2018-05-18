@@ -1,6 +1,9 @@
 package com.lixiang.ssm.dao;
 
+import java.util.List;
+
 import com.lixiang.ssm.entity.LoanProject;
+import com.lixiang.ssm.entity.User;
 
 public interface LoanProjectMapper {
     /**
@@ -50,4 +53,13 @@ public interface LoanProjectMapper {
      * @mbg.generated Wed May 16 12:22:04 CST 2018
      */
     int updateByPrimaryKey(LoanProject record);
+    
+    List<LoanProject> listLoanProject(LoanProject loanProject);
+    
+   boolean updateLoanSubmit(LoanProject loanProject);
+   
+   boolean subloanproject(LoanProject loanProject);
+   
+   boolean backloanproject(LoanProject loanProject);
+    
 }

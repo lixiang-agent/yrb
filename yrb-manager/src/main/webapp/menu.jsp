@@ -122,12 +122,15 @@
 
 					</ul>
 			   </li>
+
 			   <li class="" id="news"><a href="#" class="dropdown-toggle">
 						<i class="icon-list"></i> <span class="menu-text"> 新闻管理 </span> <b
 						class="arrow icon-angle-down"></b>
 				</a>
 
+
 					<ul class="submenu">
+
 						<li id="resources"><a href="${ctx }/news/list">
 								<i class="icon-double-angle-right"></i> 新闻
 						</a></li>
@@ -161,6 +164,42 @@
 						class="arrow icon-angle-down"></b>
 					</a>
 
+  <!-- 借款项目管理 -->
+			   <li class="" id="loan">
+					<a href="#" class="dropdown-toggle">
+						<i class="icon-list"></i> <span class="menu-text"> 借款管理 </span> <b
+						class="arrow icon-angle-down"></b>
+					</a>
+						<li id="loanlist">
+							<a href="${ctx }/loan/listLoanProject"> <i
+								class="icon-double-angle-right"></i> 借款列表
+							</a>
+						</li>
+						<li id="loancheck">
+							<a  href="${ctx }/loan/listloancheck?projectStatus=20"> <i
+								class="icon-double-angle-right"></i> 项目审核
+							</a>
+						</li>
+						
+						 <li id="loansubmit">
+							<a  href="${ctx }/loan/loansubmit?projectStatus=10"> <i
+								class="icon-double-angle-right"></i> 未提交项目
+							</a>
+						</li>
+					<%-- <li id="checkrecord">
+							<a  href="${ctx }/loan/checkrecord"> <i
+								class="icon-double-angle-right"></i> 审核记录
+							</a>
+						</li> --%>
+						
+						<li id="readyloan">
+							<a  href="${ctx }/loan/readyloan"> <i
+								class="icon-double-angle-right"></i> 待放款项目
+							</a>
+						</li> 
+
+
+
 					<ul class="submenu">
 						<li id="schedulelist">
 							<a href="${ctx }/schedule/list"> <i
@@ -183,6 +222,37 @@
 						</li>
 					</ul>
 			   </li>
+
+					</ul>
+			   </li>
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			 
+			</ul>
+			<!-- /.nav-list -->
+
+>>>>>>> refs/heads/dev
 		</div>
 	</div>
 	
