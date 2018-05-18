@@ -117,4 +117,26 @@ public interface InvProjectMapper {
 	List<InvProject> listIndexHouseProjects();
 	List<InvProject> listIndexObligationProjects();
 	
+    /**
+     * 增加用户的投资记录
+     * @param invRecord 根据页面传过来的InvRecord来增加记录
+     * @return
+     */
+    Integer addInvRecord(InvRecord invRecord);
+    /**
+     * 当有人投资时，修改投资项目的记录
+     * @param invRecord 根据页面传过来的InvRecord来修改记录
+     * @return
+     */
+    Integer updateInvProject(InvRecord invRecord);
+    /**
+     * 修改用户的金额
+     * @param uid 用户id
+     * @param password 用户密码
+     * @param money	用户投资的金额
+     * @return
+     */
+    Integer updateUserBalance(@Param("uid")Integer uid,@Param("password")String password,@Param("money")Double money);
+    
+
 }
