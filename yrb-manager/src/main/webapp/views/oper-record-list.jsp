@@ -59,8 +59,9 @@
 												class="input-group-btn">
 												<button class="btn btn-primary btn-sm" type="submit">查询</button>
 												<a class="btn btn-primary btn-sm"
-												href="${ctx }/investManage/showOperRecord" data-toggle="modal"
-												data-target="#myOperRecordModal" role="button" title="新增项目">查看审核记录</a>
+												href="${ctx }/investManage/showOperRecord"
+												data-toggle="modal" data-target="#myOperRecordModal"
+												role="button" title="新增项目">查看审核记录</a>
 											</span>
 
 										</div>
@@ -112,7 +113,7 @@
 												</c:if> <c:if test="${operRecord.projectStatus==11}">
 													退回
 												</c:if> <c:if test="${operRecord.projectStatus==20}">
-													待审批
+													<span style="color:purple;">待审批</span>
 												</c:if> <c:if test="${operRecord.projectStatus==30}">
 													待发布
 												</c:if> <c:if test="${operRecord.projectStatus==40}">
@@ -127,23 +128,13 @@
 													流标
 												</c:if></td>
 											<td>
-												<div
-													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+												<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 													<c:if test="${operRecord.projectStatus==20}">
 														<a class="green"
 															href="${ctx }/investManage/toPass?id=${operRecord.id}"
 															data-toggle="modal" data-target="#passModal" title="通过审核">
 															<i class="icon-check bigger-130"></i>
 														</a>
-													</c:if>
-													<c:if test="${operRecord.projectStatus==30}">
-														<a class="green"
-															href="${ctx }/investManage/toRelease?id=${operRecord.id}"
-															data-toggle="modal" data-target="#releaseModal"
-															title="发布项目"> <i class="icon-upload bigger-130"></i>
-														</a>
-													</c:if>
-													<c:if test="${operRecord.projectStatus==20}">
 														<a class="red"
 															href="${ctx }/investManage/toFail?id=${operRecord.id}"
 															data-toggle="modal" data-target="#failModal"
@@ -156,6 +147,7 @@
 														id="details" title="项目详情"> <i
 														class="icon-search bigger-130"></i>
 													</a>
+
 												</div>
 
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -199,8 +191,8 @@
 
 						<div class="modal-footer no-margin-top">
 							<w:pager pageSize="${inv.pageSize }"
-								url="${ctx }/investManage/pageList" recordCount="${inv.total }"
-								pageNum="${inv.pageNum }" />
+								url="${ctx }/investManage/listOperProject"
+								recordCount="${inv.total }" pageNum="${inv.pageNum }" />
 						</div>
 
 					</div>
@@ -214,14 +206,6 @@
 	</div>
 	<!-- 审核项目的模态框 -->
 	<div class="modal fade" id="passModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
-
-	<!-- 发布项目的模态框 -->
-	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
@@ -243,15 +227,15 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
-	
+
 	<!-- 审核操作记录的模态框 -->
-	<div class="modal fade" id="myOperRecordModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="myOperRecordModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>
 	</div>
-	
+
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"
 			id="ace-settings-btn">

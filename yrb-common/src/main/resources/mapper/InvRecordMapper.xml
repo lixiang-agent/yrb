@@ -156,10 +156,22 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<select id="selectInvestRecord" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.InvRecord">
-		SELECT invr.inv_date,invp.project_name,invp.project_status,invr.invrec_money,
-		SUM((invr.invrec_money*(1+invp.rate)/100 * pay.payback_no)-invr.invrec_money) interest  
+	 SELECT invr.inv_date,invp.project_name,invp.project_status,invr.invrec_money,
+		SUM(pay.`payback_money` ) interest
 		FROM t_inv_record invr,t_inv_project invp,t_payback_plan pay 
-		WHERE invr.inv_pro_id = invp.id AND pay.inv_record_id = invr.id AND invr.user_id = #{userId}
+		WHERE invr.inv_pro_id = invp.id AND pay.inv_record_id = invr.id AND invr.user_id = #{userId} 
+		<if test="projectStatus!=null">
+			AND invp.`project_status`= #{projectStatus }
+		</if>
 	</select>
-  
+	<select id="acc" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.InvRecord">
+  	SELECT SUM(invr.`invrec_money`) invrec_money,SUM(pay.`payback_money`) payback_money 
+  	FROM t_inv_record invr,t_payback_plan pay 
+  	WHERE invr.`id` = pay.`inv_record_id` AND invr.`user_id` = #{userId }
+  </select>
+  <select id="dueIn" parameterType="java.lang.Integer" resultType="com.lixiang.ssm.entity.InvRecord">
+  	SELECT SUM(CASE payback_status WHEN 0 THEN payback_money ELSE 0 END ) payback_money,SUM(CASE payback_status WHEN 0 THEN payback_margin ELSE 0 END) payback_margin 
+  	FROM t_inv_record invr,t_payback_plan pay 
+  	WHERE invr.`id` = pay.`inv_record_id` AND invr.`user_id` = 1
+  </select>
 </mapper>

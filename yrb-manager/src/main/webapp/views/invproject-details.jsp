@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <form action="${ctx }/investManage/pageList" method="post">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -19,9 +20,8 @@
 					<thead>
 						<tr>
 							<td>项目名称:</td>
-							<td><input type="text" name="projectName"
-								class="form-control" value="${invProject.projectName }"
-								maxlength="40" disabled="disabled"></td>
+							<td>${invProject.projectName }
+								</td>
 						</tr>
 						<tr>
 							<td>项目类型:</td>
@@ -41,86 +41,61 @@
 						</tr>
 						<tr>
 							<td>项目编号:</td>
-							<td><input type="text" name="invNo" class="form-control"
-								value="${invProject.invNo }" maxlength="40" disabled="disabled"></td>
+							<td>${invProject.invNo}</td>
 						</tr>
 						<tr>
 							<td>需投资总金额:</td>
-							<td><input type="text" name="invTotbalance"
-								class="form-control" value="${invProject.invTotbalance }"
-								disabled="disabled" maxlength="10"></td>
+							<td>${invProject.invTotbalance}</td>
 						</tr>
 						<tr>
 							<td>年利率:</td>
-							<td><input type="text" name="rate" class="form-control"
-								value="${invProject.rate }" disabled="disabled" maxlength="12"></td>
+							<td>${invProject.rate}</td>
 						</tr>
 						<tr>
 							<td>回款期限:</td>
-							<td><input type="text" name="paybackTime"
-								class="form-control" value="${invProject.paybackTime }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.paybackTime}</td>
 						</tr>
 						<tr>
 							<td>保障方式:</td>
-							<td><input type="text" name="safeWay" class="form-control"
-								value="${invProject.safeWay }" disabled="disabled"
-								maxlength="12"></td>
+							<td>${invProject.safeWay}</td>
 						</tr>
 						<tr>
 							<td>回款方式:</td>
 							<td>
 							<c:if test="${invProject.paybackWay==0 }">
-							<input type="text" name="paybackWay"
-								class="form-control" value="到期还本"
-								disabled="disabled" maxlength="12">
+							到期还本
 							</c:if>
 							<c:if test="${invProject.paybackWay==1 }">
-							<input type="text" name="paybackWay"
-								class="form-control" value="按月付息"
-								disabled="disabled" maxlength="12">
+							按月付息
 							</c:if>
 							<c:if test="${invProject.paybackWay==2 }">
-							<input type="text" name="paybackWay"
-								class="form-control" value="等额本息"
-								disabled="disabled" maxlength="12">
+							等额本息
 							</c:if>
 							</td>
 						</tr>
 						<tr>
 							<td>已投资金额:</td>
-							<td><input type="text" name="invBalance"
-								class="form-control" value="${invProject.invBalance }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.invBalance }</td>
 						</tr>
 						<tr>
 							<td>最小投资金额:</td>
-							<td><input type="text" name="minInvBalance"
-								class="form-control" value="${invProject.minInvBalance }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.minInvBalance }</td>
 						</tr>
 						<tr>
 							<td>最大投资金额:</td>
-							<td><input type="text" name="maxInvBalance"
-								class="form-control" value="${invProject.maxInvBalance }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.maxInvBalance }</td>
 						</tr>
 						<tr>
 							<td>借款原因:</td>
-							<td><input type="text" name="loanReason"
-								class="form-control" value="${invProject.loanReason }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.loanReason }</td>
 						</tr>
 						<tr>
 							<td>发标时间:</td>
-							<td><input type="text" name="biddingDate"
-								class="form-control" value="${invProject.biddingDate }"
-								disabled="disabled" maxlength="12"></td>
+							<td><fmt:formatDate value="${invProject.biddingDate }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 						<tr>
 							<td>借款人信息:</td>
-							<td><textarea name="borrowerInfo" class="form-control"
-									disabled="disabled">${invProject.borrowerInfo }</textarea></td>
+							<td>${invProject.borrowerInfo }</td>
 						</tr>
 						<tr>
 							<td>风险控制:</td>
@@ -130,98 +105,62 @@
 						<tr>
 							<td>项目状态:</td>
 							<td><c:if test="${invProject.projectStatus==10}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="待提交"
-								disabled="disabled" maxlength="12">
+								待提交
 							</c:if> <c:if test="${invProject.projectStatus==11}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="退回"
-								disabled="disabled" maxlength="12">
+								退回
 							</c:if> <c:if test="${invProject.projectStatus==20}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="待审批"
-								disabled="disabled" maxlength="12">		
+								待审批		
 							</c:if> <c:if test="${invProject.projectStatus==30}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="待发布"
-								disabled="disabled" maxlength="12">						
+								待发布					
 							</c:if> <c:if test="${invProject.projectStatus==40}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="筹款中"
-								disabled="disabled" maxlength="12">					
+								筹款中					
 							</c:if> <c:if test="${invProject.projectStatus==50}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="筹资成功"
-								disabled="disabled" maxlength="12">						
+								筹资成功						
 							</c:if> <c:if test="${invProject.projectStatus==60}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="还款中"
-								disabled="disabled" maxlength="12">						
+								还款中						
 							</c:if> <c:if test="${invProject.projectStatus==70}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="结束"
-								disabled="disabled" maxlength="12">						
+								结束					
 							</c:if> <c:if test="${invProject.projectStatus==100}">
-								<input type="text" name="projectStatus"
-								class="form-control" value="流标"
-								disabled="disabled" maxlength="12">						
+								流标				
 							</c:if></td>
 						</tr>
 						<tr>
 							<td>筹资预期结束时间:</td>
-							<td><input type="text" name="financingEndTime"
-								class="form-control" value="${invProject.financingEndTime }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.financingEndTime}</td>
 						</tr>
 						<c:if test="${invProject.projectStatus==40}">
 							<tr>
 								<td>筹资实际结束时间:</td>
-								<td><input type="text" name="endTime"
-									class="form-control" value="${invProject.endTime }"
-									disabled="disabled" maxlength="12"></td>
+								<td>${invProject.endTime }</td>
 							</tr>
 						</c:if>
 						<tr>
 							<td>创建人ID:</td>
-							<td><input type="text" name="creatorId"
-								class="form-control" value="${invProject.creatorId }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.creatorId }</td>
 						</tr>
 						<tr>
 							<td>创建人姓名:</td>
-							<td><input type="text" name="creatorName"
-								class="form-control" value="${invProject.creatorName }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.creatorName }</td>
 						</tr>
 						<tr>
 							<td>修改人ID:</td>
-							<td><input type="text" name="modifiorId"
-								class="form-control" value="${invProject.modifiorId }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.modifiorId }</td>
 						</tr>
 						<tr>
 							<td>修改人姓名:</td>
-							<td><input type="text" name="modifiorName"
-								class="form-control" value="${invProject.modifiorName }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.modifiorName }</td>
 						</tr>
 						<tr>
 							<td>修改时间:</td>
-							<td><input type="text" name="modifyDate"
-								class="form-control" value="${invProject.modifyDate }"
-								disabled="disabled" maxlength="12"></td>
+							<td>${invProject.modifyDate }</td>
 						</tr>
 						<tr>
 							<td>项目来源:</td>
 							<c:if test="${invProject.resource==1}">
-								<td><input type="text" name="resource"
-									class="form-control" value="借款项目"
-									disabled="disabled" maxlength="12"></td>
+								<td>借款项目</td>
 							</c:if>
 							<c:if test="${invProject.resource==2}">
-								<td><input type="text" name="resource"
-									class="form-control" value="新建项目"
-									disabled="disabled" maxlength="12"></td>
+								<td>新建项目</td>
 							</c:if>
 						</tr>
 						<tr>
