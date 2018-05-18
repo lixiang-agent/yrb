@@ -1,5 +1,6 @@
 package com.lixiang.ssm.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -136,7 +137,7 @@ public interface InvProjectMapper {
      * @param money	用户投资的金额
      * @return
      */
-    Integer updateUserBalance(@Param("uid")Integer uid,@Param("password")String password,@Param("money")Double money);
+    Integer updateUserBalance(@Param("uid")Integer uid,@Param("password")String password,@Param("money")BigDecimal money);
     
 
 }

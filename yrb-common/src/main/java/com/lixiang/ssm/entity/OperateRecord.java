@@ -303,5 +303,14 @@ public class OperateRecord {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
+
+
+	@Override
+	public String toString() {
+		return "OperateRecord [id=" + id + ", operType=" + operType + ", operatorDate=" + operatorDate
+				+ ", projectType=" + projectType + ", projectName=" + projectName + ", projectId=" + projectId
+				+ ", operatorId=" + operatorId + ", operatorName=" + operatorName + ", remark=" + remark + "]";
+
+	}
     
 }

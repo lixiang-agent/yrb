@@ -54,4 +54,8 @@ public interface OperateRecordMapper {
     int updateByPrimaryKey(OperateRecord record);
     
     List<OperateRecord> queryOperRecord(OperateRecord record);
+    List<OperateRecord> getoperator(Integer id);
+
+    List<OperateRecord> queryProOperRecord(Integer id);
+
 }

@@ -2,6 +2,7 @@ package com.lixiang.ssm.dao;
 
 import java.util.List;
 
+
 import com.lixiang.ssm.entity.InvRecord;
 
 public interface InvRecordMapper {
@@ -73,5 +74,7 @@ public interface InvRecordMapper {
      * @return
      */
     InvRecord dueIn(InvRecord invRecord);
+    
+    List<InvRecord> queryListInvRecord(Integer id);
 
 }

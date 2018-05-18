@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.dao.InvProjectMapper;
+import com.lixiang.ssm.dao.InvRecordMapper;
 import com.lixiang.ssm.dao.OperateRecordMapper;
 import com.lixiang.ssm.entity.InvProject;
+import com.lixiang.ssm.entity.InvRecord;
 import com.lixiang.ssm.entity.OperateRecord;
 
 @Service
@@ -19,7 +21,9 @@ public class InvManageService {
 	private InvProjectMapper invProjectMapper;
 	@Autowired
 	private OperateRecordMapper operateRecordMapper;
-
+	@Autowired
+	private InvRecordMapper invRecordMapper;
+	
 	public PageInfo<InvProject> pageList(InvProject record) {
 		// 获取第1页，10条内容，默认查询总数count
 		PageHelper.startPage(record.getPageNum(), record.getPageSize());
@@ -67,6 +71,10 @@ public class InvManageService {
 		
 		return list;
 	}
+	
+	public List<OperateRecord> queryProOperRecord(Integer id){
+		return operateRecordMapper.queryProOperRecord(id);
+	}
 	public int insertSelective(InvProject record) {
 		return invProjectMapper.insertSelective(record);
 	}
@@ -89,5 +97,8 @@ public class InvManageService {
 
 	public int insertSelective(OperateRecord record) {
 		return operateRecordMapper.insertSelective(record);
+	}
+	public List<InvRecord> queryListInvRecord(Integer id){
+		return invRecordMapper.queryListInvRecord(id);
 	}
 }

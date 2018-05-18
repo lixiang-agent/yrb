@@ -84,18 +84,22 @@
 							<div class="text"> 可投金额：<span class="f24 c-333">${invProjectSingle.invProject.invTotbalance - invProjectSingle.invProject.invBalance }</span>元<br>
 								<div class="info-2" style="padding-bottom: 10px;"><span class="info2-input">
 								<!-- 投资表单 -->
-								<form action="4444" method="post" id="invBalanceForm">
+								<form action="${ctx }/invProject/toInvest" method="post" id="invBalanceForm">
 								  <input type="hidden" value="" name="userId"/>
-				                  <input type="text" id="investBalance" placeholder="投资金额" class="tx-txt" style="width: 206px;height: 23px;" />
+				                  <input type="text" id="investBalance"  name="investBalance" placeholder="投资金额" class="tx-txt" style="width: 206px;height: 23px;" />
 				                  <span class="info-tit">元</span>
 													<span class="quick-error3" id="investError"></span> </div>
 													<div class="info-2" style="padding-bottom: 10px;"><span class="info2-input">
-				                  <input type="password" id="password" placeholder="交易密码" class="tx-txt" style="width: 206px;height: 23px;" />
+				                  <input type="password" id="password" name="password" placeholder="交易密码" class="tx-txt" style="width: 206px;height: 23px;" />
 													<span class="quick-error3" id="investError"></span> </div>
 											
 								<input type="submit" id="submit" value="我要投资" style=" float: left;width: 233px;height: 28px;background: #f66257;font-size: 20px;color: #fff;border-radius: 2px;border: none;cursor: pointer;transition: background 0.3s ease-in-out;" onclick="return getShowPayVal1()" />
 									<i class="icon icon-status icon-status1"></i><br />
-									<span id="errorInfo" style="color: red;"></span>
+									<span id="errorInfo" style="color: red;">
+										<c:if test="${not empty msg }">
+											${msg }
+										</c:if>
+									</span>
 								</form>
 									
 								</div>

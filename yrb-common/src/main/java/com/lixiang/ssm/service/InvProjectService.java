@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
  * @author Administrator
  *
  */
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lixiang.ssm.dao.InvProjectMapper;
 import com.lixiang.ssm.entity.InvProject;
 import com.lixiang.ssm.entity.InvProjectSingle;
+import com.lixiang.ssm.entity.InvRecord;
 @Service
 public class InvProjectService {
 	
@@ -40,5 +42,22 @@ public class InvProjectService {
 		invProjectSingle.setPaybackPlan(invProjectMapper.getPaybackPlan(id));
 		invProjectSingle.setRepaymentBalance(invProjectMapper.getRepaymentBalance(id));
 		return invProjectSingle;
+	}
+	/**
+	 * 增加投资记录
+	 * 用户总额减去
+	 * 修改已获得投资的金额
+	 * @param invRecord 传递投资记录的信息
+	 * @return
+	 */
+	@Transactional
+	public boolean addInvRecordByInvRecord(InvRecord invRecord,String password){
+		Integer flag1 = invProjectMapper.updateUserBalance(invRecord.getUserId(),password, invRecord.getInvrecMoney());
+		Integer flag2 = invProjectMapper.updateInvProject(invRecord);
+		Integer flag3 = invProjectMapper.addInvRecord(invRecord);
+		if(flag1>0&&flag2>0&&flag3>0){
+			return true;
+		}
+		return false;
 	}
 }

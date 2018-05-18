@@ -102,9 +102,12 @@
 														href="${ctx }/toUpdateRoleInfo?id=${role.id}"
 														data-toggle="modal" data-target="#modModal" title="修改角色">
 														<i class="icon-wrench bigger-130"></i>
+														
 													</a> <a class="green" href="${ctx }/editRoleRes?id=${role.id}"
 														data-toggle="modal" data-target="#resModal" title="分配资源">
 														<i class="icon-pencil bigger-130"></i>
+														
+														
 													</a> <a class="red" data-toggle="modal" href="#"
 														data-target="#delModal${role.id}" title="删除角色"> <i
 														class="icon-trash bigger-130"></i>
@@ -214,6 +217,8 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
+	
+	
 	<!-- 修改资源的模态框 -->
 	<div class="modal fade" id="resModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">

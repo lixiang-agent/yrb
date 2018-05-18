@@ -5,14 +5,11 @@
 <head>
 <meta charset="utf-8" />
 </head>
-<script type="text/javascript">
-	
-</script>
 <body>
 	<%@ include file="/top.jsp"%>
 	<div class="main-container" id="main-container">
 		<jsp:include page="/menu.jsp">
-			<jsp:param value="inv-serviceOper" name="menu" />
+			<jsp:param value="loan-checkrecord" name="menu" />
 		</jsp:include>
 
 
@@ -27,7 +24,7 @@
 
 				<ul class="breadcrumb">
 					<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-					<li class="active">投资管理</li>
+					<li class="active">审核记录</li>
 				</ul>
 				<!-- .breadcrumb -->
 
@@ -45,26 +42,30 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="table-header">项目业务处理列表</div>
+						<div class="table-header">审核记录</div>
 						<div class="breadcrumbs" id="breadcrumbs"
 							style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
 								<div class="col-lg-6">
-									<form class="form-search"
-										action="${ctx }/investManage/listServiceProject" method="post">
+									<form class="form-search" action="${ctx }/loan/listLoanProject"
+										method="post">
 										<div class="input-group">
-											<input type="text" name="projectName" class="form-control"
-												placeholder="请输入您项目名" value="${operService.projectName }"
-												aria-describedby="basic-addon2" maxlength="12"> <span
+											<input type="text" name="projectNo" class="form-control"
+												placeholder="请输入项目编号" value="${loan.projectNo }"
+												aria-describedby="basic-addon2"> <span
 												class="input-group-btn">
-												<button class="btn btn-primary btn-sm" type="submit">查询</button>
-											</span>
+												<button class="btn btn-primary btn-sm" type="submit">
+													查询</button>
 
+											</span> <a href="${ctx }/loan/toaddloan" data-toggle="modal"
+												data-target="#addloan" role="button" title="新增项目"><button
+													class="btn btn-primary btn-sm" type="button">新增</button> </a> </span>
 										</div>
 									</form>
 								</div>
 							</div>
 							<!-- #nav-search -->
+
 						</div>
 						<div class="table-responsive">
 							<table id="sample-table-2"
@@ -75,79 +76,94 @@
 												class="ace" /> <span class="lbl"></span>
 										</label></th>
 										<th>项目名称</th>
-										<th>项目类型</th>
-										<th>需投资总金额</th>
-										<th>年利率</th>
-										<th>借款原因</th>
+										<th>项目编号</th>
+										<!-- <th>借款人ID</th> -->
+										<!-- <th>借款人姓名</th> -->
+										<th>借款金额</th>
+										<th>年利率(%)</th>
+										<th>借款期限</th>
+										<th>还款方式</th>
+										<!-- <th>借款原因</th> -->
+										<!-- <th>借款人信息</th> -->
+										<th>风险控制</th>
 										<th>项目状态</th>
+										<th>操作类型</th>
+										<th>操作人</th>
+										<th>备注</th>
+										
+										
+										<!-- <th>创建人Id</th>
+										<th>创建人姓名</th>
+										<th>修改时间</th>
+										<th>修改人Id</th>
+										<th>修改人姓名</th>
+										<th>修改时间</th> -->
 										<th>操作</th>
 									</tr>
 								</thead>
 
 								<tbody>
-									<c:forEach items="${inv.list }" var="operService">
+									<c:forEach items="${page.list  }" var="loan">
 										<tr>
 											<td class="center"><label> <input
-													type="checkbox" class="ace" value="${operService.id }" />
-													<span class="lbl"></span>
+													type="checkbox" class="ace" value="${loan.id }" /> <span
+													class="lbl"></span>
 											</label></td>
-											<td>${operService.projectName }</td>
-											<td><c:if test="${operService.projectType==1}">
-													车易贷
-												</c:if> <c:if test="${operService.projectType==2}">
-													房易贷
-												</c:if> <c:if test="${operService.projectType==3}">
-													售楼贷
-												</c:if> <c:if test="${operService.projectType==4}">
-													债券贷
-												</c:if></td>
-											<td>${operService.invTotbalance }</td>
-											<td>${operService.rate }</td>
-											<td>${operService.loanReason }</td>
-											<td><c:if test="${operService.projectStatus==10}">
-													待提交
-												</c:if> <c:if test="${operService.projectStatus==11}">
-													退回
-												</c:if> <c:if test="${operService.projectStatus==20}">
-													待审批
-												</c:if> <c:if test="${operService.projectStatus==30}">
-													待发布
-												</c:if> <c:if test="${operService.projectStatus==40}">
-													<span style="color:blue;">筹款中</span>
-												</c:if> <c:if test="${operService.projectStatus==50}">
-													<span style="color:green;">筹资成功</span>
-												</c:if> <c:if test="${operService.projectStatus==60}">
-													<span style="color:pink;">还款中</span>
-												</c:if> <c:if test="${operService.projectStatus==70}">
-													结束
-												</c:if> <c:if test="${operService.projectStatus==100}">
-													流标
-												</c:if></td>
+											<td>${loan.projectName}</td>
+											<td>${loan.projectNo}</td>
+											<%-- <td>${loan.loanUserId}</td> --%>
+											<td>${loan.loanUserName}</td>
+											<td>${loan.loanBalance}</td>
+											<td>${loan.annualRate}</td>
+											<td>${loan.loanTerm}</td>
+
+
+											<td>${loan.repaymentMethod==1?'到期还本付息':(loan.repaymentMethod==2?'按月付息,到期还本':'等额本息')}</td>
+
+											<%-- <td>${loan.loanReason}</td> --%>
+										<%-- 	<td>${loan.borrowerInfo}</td> --%>
+											<td>${loan.riskControl}</td>
+
+											
+											<td><c:choose>
+													<c:when test="${loan.projectStatus == 10}">
+														待提交
+													</c:when>
+													<c:when test="${loan.projectStatus == 11}">
+														退回
+													</c:when>
+													<c:when test="${loan.projectStatus ==20}">
+														待审批
+													</c:when>
+													<c:when test="${loan.projectStatus ==30}">
+														待放款
+													</c:when>
+													<c:when test="${loan.projectStatus ==40}">
+														已放款
+													</c:when>
+													<c:when test="${loan.projectStatus ==50}">
+														待还款
+													</c:when>
+													<c:otherwise>
+														项目结束
+													</c:otherwise>
+
+
+												</c:choose></td>
+
+
+
+
 											<td>
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<c:if test="${operService.projectStatus==30}">
-														<a class="green"
-															href="${ctx }/investManage/toRelease?id=${operService.id}"
-															data-toggle="modal" data-target="#releaseModal"
-															title="发布项目"> <i class="icon-upload bigger-130"></i>
+													<a class="blue"
+														href="${ctx }/loan/checkrecordlist?id=${loan.id}"
+														data-toggle="modal" data-target="#checkrecord" title="查看审核记录">
+														<i class="icon-wrench bigger-130"></i>
 														</a>
-													</c:if>
-													<c:if test="${operService.projectStatus==40||operService.projectStatus==50||operService.projectStatus==60}">
-														<a class="blue"
-															href="${ctx }/investManage/listInvRecord?id=${operService.id}"
-															data-toggle="modal" data-target="#showInvRecordModal"
-															title="查看该项目投资记录"> <i class="icon-search bigger-130"></i>
-														</a>
-													</c:if>
-													<a class="green" data-toggle="modal"
-														data-target="#detailsModal"
-														href="${ctx }/investManage/detailsList?id=${operService.id}"
-														id="details" title="项目详情"> <i
-														class="icon-search bigger-130"></i>
-													</a>
-												</div>
 
+												</div>
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
 													<div class="inline position-relative">
 														<button class="btn btn-minier btn-yellow dropdown-toggle"
@@ -157,16 +173,16 @@
 
 														<ul
 															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li><a
-																href="${ctx }/investManage/detailsList?id=${operService.id}"
-																data-toggle="modal" data-target="#detailsModal"
-																class="tooltip-success" data-rel="tooltip" title="Edit">
-																	<span class="green"> <i
-																		class="icon-edit bigger-120"></i>
+															<li><a href="#" class="tooltip-info"
+																data-rel="tooltip" title="View"> <span class="blue">
+																		<i class="icon-zoom-in bigger-120"></i>
 																</span>
-
 															</a></li>
 
+															
+
+														
+															
 														</ul>
 													</div>
 												</div>
@@ -178,11 +194,9 @@
 								</tbody>
 							</table>
 						</div>
-
 						<div class="modal-footer no-margin-top">
-							<w:pager pageSize="${inv.pageSize }"
-								url="${ctx }/investManage/listServiceProject" recordCount="${inv.total }"
-								pageNum="${inv.pageNum }" />
+							<w:pager pageSize="${page.pageSize }" url="${ctx }/user/list"
+								recordCount="${page.total }" pageNum="${page.pageNum }" />
 						</div>
 
 					</div>
@@ -195,37 +209,16 @@
 		<!-- /.col -->
 	</div>
 
-	<!-- 发布项目的模态框 -->
-	<div class="modal fade" id="releaseModal" tabindex="-1" role="dialog"
+	<!-- 增加项目的模态框 -->
+	<div class="modal fade" id="checkrecord" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>
 	</div>
+
 	
-	<!-- 查看项目投资记录的模态框 -->
-	<div class="modal fade" id="showInvRecordModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
 
-	<!-- 项目详情的模态框 -->
-	<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
-
-	<!-- 审核操作记录的模态框 -->
-	<div class="modal fade" id="myoperServiceModal" tabindex="-1"
-		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
 
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"
@@ -278,8 +271,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- /#ace-settings-container -->
-	<!-- /.main-container-inner -->
 
 	<a href="#" id="btn-scroll-up"
 		class="btn-scroll-up btn btn-sm btn-inverse"> <i
@@ -288,6 +279,7 @@
 
 	<script src="${ctx}/assets/js/jquery-2.0.3.min.js"></script>
 	<script src="${ctx}/assets/js/jquery.mobile.custom.min.js"></script>
+
 
 	<script src="${ctx}/assets/js/bootstrap.min.js"></script>
 	<script src="${ctx}/assets/js/typeahead-bs2.min.js"></script>
@@ -303,11 +295,17 @@
 	<script src="${ctx}/assets/js/ace.min.js"></script>
 
 	<script type="text/javascript">
-		/* 模态框隐藏的时候把原来模态框里面的内容去掉 */
-		$("#myModal").on("hidden.bs.modal", function() {
+		//模态框隐藏的时候把原来模态框里面的内容去掉
+		$("#resModal").on("hidden.bs.modal", function() {
+			$(this).removeData("bs.modal");
+		});
+		$("#modModal").on("hidden.bs.modal", function() {
+			$(this).removeData("bs.modal");
+		});
+		$("#delModal").on("hidden.bs.modal", function() {
 			$(this).removeData("bs.modal");
 		});
 	</script>
-	<%@ include file="/tip.jsp"%>
 </body>
+<%@ include file="/tip.jsp"%>
 </html>
