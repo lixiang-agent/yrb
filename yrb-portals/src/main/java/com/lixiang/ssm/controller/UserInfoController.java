@@ -38,7 +38,7 @@ public class UserInfoController {
 		userInfo.setId(1);
 		userInfo.setPassword("4444555");
 		userInfo.setAccount("sdfsef");
-		userInfo.setPhoneNum(1122334455);
+		userInfo.setPhoneNum(11223344511L);
 		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
 		log.debug("---------------"+userInfo);
 		userInfoService.updateTopUp(userInfo);
