@@ -22,7 +22,24 @@
 </head>
 <script type="text/javascript">
 $().ready(function() {
-
+	//格式化数字
+	function fnumber(s, n) {
+	    /*
+	     * 参数说明：
+	     * s：要格式化的数字
+	     * n：保留几位小数
+	     * */
+	    n = n > 0 && n <= 20 ? n : 2;
+	    s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+	    var l = s.split(".")[0].split("").reverse(),
+	        r = s.split(".")[1];
+	    t = "";
+	    for (i = 0; i < l.length; i++) {
+	        t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+	    }
+	    return t.split("").reverse().join("") + "." + r;
+	}
+	
 	//创建一个map来保存条件
 	var invCondition={};
 	$("#projectType li a").click(function() {
@@ -161,7 +178,7 @@ $().ready(function() {
 				+'		<div class="circle">'
 				+'				<div class="progress-bgPic progress-bfb10">'
 				+'					<div class="show-bar">'
-				+'					'+(data[i].invBalance/data[i].invTotbalance)*100+'%</div>'
+				+'					'+fnumber((data[i].invBalance/data[i].invTotbalance).toFixed(2)*100,2)+'%</div>'
 				+'			</div>'
 				+'		</div>'
 				+'	</div>'
@@ -344,7 +361,9 @@ $().ready(function() {
 										class="f18" href="infor.html"
 										title="${invProject.projectName }" target="_blank">
 											${invProject.projectName }</a></li>
-									<li class="col-180"><span class="f20 c-333"><br/>${invProject.invTotbalance }</span>元</li>
+									<li class="col-180"><span class="f20 c-333"><br/>
+									<fmt:formatNumber value="${invProject.invTotbalance }" type="currency" pattern="#0.00"/>
+									</span>元</li>
 									<li class="col-110 relative"><span class="f20 c-orange">${invProject.rate }
 									</span>%</li>
 									<li class="col-150"><span class="f20 c-333">${invProject.paybackTime }</span>个月
@@ -360,7 +379,8 @@ $().ready(function() {
 											<div class="left progress-bar">
 												<div class="progress-bgPic progress-bfb10">
 													<div class="show-bar">
-														${(invProject.invBalance/invProject.invTotbalance)*100 }%</div>
+													<fmt:formatNumber value="${(invProject.invBalance/invProject.invTotbalance)*100 }" pattern="#0.00" />%
+														</div>
 												</div>
 											</div>
 										</div>
