@@ -17,11 +17,6 @@ import com.lixiang.ssm.utils.RedisCacheUtil;
 
 @Controller
 public class NewsController {
-
-	@Autowired
-	private NewsService newsService;
-	@Autowired
-	private ProjectService invProjectService;
 	
 	@Autowired
     private RedisCacheUtil<News> redisCacheNews;
