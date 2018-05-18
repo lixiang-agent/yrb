@@ -49,7 +49,7 @@
 							style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
 								<div class="col-lg-6">
-									<form class="form-search" action="${ctx }/investManage/pageList"
+									<form class="form-search" action="${ctx}/investManage/pageList"
 										method="post">
 										<div class="input-group">
 											<input type="text" name="projectName" class="form-control"

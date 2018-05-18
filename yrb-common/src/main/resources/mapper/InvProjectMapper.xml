@@ -511,7 +511,24 @@
 	</select>
 	<select id="queryAllInvProjectByProStatus" resultType="com.lixiang.ssm.entity.InvProject"
 		useCache="false">
-		SELECT * FROM t_inv_project where project_status = 20 || project_status = 30
+		SELECT * FROM t_inv_project <where>
+			project_status = 20
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
+	</select>
+	<select id="queryAllInvProjectService" resultType="com.lixiang.ssm.entity.InvProject"
+		useCache="false">
+		SELECT * FROM t_inv_project 
+		<where>
+			project_status = 30 || project_status = 40 || project_status = 50
+			<if test="projectName!=null and projectName!=''">
+				<bind name="names" value="'%' +projectName+'%'" />
+				and project_name like #{names}
+			</if>
+		</where> 
 	</select>
   
 </mapper>

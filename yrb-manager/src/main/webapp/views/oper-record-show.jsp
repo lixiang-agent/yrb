@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <form action="${ctx }/investManage/listOperProject" method="post">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -27,34 +28,24 @@
 						</tr>
 						<c:forEach items="${showList}" var="operRecord">
 							<tr>
-								<td><input type="text" name="operatorName"
-									class="form-control" value="${operRecord.operatorName }"
-									maxlength="40" disabled="disabled"></td>
-								<td><input type="text" name="projectName"
-									class="form-control" value="${operRecord.projectName }"
-									maxlength="40" disabled="disabled"></td>
-								<td><input type="text" name="operatorDate"
-									class="form-control" value="${operRecord.operatorDate }"
-									maxlength="40" disabled="disabled"></td>
+								<td>${operRecord.operatorName }</td>
+								<td>"${operRecord.projectName }"</td>
+								<td><fmt:formatDate value="${operRecord.operatorDate }"
+										pattern="yyyy-MM-dd" /></td>
 
 								<td><c:if test="${operRecord.operType==1 }">
-										<input type="text" name="operType" class="form-control"
-											value="提交" disabled="disabled" maxlength="12">
+										提交
 									</c:if> <c:if test="${operRecord.operType==2 }">
-										<input type="text" name="operType" class="form-control"
-											value="通过" disabled="disabled" maxlength="12">
+										通过
 									</c:if> <c:if test="${operRecord.operType==3 }">
-										<input type="text" name="operType" class="form-control"
-											value="撤回" disabled="disabled" maxlength="12">
+										撤回
 									</c:if> <c:if test="${operRecord.operType==4 }">
-										<input type="text" name="operType" class="form-control"
-											value="不同意" disabled="disabled" maxlength="12">
+										不同意
 									</c:if> <c:if test="${operRecord.operType==5 }">
-										<input type="text" name="operType" class="form-control"
-											value="发布" disabled="disabled" maxlength="12">
-									</c:if></td>
-								<td><textarea name="remark" class="form-control"
-										disabled="disabled" maxlength="400">${operRecord.remark }</textarea></td>
+										发布
+									</c:if>
+								</td>
+								<td>${operRecord.remark }</td>
 							</tr>
 						</c:forEach>
 					</thead>
