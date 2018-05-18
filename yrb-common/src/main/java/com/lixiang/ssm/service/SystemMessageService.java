@@ -9,7 +9,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.dao.SystemMessageMapper;
 import com.lixiang.ssm.entity.SystemMessage;
-import com.lixiang.ssm.entity.Ugroup;
 
 @Service
 public class SystemMessageService {

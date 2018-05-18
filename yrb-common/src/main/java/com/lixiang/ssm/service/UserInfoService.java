@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lixiang.ssm.dao.UserInfoMapper;
-import com.lixiang.ssm.entity.Role;
 import com.lixiang.ssm.entity.UserInfo;
 
 @Service
@@ -65,4 +64,14 @@ public class UserInfoService {
 		return userInfoMapper.selectByKey(id);
 	}
 	
+
+	/**
+	 * 修改用户
+	 * @param userInfo
+	 * @return
+	 */
+	public boolean updateUserInfos(UserInfo userInfo){
+		return userInfoMapper.updateByPrimaryKey(userInfo)>0;
+	}
+
 }
