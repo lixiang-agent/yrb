@@ -170,6 +170,12 @@ public class UserInfoController {
 		return "redirect:/index.jsp";
 	}
 	
+	//注册成功后跳转到登录界面
+	@RequestMapping("/toLogin")
+	public String toLogin(){
+		return "redirect:/login.jsp";
+	}
+	
 		
 	//验证真实姓名
 	@ResponseBody
