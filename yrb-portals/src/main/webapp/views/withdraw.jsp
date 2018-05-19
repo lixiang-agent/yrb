@@ -158,10 +158,10 @@
                 <input id="form:actualMoney" type="text" name="totalBalance" class="deposite-txt" maxlength="10">
                 元 </span> <span id="actualMoneyErrorDiv"><span id="actualMoney_message" style="display:none" class="error"></span></span> </li>
               <li> <span class="deposit-formleft">提现费用</span> <em id="txfy" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:fee"> </label>
+                <label id="form:fee"> ${userInfos.totalBalance }*0.1%</label>
                 </i>元 </span> <span class="txarrow-show">提现金额的0.1%，最低不低于2元，最高100元封顶</span><span class="txicon-show"></span> </li>
               <li><span class="deposit-formleft">实际到账金额</span> <em id="dzje" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:cashFine"></label>
+                <label id="form:cashFine"> ${userInfos.totalBalance}-${userInfos.totalBalance }*0.1%</label>
                 </i> 元</span> <span class="dzarrow-show">提现金额 - 提现费用</span><span class="dzicon-show"></span> </li>
               <li>
                 <input type="submit" name="form:j_idt78" value="提现" class="btn-depositok" onclick="return checkActualMoney()">

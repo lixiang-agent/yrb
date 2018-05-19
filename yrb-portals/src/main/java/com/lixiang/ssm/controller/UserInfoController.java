@@ -240,13 +240,17 @@ public class UserInfoController {
 		Subject currentUser = SecurityUtils.getSubject();
 		UserInfo result = (UserInfo) currentUser.getPrincipal();	
 		userInfo.setId(1);
-		log.debug("---------------"+userInfo.getTotalBalance()+"--------------------------");
+		userInfo.setPassword("4444555");
+		userInfo.setAccount("sdfsef");
+		userInfo.setPhoneNum(11223344511L);
+		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
 		log.debug("---------------"+userInfo);
-		System.out.println("---------------"+userInfo.getTotalBalance()+"--------------------------");
-		System.out.println("---------------"+userInfo);
 		userInfoService.updateWithdraw(userInfo);
+		System.out.println("---------------"+userInfo.getTotalBalance()+"--------------------------");
+		System.out.println("--------------"+userInfo);
 		model.addAttribute("result","result");
-		model.addAttribute("userInfo",userInfo);
+		model.addAttribute("userInfos",userInfo);
 		return "withdraw";
+		
 	}
 }

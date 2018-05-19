@@ -478,4 +478,14 @@ public class UserInfo extends BaseEntity{
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
     }
+
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", account=" + account + ", phoneNum=" + phoneNum + ", password=" + password
+				+ ", realName=" + realName + ", idcard=" + idcard + ", authStatus=" + authStatus + ", email=" + email
+				+ ", payPassword=" + payPassword + ", totalBalance=" + totalBalance + ", referee=" + referee
+				+ ", createDate=" + createDate + ", modifyDate=" + modifyDate + ", userId=" + userId + "]";
+	}
+    
+    
 }
