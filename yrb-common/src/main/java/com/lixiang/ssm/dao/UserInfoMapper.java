@@ -73,4 +73,11 @@ public interface UserInfoMapper {
      * @return
      */
     int updateTopUp(UserInfo record);
+    
+    /**
+     * 修改用户，提现
+     * @param record
+     * @return
+     */
+    int updateWithdraw(UserInfo record);
 }

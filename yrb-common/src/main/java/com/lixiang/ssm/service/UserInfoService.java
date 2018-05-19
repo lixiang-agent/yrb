@@ -78,5 +78,13 @@ public class UserInfoService {
 	public boolean updateTopUp(UserInfo userInfo){
 		return userInfoMapper.updateTopUp(userInfo)>0;
 	}
-
+	
+	/**
+	 * 修改用户,提现
+	 * @param userInfo
+	 * @return
+	 */
+	public boolean updateWithdraw(UserInfo userInfo){
+		return userInfoMapper.updateWithdraw(userInfo)>0;
+	}
 }
