@@ -61,4 +61,11 @@ public interface LoanApplicationMapper {
      * @mbg.generated Wed May 16 12:04:37 CST 2018
      */
     int updateByPrimaryKey(LoanApplication record);
+    
+    /**
+     * 添加申请借款信息
+     * @param record
+     * @return
+     */
+    int addLoanApplication(LoanApplication record);
 }

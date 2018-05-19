@@ -57,4 +57,13 @@ public class LoanApplicationService
 		PageInfo<LoanApplication> page = new PageInfo<>(list);
 		return page;
 	}
+
+	/**
+	 * 添加申请借款信息
+	 * @param loanApplication
+	 * @return
+	 */
+	public int addLoanApplication(LoanApplication loanApplication) {	
+		return mapper.addLoanApplication(loanApplication);
+	}
 }
