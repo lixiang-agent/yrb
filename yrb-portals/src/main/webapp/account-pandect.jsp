@@ -36,7 +36,7 @@
 			<li style="position: relative;"><span> <a
 					href="个人中心-系统消息.html"><i class="dot dot08"></i>系统信息 </a>
 			</span></li>
-			<li><span><a href="个人中心-账户设置.html"><i
+			<li><span><a href="${ctx }/account/show"><i
 						class="dot dot09"></i>账户设置</a></span></li>
 		</ul>
 	</div>

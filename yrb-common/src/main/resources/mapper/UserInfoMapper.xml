@@ -10,7 +10,8 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="account" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="phone_num" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <!-- <arg column="phone_num" javaType="java.lang.Long" jdbcType="INTEGER" /> -->
+     <arg column="phone_num" javaType="java.lang.Long" jdbcType="BIGINT" /> 
       <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="idcard" javaType="java.lang.String" jdbcType="CHAR" />
@@ -50,7 +51,19 @@
     from t_user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!-- 根据id来查询email -->
+  <select id="selectEmail" resultType="java.lang.Integer">
+  select email from t_user_info where id= #{id,jdbcType=INTEGER}
+  </select>
+  <!-- 根据id来查询手机号码 -->
+  <select id="selectPhoneNum" resultType="java.lang.Integer">
+  select phone_num from t_user_info where id=#{id.jdbcType=INTEGER}
   
+  </select>
+  <!-- 根据id来查询用户密码 -->
+  <select id="selectPassword" resultType="java.lang.Integer">
+  	select password from t_user_info where id=#{id.jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

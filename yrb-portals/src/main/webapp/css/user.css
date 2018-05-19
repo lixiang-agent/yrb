@@ -1232,6 +1232,7 @@ transition: transform 1s linear;}
 
 /*弹出框页面*/
 .alert-450{ float:left; width:450px; border:1px solid #E1E1E1; box-shadow:0 0 3px #E1E1E1;position:absolute; z-index:100;top:50%; left:50%; margin-left:-225px; background:#fff }
+.alert-500{ float:left; width:500px; border:1px solid #E1E1E1; box-shadow:0 0 3px #E1E1E1;position:absolute; z-index:100;top:50%; left:50%; margin-left:-225px; background:#fff }
 .alert-400{ float:left; width:400px; border:1px solid #E1E1E1; box-shadow:0 0 3px #E1E1E1;position:absolute; z-index:102;top:50%; left:50%; margin-left:-200px; background:#fff }
 .alert-h220{ height:220px;}
 .alert-title{ width:100%; background:#F5F5F5;height:43px; line-height:43px; border-bottom:1px solid #E1E1E1; }
@@ -1242,7 +1243,7 @@ transition: transform 1s linear;}
 
 .alert-main form{ float:left; padding:40px 0 27px;}
 .alert-main form .txt-name{ float:left; width:120px; height:35px; line-height:35px; text-align:right; margin-right:13px;} 
-.alert-main form li{ float:left; width:400px;}
+.alert-main form li{ float:left; padding-bottom: 5px}
 .alert-main form input[type=text]{float:left; height:17px; line-height:17px; padding:8px 0 8px 5px; border:1px solid #D0D0D0; border-radius:2px;}
 .alert-main form input[type=text]:hover{border:1px solid #0caffe; }
 .alert-main form input[type=password]{float:left; height:15px; line-height:15px; padding:9px 0 9px 5px; border:1px solid #D0D0D0; border-radius:2px;}

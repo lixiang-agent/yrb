@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beansProjectDescription>
 	<version>1</version>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<pluginVersion><![CDATA[3.9.4.201804120850-RELEASE]]></pluginVersion>
-=======
-=======
->>>>>>> refs/heads/dev
-	<pluginVersion><![CDATA[3.8.3.201612191259-RELEASE]]></pluginVersion>
-<<<<<<< HEAD
->>>>>>> refs/heads/master
-=======
 	<pluginVersion><![CDATA[3.9.3.201803200843-RELEASE]]></pluginVersion>
->>>>>>> refs/heads/dev
-=======
->>>>>>> refs/heads/dev
 	<configSuffixes>
 		<configSuffix><![CDATA[xml]]></configSuffix>
 	</configSuffixes>

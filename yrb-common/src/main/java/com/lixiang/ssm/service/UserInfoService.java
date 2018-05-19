@@ -55,7 +55,7 @@ public class UserInfoService {
 	 * @return
 	 */
 	@Transactional
-	public boolean updateUserInfo(UserInfo userInfo){
+	public int updateUserInfo(UserInfo userInfo){
 		//获取当前用户
 		UserInfo userInfo1 = (UserInfo)SecurityUtils.getSubject().getPrincipal();
 		return userInfoMapper.updateByPrimaryKeySelective(userInfo1);
@@ -69,7 +69,7 @@ public class UserInfoService {
 		return userInfoMapper.selectByKey(id);
 	}
 	
-	public boolean updateByPrimaryKeySelective(UserInfo userInfo) {
+	public int updateByPrimaryKeySelective(UserInfo userInfo) {
 		return userInfoMapper.updateByPrimaryKeySelective(userInfo);
 		}
 

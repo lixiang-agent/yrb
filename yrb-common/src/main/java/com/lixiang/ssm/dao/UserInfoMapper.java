@@ -49,7 +49,7 @@ public interface UserInfoMapper {
      * @param record
      * @return
      */
-    boolean updateByPrimaryKeySelective(UserInfo record);
+    int updateByPrimaryKeySelective(UserInfo record);
     
     
     /**
@@ -65,6 +65,13 @@ public interface UserInfoMapper {
     List<UserInfo> list(UserInfo userInfo);
     
     List<UserInfo> getUserInfoList();
+    //查询email
+    Integer selectEmail(Integer id);
+    //查询phonenum
+    Integer selectPhoneNum(Integer id);
+    //查询用户密码
+    Integer selectPassword(Integer id);
+    
 
    
     

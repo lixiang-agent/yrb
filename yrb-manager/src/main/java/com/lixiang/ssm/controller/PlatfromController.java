@@ -51,7 +51,7 @@ public class PlatfromController {
 		User result = (User) currentUser.getPrincipal();
 		userInfo.setModifyDate(new Date());
 		log.debug("result="+result);
-		boolean userInfos = userInfoService.updateByPrimaryKeySelective(userInfo);
+		boolean userInfos = userInfoService.updateByPrimaryKeySelective(userInfo)>0;
 		log.debug("resource="+userInfos);
 		model.addAttribute("userInfos", userInfos);
 		model.addAttribute("result", result);
