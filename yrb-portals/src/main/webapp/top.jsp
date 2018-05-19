@@ -40,7 +40,7 @@
 				</ul>
 				<ul class="fn-right header-top-ul">
 					<li><a href="${ctx}/index.jsp" class="app">返回首页</a></li>
-					<c:if test="${empty user }">
+					<shiro:guest>
 						<li>
 							<div class="">
 								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册">免费注册</a>
@@ -51,11 +51,11 @@
 								<a href="${ctx}/login.jsp" class="js-login" title="登录">登录</a>
 							</div>
 						</li>
-					</c:if>
-					<c:if test="${!empty user }">
+					</shiro:guest>
+					<shiro:authenticated>
 						<li>
 							<div class="">
-								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册">${user.account }</a>
+								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册"><shiro:principal property = "account"/></a>
 							</div>
 						</li>
 						<li>
@@ -63,7 +63,7 @@
 								<a href="${ctx}/userInfo/logout" class="js-login" title="退出">退出</a>
 							</div>
 						</li>
-					</c:if>
+					</shiro:authenticated>
 				</ul>
 			</div>
 		</div>
