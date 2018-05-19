@@ -48,7 +48,7 @@
 						</li>
 						<li>
 							<div class="">
-								<a href="${ctx}/views/login.jsp" class="js-login" title="登录">登录</a>
+								<a href="${ctx}/login.jsp" class="js-login" title="登录">登录</a>
 							</div>
 						</li>
 					</c:if>

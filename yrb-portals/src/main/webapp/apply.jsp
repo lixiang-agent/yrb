@@ -195,7 +195,7 @@
 	}
 	
 	function isLoanBalance(){
-		var uPattern = /^[1][0-9]{4,10}$/;
+		var uPattern = /^[1-9][0-9]{4,9}$/;
 		var loanBalance = $.trim($("#loanBalance").val());
 		
 		if(loanBalance.length<1){
@@ -204,7 +204,7 @@
 			 $("#loanBalancespan").show();
 			 return false;
 		}else if(!uPattern.test(loanBalance)){
-			 $("#loanBalancespan").html("必须是数字且为整数，10000~1999990000");
+			 $("#loanBalancespan").html("必须是数字且为整数，10000~999999999");
 			 $("#loanBalancespan").css("color","red");
 			 $("#loanBalancespan").show();
 			 return false;
@@ -241,7 +241,7 @@
 			param.contactNumber = $.trim($("#phoneNum").val());
 			param.loanBalance = $.trim($("#loanBalance").val());
 			param.loanTerm = $.trim($("#loanTerm").val());
-			param.isAddress = $.trim($("#address").val());
+			/* param.address = $.trim($("#address").val()); */
 			param.code=$.trim($("#jpgVerify").val());
 			$.ajax({
 				   type: "POST",
@@ -254,11 +254,14 @@
 					   var msg=data.msg;
 					   if(flag=="1"){
 						   alert(msg);
-						   window.location.href='${ctx}/views/login.jsp';
+						   window.location.href='${ctx}/login.jsp';
 					   }else if(flag=="2"){
 						   alert(msg);
 					   }
 					   else if(flag=="3"){
+						   alert(msg);
+					   }
+					   else if(flag=="4"){
 						   alert(msg);
 					   }else{
 						   alert(msg);

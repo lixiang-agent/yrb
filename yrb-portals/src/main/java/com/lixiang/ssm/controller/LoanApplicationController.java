@@ -34,7 +34,7 @@ public class LoanApplicationController {
 	 */
 	@ResponseBody
 	@RequestMapping("/loanApplication")
-	public Map<String,String> loanApplication(HttpSession session,@Valid LoanApplication loanApplication,BindingResult bindingResult,String code ){
+	public Map<String,String> loanApplication(HttpSession session,LoanApplication loanApplication,String code ){
 		
 		Map<String, String> map=new HashMap<String, String>();
 		
@@ -45,22 +45,21 @@ public class LoanApplicationController {
 		String flag="0";
 		
 		String msg="申请信息已提交，请耐心等待！";
-		
-		List<FieldError> errors = bindingResult.getFieldErrors();
-		for(FieldError error:errors){
-			System.out.println("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ"+error);
-		}
-		
+			
 		if(userInfo == null){
 			flag="1";
 			msg="请先登录！";	
 		}
-		else if(bindingResult.getErrorCount()>0){
+		else if(userInfo.getRealName() == null && !userInfo.getRealName().equals(loanApplication.getRealName())){
 			flag="2";
-			msg="输入信息有误，请先重写输入！";
+			msg="请输入真实姓名！";
+		}
+		else if(userInfo.getPhoneNum() == null && !userInfo.getPhoneNum().equals(loanApplication.getContactNumber())){
+			flag="3";
+			msg="请输入真实手机号码！";
 		}
 		else if(codes !=null && !codes.equalsIgnoreCase(code)){
-			flag="3";
+			flag="4";
 			msg="验证码错误！";
 		}
 		else{

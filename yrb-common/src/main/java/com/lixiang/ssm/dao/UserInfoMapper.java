@@ -65,4 +65,18 @@ public interface UserInfoMapper {
     List<UserInfo> list(UserInfo userInfo);
     
     List<UserInfo> getUserInfoList();
+    
+    /**
+     * 注册用户信息
+     * @param UserInfo
+     * @return
+     */
+    int register(UserInfo UserInfo);
+    
+    /**
+     * 登录信息
+     * @param account
+     * @return
+     */
+    UserInfo login(String account);
 }

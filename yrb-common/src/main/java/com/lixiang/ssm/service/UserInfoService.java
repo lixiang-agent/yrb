@@ -1,10 +1,13 @@
 package com.lixiang.ssm.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +80,31 @@ public class UserInfoService {
 	 */
 	public boolean updateUserInfos(UserInfo userInfo){
 		return userInfoMapper.updateByPrimaryKey(userInfo)>0;
+	}
+	
+	/**
+	 * 注册者信息
+	 * @param UserInfo
+	 * @return
+	 */
+	public int register(UserInfo userInfo){
+		
+		ByteSource credentialsSalt = ByteSource.Util.bytes(userInfo.getAccount());
+		Object value = new SimpleHash("MD5", userInfo.getPassword(), credentialsSalt, 101);
+		userInfo.setPassword(value.toString());	
+		userInfo.setCreateDate(new Date());
+		return userInfoMapper.register(userInfo);
+		
+	}
+	
+	/**
+	 * 登录者信息
+	 * @param account
+	 * @return
+	 */
+	public UserInfo login(String account){
+		
+		return userInfoMapper.login(account);
 	}
 
 }

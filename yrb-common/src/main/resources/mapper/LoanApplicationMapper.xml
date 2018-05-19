@@ -187,4 +187,17 @@
       handler_date = #{handlerDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="addLoanApplication" parameterType="com.lixiang.ssm.entity.LoanApplication">
+    insert into t_loan_application (user_id, real_name, 
+      contact_number, loan_balance, loan_term, 
+      address, appliy_date
+      
+      )
+    values (#{userId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, 
+      #{contactNumber,jdbcType=VARCHAR}, #{loanBalance,jdbcType=INTEGER}, #{loanTerm,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR},#{appliyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
 </mapper>

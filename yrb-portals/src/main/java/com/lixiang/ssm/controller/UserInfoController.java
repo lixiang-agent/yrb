@@ -121,8 +121,7 @@ public class UserInfoController {
 		loginMap.put("msg", msg);
 		return loginMap;
 	}
-	
-	
+		
 	//验证真实姓名
 	@ResponseBody
 	@RequestMapping("/isRealName")
@@ -150,9 +149,7 @@ public class UserInfoController {
 		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
 		if(user.getPhoneNum() == null){
 			return 0;
-		}		
-		
-		System.out.println(user.getPhoneNum()+"QQQQQQQQQQQQQQQQQQQQQQQQQQQ"+phoneNum);
+		}
 				
 		if(!user.getPhoneNum().equals(Long.valueOf(phoneNum))){
 			return 1;
@@ -175,7 +172,7 @@ public class UserInfoController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.removeAttribute("user");
-		return "login";
+		return "redirect:/login.jsp";
 	}
 		
 
