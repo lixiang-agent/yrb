@@ -75,7 +75,7 @@ public class OperateRecordController {
 		 List<OperateRecord> operateRecord= operateRecordService.getoperator(loanProject.getProjectNo());
 		 System.out.println("*******************************************");
 		 System.out.println(operateRecord);
-		 System.out.println("*******************************************");
+		
 		 model.addAttribute("operateRecord", operateRecord);
 		 model.addAttribute("loan", loanProject);
 	
