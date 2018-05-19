@@ -245,7 +245,7 @@
 			param.contactNumber = $.trim($("#phoneNum").val());
 			param.loanBalance = $.trim($("#loanBalance").val());
 			param.loanTerm = $.trim($("#loanTerm").val());
-			/* param.address = $.trim($("#address").val()); */
+			param.address = $.trim($("#address").val());
 			param.code=$.trim($("#jpgVerify").val());
 			$.ajax({
 				   type: "POST",

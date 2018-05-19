@@ -182,31 +182,34 @@ public class UserInfoController {
 	@RequestMapping("/isRealName")
 	public int isRealName(HttpServletRequest request,String realName) {	
 		
-		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
+		Subject currentUser = SecurityUtils.getSubject();
 		
-		if(user == null){
+		UserInfo userInfo = (UserInfo) currentUser.getPrincipal();
+		
+		if(userInfo == null){
 			return 2;
 		}
-		if(user.getRealName() == null){
+		if(userInfo.getRealName() == null){
 			return 0;
 		}		
-		if(!user.getRealName().equals(realName)){
+		if(!userInfo.getRealName().equals(realName)){
 			return 1;
 		}		
 		return 3;
 	}
 	
-	//验证手机号码
+	//验证是否是本人手机号码
 	@ResponseBody
 	@RequestMapping("/isPhoneNum")
 	public int isPhoneNum(HttpServletRequest request,String phoneNum) {	
 		
-		UserInfo user = (UserInfo) request.getSession().getAttribute("user");
-		if(user.getPhoneNum() == null){
+		Subject currentUser = SecurityUtils.getSubject();
+		
+		UserInfo userInfo = (UserInfo) currentUser.getPrincipal();
+		if(userInfo.getPhoneNum() == null){
 			return 0;
-		}
-				
-		if(!user.getPhoneNum().equals(Long.valueOf(phoneNum))){
+		}			
+		if(!userInfo.getPhoneNum().equals(Long.valueOf(phoneNum))){
 			return 1;
 		}		
 		return 2;
