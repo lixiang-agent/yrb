@@ -32,7 +32,7 @@
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-投资记录.html">投资记录</a></span></li>
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-回款计划.html">回款计划</a></span></li>
         <li class=""><span><a href="个人中心-开通第三方1.html"><i class="dot dot02"></i>开通第三方</a> </span> </li>
-        <li><span><a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}"><i class="dot dot03"></i>充值</a></span></li>
+        <li><span><a href="${ctx }/userInfo/userInfoUpdateTopUp?id=${user_info.id}"><i class="dot dot03"></i>充值</a></span></li>
         <li class=""><span><a href="个人中心-提现1.html"><i class="dot dot04"></i>提现</a></span></li>
         <li style="position:relative;" class=""> <span> <a href="个人中心-我的红包.html"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
         <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-兑换历史.html">兑换历史</a></span></li>
@@ -369,6 +369,8 @@
 				  if("false"=='true'){
 						 showSpan("alert-unbindMsgDialog");
 					  } 
+				  
+				  
 			 });
 			//]]>
 		</script>
@@ -377,11 +379,11 @@
         <h3><i>充值</i></h3>
         <div class="quick-pay-wrap">
           <h4> <span class="quick-tit pay-cur"><em>快捷支付</em></span> <span class="online-tit"><em>网银充值</em></span> </h4>
-          <form id="form" name="form" method="post" action="" >
+          <form id="form" name="form" method="post" action="${ctx}/userInfo/userInfoUpdateTopUp" >
             <div class="quick-main">
               <div class="fl quick-info">
                 <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
-                  <input id="form:actualMoney1" type="text" name="" class="pay-money-txt" maxlength="10" >
+                  <input id="form:actualMoney1" type="text" name="totalBalance" class="pay-money-txt" maxlength="10" >
                   <em>元</em> </span> <span class="quick-error"> </span> </div>
                 <div class="info-tips">亿人宝提醒您：充值金额超过50000元时，请切换到网银充值</div>
                 <div class="info-2"> <span class="info-tit">银行卡号</span> <span class="info2-input">
@@ -391,7 +393,7 @@
                   </em> </span> <span class="quick-error3" id="bankCardError"></span> </div>
                 <div class="bank-check" id="bank-check2"> <b class="selected" id="bankProtocol1"></b><span class="bank-agree">我同意并接受<a href="#" target="_blank">《亿人宝投资咨询与管理服务电子协议》</a></span> <span class="error" id="bankProtocol_message" style="display:none;margin-top:-3px;">请同意协议内容！</span> </div>
                 <input type="submit" name="" value="充值"  class="btn-paycz" onclick="return getShowPayVal1()">
-               <%--  <a href="${ctx }/userInFo/userInfoUpdate?id=${user_info.id}">充值</a> --%>
+               ${userInfo}
               </div>
               <div class="fr bank-info">
                 <p class="bank-tit">快捷支付支持银行：</p>
@@ -400,11 +402,11 @@
             </div>
           </form>
           <div class="online-main" style="display:none;">
-            <form id="recharge" name="recharge" method="post" action="#" target="_blank">
+            <form id="recharge" name="recharge" method="post" action="${ctx}/userInfo/userInfoUpdateTopUp" target="_blank">
               <div class="online-mar">
                 <div class="quick-info quick-info-width">
                   <div class="info-1"> <span class="info-tit">充值金额</span> <span class="info1-input">
-                    <input id="recharge:actualMoney" type="text" name="recharge:actualMoney" class="pay-money-txt" maxlength="10" onblur="checkRecharge()" onkeydown="amount(this);keyUpcheck()" onkeyup="amount(this);keyUpcheck()">
+                    <input id="recharge:actualMoney" type="text" name="totalBalance" class="pay-money-txt" maxlength="10" onblur="checkRecharge()" onkeydown="amount(this);keyUpcheck()" onkeyup="amount(this);keyUpcheck()">
                     <em>元</em> </span> <span id="actualMoneyErrorDiv" class="quick-error2"> </span> </div>
                 </div>
               </div>
