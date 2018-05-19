@@ -77,6 +77,7 @@
 										<th>项目名称</th>
 										<th>项目类型</th>
 										<th>需投资总金额</th>
+										<th>已投资金额</th>
 										<th>年利率</th>
 										<th>借款原因</th>
 										<th>项目状态</th>
@@ -102,6 +103,7 @@
 													债券贷
 												</c:if></td>
 											<td>${operService.invTotbalance }</td>
+											<td>${operService.invBalance }</td>
 											<td>${operService.rate }</td>
 											<td>${operService.loanReason }</td>
 											<td><c:if test="${operService.projectStatus==10}">
@@ -137,7 +139,7 @@
 														<a class="blue"
 															href="${ctx }/investManage/listInvRecord?id=${operService.id}"
 															data-toggle="modal" data-target="#showInvRecordModal"
-															title="查看该项目投资记录"> <i class="icon-search bigger-130"></i>
+															title="查看该项目投资记录"> <i class="icon-android bigger-130"></i>
 														</a>
 													</c:if>
 													<c:if test="${operService.projectStatus==50}">

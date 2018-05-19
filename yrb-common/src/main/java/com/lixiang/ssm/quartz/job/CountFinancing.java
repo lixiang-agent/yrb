@@ -31,6 +31,8 @@ public class CountFinancing implements Job {
 		List<InvProject> list = invManageService.queryInvProjectByFinancingTime(inv);
 		for (Iterator<InvProject> it = list.iterator(); it.hasNext();) {
 			InvProject obj = (InvProject) it.next();
+			System.out.println("这是对象："+obj);
+			System.out.println("这是金额差："+InterestUtils.sub(obj.getInvBalance().doubleValue(), obj.getInvTotbalance().doubleValue()).doubleValue());
 			if ((InterestUtils.sub(obj.getInvBalance().doubleValue(), obj.getInvTotbalance().doubleValue()).doubleValue()) >=0) {
 				obj.setProjectStatus(50);
 				int result = invManageService.updateByPrimaryKeySelective(obj);

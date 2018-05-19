@@ -8,11 +8,11 @@ import java.util.List;
 
 public class InterestUtils {
 	/* 到期还本 */
-	public static final int MATURITY_REPAYMENT = 1;
+	public static final int MATURITY_REPAYMENT = 0;
 	/* 按月付息,到期还本 */
-	public static final int MATURITY_INTEREST_REPAYMENT = 2;
+	public static final int MATURITY_INTEREST_REPAYMENT = 1;
 	/* 等额本息 */
-	public static final int AVERAGE_CAPITAL_PLUS_INTEREST = 3;
+	public static final int AVERAGE_CAPITAL_PLUS_INTEREST = 2;
 
 	/**
 	 * 获取还款记录或获取借款记录

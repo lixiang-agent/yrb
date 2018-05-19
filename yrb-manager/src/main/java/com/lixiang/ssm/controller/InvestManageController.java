@@ -237,18 +237,23 @@ public class InvestManageController {
 	@RequestMapping("/toEfiiective")
 	public String toProjectEffective(Integer id,Model model){
 		InvProject invProject = invManageService.selectByPrimaryKey(id);
+		System.out.println("这是传过来的参数："+invProject.getId());
 		model.addAttribute("invProject", invProject);
 		return "invproject-effective";
 	}
 	
 	@RequestMapping("/effective")
 	public String projectEffective(Integer id,Model model,HttpSession session){
+		System.out.println("这是id："+id);
 		List<InvRecord> invRecList = invManageService.queryListInvRecord(id);
-		PaybackPlan paybackPlan = new PaybackPlan();
-		Subject currentUser = SecurityUtils.getSubject();
-		User usr = (User) currentUser.getPrincipal();
 		for(Iterator<InvRecord> it = invRecList.iterator(); it.hasNext();){
+			
+			PaybackPlan paybackPlan = new PaybackPlan();
+			Subject currentUser = SecurityUtils.getSubject();
+			User usr = (User) currentUser.getPrincipal();
+			System.out.println("这是用户："+usr.getUsername());
 			InvRecord obj = (InvRecord) it.next();
+			System.out.println("这是投资记录:"+obj);
 			// 设置投资记录id
 			paybackPlan.setInvRecordId(obj.getId());
 			// 设置项目id
@@ -260,6 +265,7 @@ public class InvestManageController {
 			// 设置操作时间
 			paybackPlan.setOperatorDate(new Date());
 			// 通过投资记录表中项目ID来查询项目的对象
+			System.out.println("这是投资记录表中的项目id:"+obj.getInvRecId());
 			InvProject invProject = invManageService.selectByPrimaryKey(obj.getInvRecId());
 			// 修改项目状态为待回款
 			invProject.setProjectStatus(60);
