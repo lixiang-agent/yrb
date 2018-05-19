@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,7 +40,8 @@ public class LoanApplicationController {
 		
 		Map<String, String> map=new HashMap<String, String>();
 		
-		UserInfo userInfo = (UserInfo) session.getAttribute("user");
+		Subject currentUser = SecurityUtils.getSubject();
+		UserInfo userInfo = (UserInfo) currentUser.getPrincipal();
 		
 		String codes = (String) session.getAttribute("code");
 		

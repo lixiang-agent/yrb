@@ -3,9 +3,16 @@ package com.lixiang.ssm.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.jboss.logging.Logger;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lixiang.ssm.entity.User;
 import com.lixiang.ssm.entity.UserInfo;
 import com.lixiang.ssm.service.UserInfoService;
 
@@ -38,7 +46,6 @@ public class UserInfoController {
 	protected Logger log = Logger.getLogger(UserInfoController.class);
 	
 	/**
-<<<<<<< HEAD
 	 * 修改用户,充值 
 	 * 
 	 * @param request
@@ -115,37 +122,52 @@ public class UserInfoController {
 		
 		Map<String, String> loginMap = new HashMap<String, String>();
 		
-		UserInfo user = userInfoService.login(account);
-		
-		String codes = (String) session.getAttribute("code");
+		Subject currentUser = SecurityUtils.getSubject();
 		
 		String flag="0";		
 		String msg = "登录成功！";
-	
+		//获取验证码
+		String codes = (String) session.getAttribute("code");
+		//判断验证码
 		if(codes !=null && !codes.equalsIgnoreCase(code)){
-			flag="3";
+			flag="5";
 			msg = "验证码错误";	
 		}
-		else if(user == null){
-			flag="1";
-			msg = "账号不存在";			
-		}
-		else{
-			ByteSource credentialsSalt = ByteSource.Util.bytes(account);
-			Object value = new SimpleHash("MD5", password, credentialsSalt, 101);
-			System.out.println(user.getPassword().equals(value.toString()));	
-			if(!user.getPassword().equals(value.toString())){
-				flag="2";	
-				msg = "密码错误";				
+		//判断是否登录
+		else if(!currentUser.isAuthenticated()){
+			// 把用户名和密码封装在一个UsernamePasswordToken 对象中
+			UsernamePasswordToken token = new UsernamePasswordToken(account, password);
+			// 记住我
+			token.setRememberMe(true);
+			try {
+				// 登录，调用是subject.login();
+				currentUser.login(token);
+			} catch (UnknownAccountException uae) {
+				flag="1";
+				msg = "账号不存在";	
+			} catch (IncorrectCredentialsException ice) {
+				flag="2";
+				msg = "密码错误";	
+			} catch (LockedAccountException lae) {
+				flag="3";
+				msg="账号被锁定";
 			}
-			else{
-				session.setAttribute("user", user);				
-			}
-		}
+			catch (AuthenticationException ae) {
+				flag="4";
+				msg="没有权限";
+			}					
+		}		
 		loginMap.put("flag", flag);
 		loginMap.put("msg", msg);
 		return loginMap;
 	}
+	
+	//登录成功后跳转到主界面
+	@RequestMapping("/index")
+	public String main(){
+		return "redirect:/index.jsp";
+	}
+	
 		
 	//验证真实姓名
 	@ResponseBody
@@ -195,8 +217,9 @@ public class UserInfoController {
 	
 	//退出登录
 	@RequestMapping("/logout")
-	public String logout(HttpSession session){
-		session.removeAttribute("user");
+	public String logout(){
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
 		return "redirect:/login.jsp";
 	}
 

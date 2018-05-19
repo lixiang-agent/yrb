@@ -132,9 +132,15 @@ function submitForm(){
 				   }
 				   else if(flag=="3"){
 					   alert(msg);
+				   }
+				   else if(flag=="4"){
+					   alert(msg);
+				   }
+				   else if(flag=="5"){
+					   alert(msg);
 				   }else{
 					   alert(msg);
-					   window.location.href='${ctx}/index.jsp';
+					   window.location.href='${ctx}/userInfo/index';
 				   }
 			   }
 		 });
