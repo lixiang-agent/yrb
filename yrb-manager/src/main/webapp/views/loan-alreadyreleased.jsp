@@ -9,7 +9,7 @@
 	<%@ include file="/top.jsp"%>
 	<div class="main-container" id="main-container">
 		<jsp:include page="/menu.jsp">
-			<jsp:param value="loan-readyloan" name="menu" />
+			<jsp:param value="loan-alreadyreleased" name="menu" />
 		</jsp:include>
 
 
@@ -24,7 +24,7 @@
 
 				<ul class="breadcrumb">
 					<li><i class="icon-home home-icon"></i> <a href="#">首页</a></li>
-					<li class="active">待放款项目</li>
+					<li class="active">已放款项目</li>
 				</ul>
 				<!-- .breadcrumb -->
 
@@ -42,7 +42,7 @@
 			<div class="page-content">
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="table-header">待放款项目</div>
+						<div class="table-header">已放款项目</div>
 						<div class="breadcrumbs" id="breadcrumbs"
 							style="margin-top: 5px; padding-bottom: 50px">
 							<div class="nav-search" id="nav-search">
@@ -112,15 +112,13 @@
 											<td>
 												<div
 													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<%-- <a class="blue"
-														href="${ctx }/check/agree?id=${loan.id}"
-														data-toggle="modal" data-target="#agree" title="同意放款">
-														<i class="icon-check bigger-130"></i>
-														</a> --%>
+													
 														
 														
 														
-														
+														 <a class="pink" href="${ctx }/check/repaymentlist?id=${loan.id}"
+														data-toggle="modal" data-target="#repaymentlist" title="还款列表">
+														<i class="icon-search bigger-130"></i></a>
 														
 														
 														
@@ -136,64 +134,7 @@
 														
 														
 
-												</a> <a class="red" data-toggle="modal" href="#"
-														data-target="#agree${loan.id}" title="同意放款"> <i
-														class="icon-check bigger-130"></i>
-													</a>
-													
-													<div class="modal fade" tabindex="-1" role="dialog"
-														id="agree${loan.id}">
-														<div class="modal-dialog" role="document">
-															<form action="${ctx}/check/agree" method="post">
-																<input type="hidden" name="id" value="${loan.id }">
-																<div class="modal-content">
-																	<div class="modal-header">
-																		<button type="button" class="close"
-																			data-dismiss="modal" aria-label="Close">
-																			<span aria-hidden="true">&times;</span>
-																		</button>
-																		<h4 class="modal-title">同意放款</h4>
-																	</div>
-																	<div class="modal-body">
-																		<p>确定要放款？</p>
-																		
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-default"
-																			data-dismiss="modal">取消</button>
-																		<button type="submit" class="btn btn-primary">
-																			放款</button>
-																	</div>
-																</div>
-															</form>
-															<!-- /.modal-content -->
-														</div>
-														<!-- /.modal-dialog -->
-													</div>
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-													
-
-
-
-
-
+												
 												</div>
 												<div class="visible-xs visible-sm hidden-md hidden-lg">
 													<div class="inline position-relative">
@@ -210,11 +151,7 @@
 																</span>
 															</a></li>
 
-															<li><a class="red" data-toggle="modal" href="#"
-																data-target="#agree${loan.id}" title="同意放款"> <i
-																	class="icon-check bigger-130"></i>
-															</a></li>
-
+															
 															
 														</ul>
 													</div>
@@ -244,25 +181,13 @@
 
 
 
-	<!-- 同意放款的模态框 -->
-	<div class="modal fade" id="agree" tabindex="-1" role="dialog"
+<!-- 查看还款计划的模态框 -->
+	<div class="modal fade" id="repaymentlist" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>
 	</div>
-
-	
-	
-	
-	<!-- 备注的模态框 -->
-	<div class="modal fade" id="editloan" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-		</div>
-	</div>
-
 
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"

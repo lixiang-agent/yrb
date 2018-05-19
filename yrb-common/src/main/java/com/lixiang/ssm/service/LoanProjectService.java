@@ -84,6 +84,47 @@ public class LoanProjectService {
 		return loanProjectMapper.backloanproject(loanProject);
 	}
 	
+	public boolean agree(LoanProject loanProject){
+		return loanProjectMapper.agree(loanProject);
+	}
+	/*public boolean alreadyreleased(LoanProject loanProject){
+		return loanProjectMapper.alreadyreleased(loanProject);
+	}*/
+	
+	
+	/**
+	 * 分页的查询  查询待放款的所有项目
+	 * @param LoanProject
+	 * @return
+	 */
+	public PageInfo<LoanProject> pageListloanproject(LoanProject loanProject) {
+		//获取第1页，10条内容，默认查询总数count
+		PageHelper.startPage(loanProject.getPageNum(), loanProject.getPageSize());
+		//查询语句
+		List<LoanProject> list = loanProjectMapper.readyloan(loanProject);
+		//用PageInfo对结果进行包装
+		PageInfo<LoanProject> page = new PageInfo<>(list);
+		
+		return page;
+	}
+	
+	
+	/**
+	 * 分页的查询  查询已放款的所有项目
+	 * @param LoanProject
+	 * @return
+	 */
+	public PageInfo<LoanProject> alreadyreleased(LoanProject loanProject) {
+		//获取第1页，10条内容，默认查询总数count
+		PageHelper.startPage(loanProject.getPageNum(), loanProject.getPageSize());
+		//查询语句
+		List<LoanProject> list = loanProjectMapper.readyloan(loanProject);
+		//用PageInfo对结果进行包装
+		PageInfo<LoanProject> page = new PageInfo<>(list);
+		
+		return page;
+	}
+
 	
 
 	

@@ -204,8 +204,14 @@
 						</li>
 		
 						<li id="readyloan">
-							<a  href="${ctx }/loan/readyloan?project_status=30"> <i
+							<a  href="${ctx }/loan/readyloan?projectStatus=30"> <i
 								class="icon-double-angle-right"></i> 待放款项目
+							</a>
+						</li> 
+						
+						<li id="alreadyreleased">
+							<a  href="${ctx }/loan/alreadyreleased?projectStatus=40"> <i
+								class="icon-double-angle-right"></i> 已放款项目
 							</a>
 						</li> 
  				</ul>
