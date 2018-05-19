@@ -76,4 +76,10 @@ public class LoanApplicationController {
 	}
 	
 	
+	//申请提交后跳转界面
+	@RequestMapping("/index")
+	public String main(){
+		return "redirect:/index.jsp";
+	}
+	
 }

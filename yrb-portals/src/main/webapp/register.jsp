@@ -170,19 +170,23 @@
 		var uPattern = /^1[3,4,5,7,8]\d{9}$/;
 		var phoneNum = $.trim($("#phoneNum").val());
 		if(phoneNum.length<1){
-			 $("#phonespan").html("手机号不能为空");
-			 $("#phonespan").css("color","red");
-			 $("#phonespan").show();
+			 $("#phoneJy").html("手机号不能为空");
+			 $("#phoneJy").css("color","red");
+			 $("#phoneJy").show();
 			 return flag;
 		 }
 		else if(!uPattern.test(phoneNum)){
-			 $("#phonespan").html("手机号码格式不正确");
-			 $("#phonespan").css("color","red");
-			 $("#phonespan").show();
+			 $("#phoneJy").html("这不是一个手机号码");
+			 $("#phoneJy").css("color","red");
+			 $("#phoneJy").show();
 			 return flag;
 		}
 		else{
-			 $("#phonespan").hide();
+			 $("#phoneJy").html("手机号码可用");
+			 $("#phoneJy").css("color","green");
+			 $("#phoneJy").show();
+			 flag = true;
+			 
 		}
 		return flag;
 	}
@@ -200,9 +204,44 @@
        
 	}
 	
+	function isReferee(){
+		var flag = false;
+		var account = $.trim($("#referee").val());
+		if(account != null && account !=""){
+			var param={};
+			param.account = account;
+			$.ajax({
+			   type: "POST",
+			   url: "${ctx}/userInfo/isAccount",
+			   data: param,
+			   dataType:"json",
+			   async: false,
+			   success: function(data){
+				   if (data == 0) {	
+					    $("#refereespan").html("推荐人不存在");
+						$("#refereespan").css("color", "red");
+						$("#refereespan").show();
+						flag = false;					
+					} else {
+						$("#refereespan").html("推荐人可用");
+						$("#refereespan").css("color", "green");
+						$("#refereespan").show();
+						flag = true;
+					}
+			   }
+			});
+		}else{
+			$("#refereespan").html("请填写推荐人账户名，如无推荐人请留空");
+			$("#refereespan").css("color", "black");
+			$("#refereespan").show();
+			flag = true;
+		}
+		return flag;
+	}
+	
 	function submitzhuc(){
 		
-		if(isAccount() && ispwd() && isqpwd() && isyanzhengma() && check()){	
+		if(isAccount() && ispwd() && isqpwd() && isyanzhengma() && check() && isPhoneNum() && isReferee()){	
 			var param={};
 			param.account = $.trim($("#account").val());
 			param.password = $.trim($("#password").val());
@@ -270,16 +309,16 @@
 					<span id="yanzhengmaspan"></span> <span class="info" id="jpgVerifys" data-info="请输入手机验证码"></span> </li>
        
         <li class="telNumber"> <span class="dis">手机号码:</span>
-          <input type="text" class="input _phoneNum" id="phoneNum" name="phoneNum" tabindex="1" maxlength="11">
-          <a href="javascript:void(0);" class="button radius1 _getkey" id="sendPhone">获取验证码</a> <span id="phoneJy" data-info="请输入您的常用电话">请输入您的常用电话</span></li>
+          <input type="text" class="input _phoneNum" id="phoneNum" name="phoneNum" tabindex="1" maxlength="11" onblur="isPhoneNum();">
+          <!-- <a href="javascript:void(0);" class="button radius1 _getkey" id="sendPhone">获取验证码</a> --> <span id="phoneJy" data-info="请输入您的常用电话">请输入您的常用电话</span></li>
        
-        <li class="telNumber"><span class="dis">短信验证码:</span>
+       <!--  <li class="telNumber"><span class="dis">短信验证码:</span>
           <input id="phonVerify" type="text" class="input input1  _phonVerify" data-_id="phonVerify" tabindex="1">
-          <span class="info" id="phonVerifys" data-info="请输入手机验证码">请输入手机验证码</span></li>
+          <span class="info" id="phonVerifys" data-info="请输入手机验证码">请输入手机验证码</span></li> -->
        
         <li> <span class="dis">推 荐 人:</span>
-          <input type="text" class="input input1 _invist" id="referee" name="referee">
-          <span class="_invist_msg">请填写推荐人账户名，如无推荐人请留空</span> </li>
+          <input type="text" class="input input1 _invist" id="referee" name="referee" onblur="isReferee();" tabindex="1" maxlength="24">
+          <span id="refereespan" class="_invist_msg">请填写推荐人账户名，如无推荐人请留空</span> </li>
        
         <li class="agree">
           <input name="protocol" id="protocol" type="checkbox" value="" checked="checked" onclick="check();">

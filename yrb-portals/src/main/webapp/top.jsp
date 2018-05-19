@@ -55,7 +55,7 @@
 					<shiro:authenticated>
 						<li>
 							<div class="">
-								<a href="${ctx}/register.jsp" class="c-orange" title="免费注册"><shiro:principal property = "account"/></a>
+								<a href="${ctx}/register.jsp" class="c-orange" title="查看个人信息"><shiro:principal property = "account"/></a>
 							</div>
 						</li>
 						<li>
