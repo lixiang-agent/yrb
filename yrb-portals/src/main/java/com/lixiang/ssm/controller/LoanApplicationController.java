@@ -41,6 +41,7 @@ public class LoanApplicationController {
 		Map<String, String> map=new HashMap<String, String>();
 		
 		Subject currentUser = SecurityUtils.getSubject();
+		
 		UserInfo userInfo = (UserInfo) currentUser.getPrincipal();
 		
 		String codes = (String) session.getAttribute("code");
