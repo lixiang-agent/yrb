@@ -2,8 +2,6 @@ package com.lixiang.ssm.controller;
 
 import java.math.BigDecimal;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.jboss.logging.Logger;
@@ -67,10 +65,11 @@ public class UserInfoController {
 		//userInfo.setPhoneNum(11223344511L);
 		userInfo.setTotalBalance(new BigDecimal(1000));
 		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
+		log.debug("---------------"+userInfo.getTotalBalance()+"--------------------------");
 		log.debug("---------------"+userInfo);
 		userInfoService.updateWithdraw(userInfo);
 		model.addAttribute("result","result");
 		model.addAttribute("userInfo",userInfo);
-		return "top-up";
+		return "withdraw";
 	}
 }
