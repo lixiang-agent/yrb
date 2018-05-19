@@ -312,6 +312,18 @@
 
   
   
+  <!-- 更新-->
+	 <update id="updateUserInfo" parameterType="com.lixiang.ssm.entity.UserInfo">
+    update t_user_info
+    <set>
+      <if test="totalBalance != null">
+        total_balance =#{totalBalance},
+      </if>
+     </set>
+    where id = #{id}
+  </update>
+  
+  
   <!-- 修改用户,提现 -->
 	 <update id="updateWithdraw" parameterType="com.lixiang.ssm.entity.UserInfo">
     update t_user_info
@@ -326,9 +338,10 @@
         password = #{password},
        </if>  
       <if test="totalBalance != null">
-        total_balance =total_balance-#{totalBalance}-#{totalBalance}*0.1%,
+        total_balance =total_balance-#{totalBalance},
       </if>
      </set>
     where id = #{id}
   </update>
+  
 </mapper>

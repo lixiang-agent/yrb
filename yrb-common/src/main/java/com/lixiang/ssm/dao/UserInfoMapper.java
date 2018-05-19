@@ -98,6 +98,13 @@ public interface UserInfoMapper {
     UserInfo login(String account);
     
     /**
+     * 更新数据
+     * @param record
+     * @return
+     */
+    int updateUserInfo(UserInfo record);
+    
+    /**
      * 修改用户，提现
      * @param record
      * @return
