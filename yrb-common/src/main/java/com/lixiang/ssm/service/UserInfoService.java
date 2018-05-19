@@ -106,6 +106,15 @@ public class UserInfoService {
 		
 		return userInfoMapper.login(account);
 	}
+	
+		 /** 更新
+		 * @param userInfo
+		 * @return
+		 */
+		public boolean updateUserInfos(UserInfo userInfo){
+			return userInfoMapper.updateUserInfo(userInfo)>0;
+		}
+	
 
 	 /** 修改用户,提现
 	 * @param userInfo
