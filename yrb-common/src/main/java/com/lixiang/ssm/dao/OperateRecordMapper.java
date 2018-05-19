@@ -57,5 +57,7 @@ public interface OperateRecordMapper {
     List<OperateRecord> getoperator(Integer id);
 
     List<OperateRecord> queryProOperRecord(Integer id);
+    
+
 
 }

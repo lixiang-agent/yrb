@@ -304,6 +304,27 @@ public class LoanProjectController {
 		return "checkrecord";
 	}
 	
+	
+	
+	@RequestMapping("/readyloan")
+	public String readyloan(Model model,LoanProject loanProject){
+		PageInfo<LoanProject> page = loanProjectService.pageListloanproject(loanProject);
+		model.addAttribute("page", page);
+		return "readyloan";
+	}
+	
+	/**
+	 * 查看已放款任务
+	 * @param model
+	 * @param loanProject
+	 * @return
+	 */
+	@RequestMapping("/alreadyreleased")
+	public String alreadyreleased(Model model,LoanProject loanProject){
+		PageInfo<LoanProject> page = loanProjectService.alreadyreleased(loanProject);
+		model.addAttribute("page", page);
+		return "loan-alreadyreleased";
+	}
 
 
 }

@@ -337,7 +337,27 @@
   </update>
   
   
+  	<select id="readyloan" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	 select * from t_loan_project where project_status=30
+	
+	
+	
+	</select>
+	
+	
+	 <update id="agree" parameterType="com.lixiang.ssm.entity.LoanProject">
+  	 update t_loan_project set  project_status=40 where id= #{id}
+
+  </update>
   
+  
+  
+  <select id="alreadyreleased" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	 select * from t_loan_project where project_status=40
+	
+	
+	
+	</select>
   
   
   

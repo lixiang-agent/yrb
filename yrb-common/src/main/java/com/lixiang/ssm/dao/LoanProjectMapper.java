@@ -3,6 +3,7 @@ package com.lixiang.ssm.dao;
 import java.util.List;
 
 import com.lixiang.ssm.entity.LoanProject;
+import com.lixiang.ssm.entity.OperateRecord;
 import com.lixiang.ssm.entity.User;
 
 public interface LoanProjectMapper {
@@ -61,5 +62,15 @@ public interface LoanProjectMapper {
    boolean subloanproject(LoanProject loanProject);
    
    boolean backloanproject(LoanProject loanProject);
+   
+   boolean agree(LoanProject loanProject);
+   boolean alreadyreleased(LoanProject loanProject);
+   
+   /**
+    * 查询待放款的项目
+    * @param operateRecord
+    * @return
+    */
+   List<LoanProject> readyloan(LoanProject loanProject);
     
 }
