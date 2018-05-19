@@ -112,8 +112,8 @@
 				}
 				var balance=Number("0.0");
 				//提现金额小于余额 
-				var legalFlag=(actualMoney-balance).toFixed(2)<=0;
-				if(!legalFlag)
+				var legalFlag=(totalBalance-balance).toFixed(2)<=0;
+				if(legalFlag)
 				{
 					$(actualMessage).text("余额不足");
 					$(actualMessage).show();
@@ -146,7 +146,7 @@
     <div class="personal-main">
       <div class="personal-deposit">
         <h3><i>提现</i></h3>
-        <form id="form" name="form" method="post" action="/userInfo/userInfoWithdraw" enctype="application/x-www-form-urlencoded" target="_blank">
+        <form id="form" name="form" method="post" action="${ctx }/userInfo/userInfoWithdraw" enctype="application/x-www-form-urlencoded" target="_blank">
           <input type="hidden" name="form" value="form">
           <div class="deposit-form" style="margin-top:0px;border-top:0px none;">
             <h6>填写提现金额</h6>

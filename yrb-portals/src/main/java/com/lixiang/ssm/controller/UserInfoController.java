@@ -54,7 +54,7 @@ public class UserInfoController {
 		userInfo.setPassword("4444555");
 		userInfo.setAccount("sdfsef");
 		userInfo.setPhoneNum(11223344511L);
-		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
+		//2.调用service，调用第三方支付接口，如果支付成功，账号里面再加钱
 		log.debug("---------------"+userInfo);
 		userInfoService.updateTopUp(userInfo);
 		model.addAttribute("result","result");
@@ -216,10 +216,6 @@ public class UserInfoController {
 		UserInfo result = (UserInfo) currentUser.getPrincipal();	
 		userInfo.setId(1);
 		userInfo.setTotalBalance(new BigDecimal(1000));
-		log.debug("---------------"+userInfo.getTotalBalance()+"--------------------------");
-		log.debug("---------------"+userInfo);
-		System.out.println("---------------"+userInfo.getTotalBalance()+"--------------------------");
-		System.out.println("---------------"+userInfo);
 		userInfoService.updateUserInfos(userInfo);
 		model.addAttribute("result","result");
 		model.addAttribute("userInfo",userInfo);
@@ -240,14 +236,8 @@ public class UserInfoController {
 		Subject currentUser = SecurityUtils.getSubject();
 		UserInfo result = (UserInfo) currentUser.getPrincipal();	
 		userInfo.setId(1);
-		userInfo.setPassword("4444555");
-		userInfo.setAccount("sdfsef");
-		userInfo.setPhoneNum(11223344511L);
-		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
-		log.debug("---------------"+userInfo);
+		//2.调用service，调用第三方支付接口，如果提现成功，账号里面再减钱，但是余额要>0
 		userInfoService.updateWithdraw(userInfo);
-		System.out.println("---------------"+userInfo.getTotalBalance()+"--------------------------");
-		System.out.println("--------------"+userInfo);
 		model.addAttribute("result","result");
 		model.addAttribute("userInfos",userInfo);
 		return "withdraw";
