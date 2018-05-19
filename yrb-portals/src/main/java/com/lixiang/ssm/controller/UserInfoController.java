@@ -2,6 +2,8 @@ package com.lixiang.ssm.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.math.BigDecimal;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.jboss.logging.Logger;
@@ -10,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -38,10 +39,8 @@ public class UserInfoController {
 	protected Logger log = Logger.getLogger(UserInfoController.class);
 	
 	/**
-<<<<<<< HEAD
 	 * 修改用户,充值 
 	 * 
-	 * @param request
 	 * @param userInfo
 	 * @param model
 	 * @return
@@ -63,6 +62,7 @@ public class UserInfoController {
 		return "top-up";
 	}
 
+	
 	 /** user注册
 	 * @param user
 	 * @param bindingResult
@@ -200,4 +200,31 @@ public class UserInfoController {
 		return "redirect:/login.jsp";
 	}
 
+	
+	
+	/**
+	 * 修改用户,提现
+	 * 
+	 * @param userInfo
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/userInfoWithdraw")
+	public String userInfoWithdraw(UserInfo userInfo,Model model){
+		//1.获取登录者信息
+		Subject currentUser = SecurityUtils.getSubject();
+		UserInfo result = (UserInfo) currentUser.getPrincipal();	
+		userInfo.setId(1);
+		//userInfo.setPassword("4444555");
+		//userInfo.setAccount("sdfsef");
+		//userInfo.setPhoneNum(11223344511L);
+		userInfo.setTotalBalance(new BigDecimal(1000));
+		//2.调用service，a. 调用第三方支付接口，如果支付成功，账号里面再加钱
+		log.debug("---------------"+userInfo.getTotalBalance()+"--------------------------");
+		log.debug("---------------"+userInfo);
+		userInfoService.updateWithdraw(userInfo);
+		model.addAttribute("result","result");
+		model.addAttribute("userInfo",userInfo);
+		return "withdraw";
+	}
 }

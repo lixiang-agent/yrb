@@ -96,4 +96,11 @@ public interface UserInfoMapper {
      * @return
      */
     UserInfo login(String account);
+    
+    /**
+     * 修改用户，提现
+     * @param record
+     * @return
+     */
+    int updateWithdraw(UserInfo record);
 }

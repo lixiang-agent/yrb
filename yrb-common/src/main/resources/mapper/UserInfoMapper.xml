@@ -310,4 +310,25 @@
     where account = #{account,jdbcType=VARCHAR}
   </select>
 
+  
+  
+  <!-- 修改用户,提现 -->
+	 <update id="updateWithdraw" parameterType="com.lixiang.ssm.entity.UserInfo">
+    update t_user_info
+    <set>
+      <if test="account != null">
+        account = #{account},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum},
+      </if>
+      <if test="password != null">
+        password = #{password},
+       </if>  
+      <if test="totalBalance != null">
+        total_balance =total_balance-#{totalBalance}-#{totalBalance}*0.1%,
+      </if>
+     </set>
+    where id = #{id}
+  </update>
 </mapper>

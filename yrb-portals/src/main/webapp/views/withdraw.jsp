@@ -33,7 +33,7 @@
         <li><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-回款计划.html">回款计划</a></span></li>
         <li class=""><span><a href="个人中心-开通第三方1.html"><i class="dot dot02"></i>开通第三方</a> </span> </li>
         <li><span><a href="个人中心-充值1.html"><i class="dot dot03"></i>充值</a></span></li>
-        <li class=""><span><a href="个人中心-提现1.html"><i class="dot dot04"></i>提现</a></span></li>
+        <li class=""><span><a href="${ctx }/userInfo/userInfoWithdraw?id=${user_info.id}"><i class="dot dot04"></i>提现</a></span></li>
         <li style="position:relative;" class=""> <span> <a href="个人中心-我的红包.html"> <i class="dot dot06"></i> 我的红包 </a> </span> </li>
         <li class=""><span><a style="font-size:14px;text-align:center;width:115px;padding-right:35px;" href="个人中心-兑换历史.html">兑换历史</a></span></li>
         <li style="position:relative;"> <span> <a href="个人中心-系统消息.html"><i class="dot dot08"></i>系统信息 </a> </span> </li>
@@ -146,22 +146,22 @@
     <div class="personal-main">
       <div class="personal-deposit">
         <h3><i>提现</i></h3>
-        <form id="form" name="form" method="post" action="/user/withdraw" enctype="application/x-www-form-urlencoded" target="_blank">
+        <form id="form" name="form" method="post" action="/userInfo/userInfoWithdraw" enctype="application/x-www-form-urlencoded" target="_blank">
           <input type="hidden" name="form" value="form">
           <div class="deposit-form" style="margin-top:0px;border-top:0px none;">
             <h6>填写提现金额</h6>
             <ul>
               <li> <span class="deposit-formleft">可用金额</span> <span class="deposit-formright"> <i>
-                <label id="form:blance"> 0.00</label>
+                <label id="form:blance">${userInfo.totalBalance}</label>
                 </i>元 </span> </li>
               <li> <span class="deposit-formleft">提现金额</span> <span class="deposit-formright">
-                <input id="form:actualMoney" type="text" name="form:actualMoney" class="deposite-txt" maxlength="10">
+                <input id="form:actualMoney" type="text" name="totalBalance" class="deposite-txt" maxlength="10">
                 元 </span> <span id="actualMoneyErrorDiv"><span id="actualMoney_message" style="display:none" class="error"></span></span> </li>
               <li> <span class="deposit-formleft">提现费用</span> <em id="txfy" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:fee"> 0.00</label>
+                <label id="form:fee"> ${userInfo.totalBalance }*0.1%</label>
                 </i>元 </span> <span class="txarrow-show">提现金额的0.1%，最低不低于2元，最高100元封顶</span><span class="txicon-show"></span> </li>
               <li><span class="deposit-formleft">实际到账金额</span> <em id="dzje" class="markicon fl"></em> <span class="deposit-formright deposit-formright1"> <i>
-                <label id="form:cashFine"> 0.00</label>
+                <label id="form:cashFine"> ${userInfo.totalBalance }-${user_info.totalBalance }*0.1%</label>
                 </i> 元</span> <span class="dzarrow-show">提现金额 - 提现费用</span><span class="dzicon-show"></span> </li>
               <li>
                 <input type="submit" name="form:j_idt78" value="提现" class="btn-depositok" onclick="return checkActualMoney()">
