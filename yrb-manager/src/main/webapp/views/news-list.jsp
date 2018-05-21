@@ -70,97 +70,106 @@
 							</div>
 							<!-- #nav-search -->
 						</div>
-						<div class="table-responsive">
-							<table id="sample-table-2"
-								class="table table-striped table-bordered table-hover">
-								<thead>
-									<tr>
-										<th class="center"><label> <input type="checkbox"
-												class="ace" /> <span class="lbl"></span>
-										</label></th>
-										<th>标题</th>
-										<th>新闻类型</th>
-										<th>发布状态</th>
-										<th>发布人</th>
-										<th class="hidden-480">发布时间</th>
-										<th>操作</th>
-									</tr>
-								</thead>
-
-								<tbody>
-									<c:forEach items="${page.list}" var="news">
+						<div id="checkedon" class="table-responsive">
+							<form action="${ctx}/news/bathUpdatestatus" method="post"
+								id="publishForm">
+								<table id="sample-table-2"
+									class="table table-striped table-bordered table-hover">
+									<thead>
 										<tr>
-											<td class="center"><label> <input id="pitchOn"
-													type="checkbox" class="ace" value="${news.id }" /> <span
-													class="lbl"></span>
-											</label></td>
-											<td><a href="${ctx}/news/getNewsById?id=${news.id}"
-												data-toggle="modal" data-target="#newsModal" title="信息内容">${news.title}</a></td>
-											<td>${news.classify==1?'新闻公告':(news.classify==2?'媒体知识':'理财知识')}</td>
-											<td>${news.status?'已发布':'未发布'}</td>
-											<td>${news.publisherName}</td>
-											<td class="hidden-480"><fmt:formatDate
-													value="${news.publishDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
-											</td>
-											<td>
-												<div
-													class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-													<a class="orange"
-														href="${ctx}/news/updatestatus?id=${news.id}" title="发布">
-														<i class="icon-circle-arrow-up bigger-130"></i>
-													</a> <a class="green"
-														href="${ctx}/news/to-update?id=${news.id}"
-														data-toggle="modal" data-target="#updateModal"
-														title="修改信息"> <i class="icon-pencil bigger-130"></i>
-													</a>
-
-													<!-- 发送请求(删除) -->
-													<a class="red" href="${ctx}/news/toDelete?id=${news.id}"
-														data-toggle="modal" data-target="#deleteModal"
-														title="删除信息"> <i class="icon-trash bigger-130"></i>
-													</a>
-
-												</div>
-												<div class="visible-xs visible-sm hidden-md hidden-lg">
-													<div class="inline position-relative">
-														<button class="btn btn-minier btn-yellow dropdown-toggle"
-															data-toggle="dropdown">
-															<i class="icon-caret-down icon-only bigger-120"></i>
-														</button>
-
-														<ul
-															class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li><a href="${ctx}/news/updatestatus?id=${news.id}"
-																class="tooltip-success" data-rel="tooltip" title="Edit">
-																	<span class="orange"> <i
-																		class="icon-circle-arrow-up bigger-120"></i>
-																</span>
-
-															</a></li>
-															<li><a href="javascript:void();" data-toggle="modal"
-																data-target="#updateModal" class="tooltip-success"
-																data-rel="tooltip" title="Edit"> <span class="green">
-																		<i class="icon-edit  bigger-120"></i>
-																</span>
-
-															</a></li>
-															<li><a href="javascript:void();" data-toggle="modal"
-																data-target="#deleteModal" class="tooltip-error"
-																data-rel="tooltip" title="Delete"> <span class="red">
-																		<i class="icon-trash bigger-120"></i>
-																</span>
-															</a></li>
-
-														</ul>
-													</div>
-												</div>
-											</td>
+											<th class="center"><label> <input id="pitchOne"
+													type="checkbox" class="ace" /> <span class="lbl"></span>
+											</label></th>
+											<th>标题</th>
+											<th>新闻类型</th>
+											<th>发布状态</th>
+											<th>发布人</th>
+											<th class="hidden-480">发布时间</th>
+											<th>操作 <a class="orange" href="javascript:checkChooseNews();" title="请选择你要发布的新闻"> <i
+													class="icon-circle-arrow-up bigger-130"></i>
+											</a>
+											</th>
 										</tr>
+									</thead>
 
-									</c:forEach>
+									<tbody>
+										<c:forEach items="${page.list}" var="news">
+											<tr>
+												<td class="center"><label> <input
+														type="checkbox" class="ace" name="id" value="${news.id }" />
+														<span class="lbl"></span>
+												</label></td>
+												<td><a href="${ctx}/news/getNewsById?id=${news.id}"
+													data-toggle="modal" data-target="#newsModal" title="信息内容">${news.title}</a></td>
+												<td>${news.classify==1?'新闻公告':(news.classify==2?'媒体知识':'理财知识')}</td>
+												<td>${news.status?'已发布':'未发布'}</td>
+												<td>${news.publisherName}</td>
+												<td class="hidden-480"><fmt:formatDate
+														value="${news.publishDate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate>
+												</td>
+												<td>
+													<div
+														class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+														<a class="orange"
+															href="${ctx}/news/updatestatus?id=${news.id}" title="发布">
+															<i class="icon-circle-arrow-up bigger-130">发布</i>
+														</a> <a class="green"
+															href="${ctx}/news/to-update?id=${news.id}"
+															data-toggle="modal" data-target="#updateModal"
+															title="修改信息"> <i class="icon-pencil bigger-130">修改</i>
+														</a>
 
-								</tbody>
-							</table>
+														<!-- 发送请求(删除) -->
+														<a class="red" href="${ctx}/news/toDelete?id=${news.id}"
+															data-toggle="modal" data-target="#deleteModal"
+															title="删除信息"> <i class="icon-trash bigger-130">删除</i>
+														</a>
+
+													</div>
+													<div class="visible-xs visible-sm hidden-md hidden-lg">
+														<div class="inline position-relative">
+															<button class="btn btn-minier btn-yellow dropdown-toggle"
+																data-toggle="dropdown">
+																<i class="icon-caret-down icon-only bigger-120"></i>
+															</button>
+
+															<ul
+																class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+																<li><a
+																	href="${ctx}/news/updatestatus?id=${news.id}"
+																	class="tooltip-success" data-rel="tooltip" title="Edit">
+																		<span class="orange"> <i
+																			class="icon-circle-arrow-up bigger-120"></i>
+																	</span>
+
+																</a></li>
+																<li><a href="javascript:void();"
+																	data-toggle="modal" data-target="#updateModal"
+																	class="tooltip-success" data-rel="tooltip" title="Edit">
+																		<span class="green"> <i
+																			class="icon-edit  bigger-120"></i>
+																	</span>
+
+																</a></li>
+																<li><a href="javascript:void();"
+																	data-toggle="modal" data-target="#deleteModal"
+																	class="tooltip-error" data-rel="tooltip" title="Delete">
+																		<span class="red"> <i
+																			class="icon-trash bigger-120"></i>
+																	</span>
+																</a></li>
+
+															</ul>
+														</div>
+													</div>
+												</td>
+											</tr>
+
+										</c:forEach>
+
+									</tbody>
+								</table>
+							</form>
 							<div class="modal-footer no-margin-top">
 								<w:pager pageSize="${page.pageSize }" url="${ctx}/news/list"
 									recordCount="${page.total }" pageNum="${page.pageNum }" />
@@ -201,7 +210,63 @@
 			<div class="modal-content"></div>
 		</div>
 	</div>
+	<!-- 发布的模态框 -->
+	<div class="modal fade" id="updatestatusModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">
+						<strong>发布新闻</strong>
+					</h4>
+				</div>
 
+				<div class="modal-body">
+					<div class="row">
+						<div style="text-align: center; margin: 0 auto; width: 50%;">
+							<span style="color: c5c5c5;">确定要发布吗?</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn default btn-sm"
+						data-dismiss="modal">取消</button>
+					<button type="button" onclick="publish();" class="btn btn-primary btn-sm">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 校验是否选择新闻 -->
+	<div class="modal fade" id="checkstatusModal" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">
+						<strong>发布新闻</strong>
+					</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="row">
+						<div style="text-align: center; margin: 0 auto; width: 50%;">
+							<span style="color: c5c5c5;">请选择新闻</span>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="ace-settings-container" id="ace-settings-container">
 		<div class="btn btn-app btn-xs btn-warning ace-settings-btn"
 			id="ace-settings-btn">
@@ -286,7 +351,59 @@
 			$(this).removeData("bs.modal");
 			UE.getEditor('container').destroy();
 		});
+
+		$('table th input:checkbox').on(
+				'click',
+				function() {
+					var that = this;
+					$(this).closest('table').find(
+							'tr > td:first-child input:checkbox').each(
+							function() {
+								this.checked = that.checked;
+								$(this).closest('tr').toggleClass('selected');
+							});
+
+				});
+		var res = '';
+		$(document).ready(function() {
+			$("input[name='id']").click(function() {
+				var checkFlag = $(this).attr("checked");
+				if (checkFlag == "checked") {
+					var value = $("input[name='id']").val()
+					res = res + "," + value;
+					return res;
+				}
+			});
+		});
+
+		/**
+		* 检查是否选择了新闻
+		**/
+		function checkChooseNews(){
+			//检查是否选择了新闻
+
+			if ($("input[name='id']:checked").length == 0) {
+				$('#checkstatusModal').modal({});
+				return;
+			}
+			
+			//弹出确认框
+			
+			$('#updatestatusModal').modal({});
+			
+		}
+		
+		
+		
+		/**
+		 * 发布
+		 */
+		function publish() {
+			//检查是否选择了新闻
+			$("#publishForm").submit();
+		}
 	</script>
 
 </body>
+
 </html>

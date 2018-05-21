@@ -563,7 +563,7 @@
 		useCache="false">
 		SELECT * FROM t_inv_project
 		<where>
-		 project_status = 40 and inv_balance >= inv_totalbalance and Financing_end_time > now()
+		 project_status = 40 and inv_balance >= inv_totbalance and Financing_end_time > now()
 		</where>
 	</select>
 	

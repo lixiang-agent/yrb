@@ -81,8 +81,34 @@ public class NewsService {
 	 * @return
 	 */
 	public boolean updateNewsStatusById(News news){
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = (User)currentUser.getPrincipal();
+		log.debug(user.getUsername());
+		news.setPublisherName(user.getUsername());
+		news.setPublishDate(new Date());
 		news.setStatus(true);
 		return mapper.updateNewsStatusById(news)>0;
+	}
+	/**
+	 * 批量修改新闻发布状态
+	 * @param news
+	 * @param model
+	 * @return
+	 */
+	public boolean bathUpdateNewsStatusById(String id){
+		String[] nid = id.split(",");
+		for(String newsid:nid){
+		News news = new News(); 
+		news.setId(Integer.parseInt(newsid));
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = (User)currentUser.getPrincipal();
+		log.debug(user.getUsername());
+		news.setPublisherName(user.getUsername());
+		news.setPublishDate(new Date());
+		news.setStatus(true);
+		mapper.updateNewsStatusById(news);
+		}
+		return true;
 	}
 	/**
 	 * 查询显示信息
