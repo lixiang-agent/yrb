@@ -269,6 +269,6 @@
     </where>
   </select>
 	<update id="updateNewsStatusById" parameterType="com.lixiang.ssm.entity.News">
-		update t_news set status = #{status},publisher_name = #{publisherName}, publish_date = #{publishDate}  where id = #{id}
+		update t_news set status = #{status}  where id = #{id}
 	</update>
 </mapper>

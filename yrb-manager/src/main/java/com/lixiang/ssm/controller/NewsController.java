@@ -122,7 +122,7 @@ public class NewsController {
 	 */
 	@RequestMapping("/toDelete")
 	public String toDeleteNews(Integer id, Model model) {
-		String tip = "确定要删除吗？确认请确定！";
+		String tip = "确定要删除吗？确定请确定！";
 		model.addAttribute("tip", tip);
 		model.addAttribute("news", id);
 		return "news-delete";
@@ -152,11 +152,4 @@ public class NewsController {
 		return "redirect:list";
 	}
 
-	@RequestMapping("/bathUpdatestatus")
-	public String bathUpdateNewsStatusById(String id, Model model) {
-		log.info(id);
-		boolean result = service.bathUpdateNewsStatusById(id);
-		model.addAttribute("oper_result", result);
-		return "redirect:list";
-	}
 }
